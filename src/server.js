@@ -1,19 +1,23 @@
 const express = require('express');
-const db = require('./database/config');
+const db = require('./config/db');
 const mongoose = require('mongoose');
-const swaggerUi = require('swagger-ui-express')
-const swaggerFile = require('../swagger.json')
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('../swagger.json');
+const cors = require('cors');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 class App {
+
     constructor() {
         this.express = express();
 
         this.database();
         this.middlewares();
         this.routes();
-        this. swagger();
+        this.swagger();
+
+        this.express.use(cors());
 
         this.express.listen(PORT, () =>
             console.log(`Sua API REST está funcionando na porta ${PORT}`)
@@ -29,7 +33,7 @@ class App {
     }
 
     routes() {
-        this.express.use(require('./routes'));
+        this.express.use(require('./routes/routes'));
     }
 
     swagger() {

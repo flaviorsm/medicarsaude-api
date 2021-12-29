@@ -13,6 +13,64 @@
   ],
   "consumes": [],
   "produces": [],
-  "paths": {},
+  "paths": {
+    "/usuario": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Adicionar novo usuário.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "João Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "joao@email.com"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "123654"
+                }
+              },
+              "required": [
+                "nome",
+                "email",
+                "senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
   "definitions": {}
 }

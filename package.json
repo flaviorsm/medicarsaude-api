@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "swagger-autogen": "node src/swagger.js"
+    "dev": "node src/config/swagger.js && nodemon src/server.js",
+    "swagger-autogen": "node src/config/swagger.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/flaviorsm/medicarsaude-api#readme",
   "dependencies": {
     "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "swagger-autogen": "^2.18.3",
     "swagger-ui-express": "^4.3.0"
   },
