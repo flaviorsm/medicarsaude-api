@@ -16,12 +16,7 @@ class App {
         this.middlewares();
         this.routes();
         this.swagger();
-
-        this.express.use(cors());
-
-        this.express.listen(PORT, () =>
-            console.log(`Sua API REST está funcionando na porta ${PORT}`)
-        );
+        this.api();
     }
 
     database() {
@@ -41,6 +36,14 @@ class App {
             '/api-docs',
             swaggerUi.serve,
             swaggerUi.setup(swaggerFile)
+        );
+    }
+
+    api() {
+        this.express.use(cors());
+
+        this.express.listen(PORT, () =>
+            console.log(`Sua API REST está funcionando na porta ${PORT}`)
         );
     }
 }

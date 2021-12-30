@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Medicar Saúde",
+    "description": "Cooperativa de Saúde",
+    "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -23,7 +23,33 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Lista de usuários obtidos com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string",
+                    "example": "João Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "joao@email.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "123654"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno"
           }
         }
       },
@@ -36,7 +62,7 @@
           {
             "name": "usuario",
             "in": "body",
-            "description": "Adicionar novo usuário.",
+            "description": "Adicionando novo usuário.",
             "schema": {
               "type": "object",
               "properties": {
@@ -63,10 +89,30 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Criado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": ""
+                },
+                "email": {
+                  "type": "string",
+                  "example": ""
+                },
+                "senha": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro interno"
           }
         }
       }
