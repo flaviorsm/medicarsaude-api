@@ -12,7 +12,7 @@ class App {
     constructor() {
         this.express = express();
 
-        this.database();
+        //this.database();
         this.middlewares();
         this.routes();
         this.swagger();
@@ -28,7 +28,7 @@ class App {
     }
 
     routes() {
-        this.express.use(require('./routes/routes'));
+        this.express.use(require('./routes/cliente.route'));
     }
 
     swagger() {

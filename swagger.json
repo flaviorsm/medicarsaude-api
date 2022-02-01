@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
+    "version": "1.0.0",
     "title": "Medicar Saúde",
-    "description": "Cooperativa de Saúde",
-    "version": "1.0.0"
+    "description": "Cooperativa de Saúde"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -14,102 +14,229 @@
   "consumes": [],
   "produces": [],
   "paths": {
-    "/usuario": {
-      "get": {
-        "tags": [
-          "Usuario"
-        ],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Lista de usuários obtidos com sucesso.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "nome": {
-                    "type": "string",
-                    "example": "João Doe"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "joao@email.com"
-                  },
-                  "senha": {
-                    "type": "string",
-                    "example": "123654"
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      },
+    "/cliente/criar": {
       "post": {
         "tags": [
-          "Usuario"
+          "Cliente"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "usuario",
+            "name": "cliente",
             "in": "body",
-            "description": "Adicionando novo usuário.",
+            "description": "Adicionando novo cliente.",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "João Doe"
+                  "example": "String"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "String"
                 },
                 "email": {
                   "type": "string",
-                  "example": "joao@email.com"
+                  "example": "String"
                 },
-                "senha": {
+                "telefone": {
                   "type": "string",
-                  "example": "123654"
+                  "example": "String"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "codigo": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "String"
                 }
               },
               "required": [
                 "nome",
+                "endereco",
                 "email",
-                "senha"
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "codigo",
+                "status"
               ]
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Criado com sucesso.",
+            "description": "Criado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/cliente/{id}/alterar": {
+      "put": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cliente",
+            "in": "body",
+            "description": "Adicionando novo cliente.",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": ""
+                  "example": "String"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "String"
                 },
                 "email": {
                   "type": "string",
-                  "example": ""
+                  "example": "String"
                 },
-                "senha": {
+                "telefone": {
                   "type": "string",
-                  "example": ""
+                  "example": "String"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "codigo": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "String"
                 }
               },
-              "xml": {
-                "name": "main"
-              }
+              "required": [
+                "nome",
+                "endereco",
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "codigo",
+                "status"
+              ]
             }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/cliente/todos": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Lista todos os clientes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Clientes encontrados."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/cliente/buscar": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Escolha apenas um parâmetro.",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identificador do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "telefone",
+            "description": "Telefone do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Email do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cpf",
+            "description": "CPF do cliente",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
           },
           "500": {
             "description": "Erro interno"
