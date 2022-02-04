@@ -7,14 +7,59 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "tags": [],
   "schemes": [
     "http"
   ],
-  "consumes": [],
-  "produces": [],
   "paths": {
-    "/cliente/criar": {
+    "/clientes": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Lista todos os clientes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Clientes encontrados."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/cliente/{id}": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Buscar cliente pelo identificador.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Cliente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/criar": {
       "post": {
         "tags": [
           "Cliente"
@@ -89,7 +134,7 @@
         }
       }
     },
-    "/cliente/{id}/alterar": {
+    "/cliente": {
       "put": {
         "tags": [
           "Cliente"
@@ -97,18 +142,16 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "cliente",
             "in": "body",
-            "description": "Adicionando novo cliente.",
+            "description": "Alterar cliente.",
             "schema": {
               "type": "object",
               "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "String"
+                },
                 "nome": {
                   "type": "string",
                   "example": "String"
@@ -143,10 +186,11 @@
                 },
                 "status": {
                   "type": "string",
-                  "example": "String"
+                  "example": "Enum"
                 }
               },
               "required": [
+                "id",
                 "nome",
                 "endereco",
                 "email",
@@ -161,7 +205,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Alterado com sucesso."
           },
           "404": {
@@ -172,78 +216,6 @@
           }
         }
       }
-    },
-    "/cliente/todos": {
-      "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Lista todos os clientes",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Clientes encontrados."
-          },
-          "404": {
-            "description": "Cliente não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-    "/cliente/buscar": {
-      "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Escolha apenas um parâmetro.",
-        "parameters": [
-          {
-            "name": "id",
-            "description": "Identificador do cliente",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "nome",
-            "description": "Nome do cliente",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "telefone",
-            "description": "Telefone do cliente",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "email",
-            "description": "Email do cliente",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "cpf",
-            "description": "CPF do cliente",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cliente encontrado."
-          },
-          "404": {
-            "description": "Cliente não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
     }
-  },
-  "definitions": {}
+  }
 }
