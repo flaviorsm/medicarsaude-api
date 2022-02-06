@@ -1,8 +1,8 @@
 import { IParceiro } from "../interfaces/IParceito";
 import { ParceiroModel } from "../models/Parceiro.model";
-import { Repository } from "../../shared/utils/Repository";
+import { RepositoryBase } from "../../shared/utils/RepositoryBase";
 
-export class ParceiroRepository implements Repository<IParceiro> {
+export class ParceiroRepository extends RepositoryBase<IParceiro> {
 
     async find(query: any): Promise<(IParceiro & { _id: string; })[]> {
         return await ParceiroModel.find(query)

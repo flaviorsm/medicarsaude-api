@@ -53,7 +53,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.ClienteService = void 0;
 var Status_enum_1 = require("../../shared/enum/Status.enum");
-var Service_1 = require("../../shared/utils/Service");
+var ServiceBase_1 = require("../../shared/utils/ServiceBase");
 var ClienteRepository_1 = require("../repositories/ClienteRepository");
 var ClienteService = /** @class */ (function (_super) {
     __extends(ClienteService, _super);
@@ -233,5 +233,5 @@ var ClienteService = /** @class */ (function (_super) {
         return this.clienteRepository.update(id, body);
     };
     return ClienteService;
-}(Service_1.ServiceBase));
+}(ServiceBase_1.ServiceBase));
 exports.ClienteService = ClienteService;

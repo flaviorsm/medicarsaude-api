@@ -14,6 +14,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO> {
     }
 
     async find(query: any): Promise<IParceiro[] | IParceiro> {
+
         if (query.nome || query.email || query.telefone) {
             if (query.nome) {
                 query = { nome: { "$regex": query.nome, "$options": "i" } };
@@ -30,12 +31,19 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO> {
 
         else if (query.cpf) {
             const pessoaFisica = await this.pessoaFisicaRepository.findOne(query);
-            return await this.parceiroRepository.findOne({ pessoaFisica: pessoaFisica._id });
+            return await this.parceiroRepository.findOne({ pessoaFisica: pessoaFisica._id })
+                .catch(err => {
+                    throw new Error(`==>: ${err}`);
+                });
         }
 
         else if (query.cnpj) {
+            this.logger.info('===>', query)
             const pessoaJuridica = await this.pessoaJuridicaRepository.findOne(query);
-            return await this.parceiroRepository.findOne({ pessoaJuridica: pessoaJuridica._id });
+            return await this.parceiroRepository.findOne({ pessoaJuridica: pessoaJuridica._id })
+                .catch(err => {
+                    throw new Error(`==>: ${err}`);
+                });;
         }
 
         else if (query.codigo) {
@@ -60,7 +68,6 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO> {
 
             dto.endereco = await this.enderecoRepository.create(dto, session).then(ed => ed[0]._id);
 
-            this.logger.info('==>', dto.cpf);
             dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps[0]._id);
 
             if (dto.cpf) {

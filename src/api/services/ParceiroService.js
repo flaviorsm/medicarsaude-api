@@ -52,7 +52,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.ParceiroService = void 0;
-var Service_1 = require("../../shared/utils/Service");
+var ServiceBase_1 = require("../../shared/utils/ServiceBase");
 var Status_enum_1 = require("./../../shared/enum/Status.enum");
 var ParceiroRepository_1 = require("./../repositories/ParceiroRepository");
 var ParceiroService = /** @class */ (function (_super) {
@@ -98,14 +98,19 @@ var ParceiroService = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.pessoaFisicaRepository.findOne(query)];
                     case 8:
                         pessoaFisica = _a.sent();
-                        return [4 /*yield*/, this.parceiroRepository.findOne({ pessoaFisica: pessoaFisica._id })];
+                        return [4 /*yield*/, this.parceiroRepository.findOne({ pessoaFisica: pessoaFisica._id })["catch"](function (err) {
+                                throw new Error("==>: ".concat(err));
+                            })];
                     case 9: return [2 /*return*/, _a.sent()];
                     case 10:
                         if (!query.cnpj) return [3 /*break*/, 13];
+                        this.logger.info('===>', query);
                         return [4 /*yield*/, this.pessoaJuridicaRepository.findOne(query)];
                     case 11:
                         pessoaJuridica = _a.sent();
-                        return [4 /*yield*/, this.parceiroRepository.findOne({ pessoaJuridica: pessoaJuridica._id })];
+                        return [4 /*yield*/, this.parceiroRepository.findOne({ pessoaJuridica: pessoaJuridica._id })["catch"](function (err) {
+                                throw new Error("==>: ".concat(err));
+                            })];
                     case 12: return [2 /*return*/, _a.sent()];
                     case 13:
                         if (!query.codigo) return [3 /*break*/, 15];
@@ -145,7 +150,6 @@ var ParceiroService = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.enderecoRepository.create(dto, session).then(function (ed) { return ed[0]._id; })];
                     case 3:
                         _a.endereco = _e.sent();
-                        this.logger.info('==>', dto.cpf);
                         _b = dto;
                         return [4 /*yield*/, this.pessoaRepository.create(dto, session).then(function (ps) { return ps[0]._id; })];
                     case 4:
@@ -258,5 +262,5 @@ var ParceiroService = /** @class */ (function (_super) {
         return this.parceiroRepository.update(id, body);
     };
     return ParceiroService;
-}(Service_1.ServiceBase));
+}(ServiceBase_1.ServiceBase));
 exports.ParceiroService = ParceiroService;

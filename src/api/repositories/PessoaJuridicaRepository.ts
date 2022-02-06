@@ -1,15 +1,19 @@
 import { IPessoaJuridica } from "../interfaces/IPessoaJuridica";
 import { PessoaJuridicaModel } from "../models/PessoaJuridica.model";
-import { Repository } from "../../shared/utils/Repository";
+import { RepositoryBase } from "../../shared/utils/RepositoryBase";
 
-export class PessoaJuridicaRepository implements Repository<IPessoaJuridica> {
+export class PessoaJuridicaRepository extends RepositoryBase<IPessoaJuridica> {
+
+    constructor() {
+        super();
+    }
 
     async find(query: any): Promise<(IPessoaJuridica & { _id: string; })[]> {
         return await PessoaJuridicaModel.find(query)
             .populate({
-                path: 'Pessoa',
+                path: 'pessoa',
                 populate: {
-                    path: 'Endereco'
+                    path: 'endereco'
                 }
             });
     }
@@ -17,9 +21,9 @@ export class PessoaJuridicaRepository implements Repository<IPessoaJuridica> {
     async findOne(query: any): Promise<IPessoaJuridica & { _id: string; }> {
         return await PessoaJuridicaModel.findOne(query)
             .populate({
-                path: 'Pessoa',
+                path: 'pessoa',
                 populate: {
-                    path: 'Endereco'
+                    path: 'endereco'
                 }
             });
     }
@@ -27,9 +31,9 @@ export class PessoaJuridicaRepository implements Repository<IPessoaJuridica> {
     async findById(id: string): Promise<IPessoaJuridica & { _id: string; }> {
         return await PessoaJuridicaModel.findById(id)
             .populate({
-                path: 'Pessoa',
+                path: 'pessoa',
                 populate: {
-                    path: 'Endereco'
+                    path: 'endereco'
                 }
             });
     }

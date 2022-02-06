@@ -1,8 +1,8 @@
 import { IEndereco } from '../interfaces/IEndereco';
 import { EnderecoModel } from './../models/Endereco.model';
-import { Repository } from "../../shared/utils/Repository";
+import { RepositoryBase } from "../../shared/utils/RepositoryBase";
 
-export class EnderecoRepository implements Repository<IEndereco> {
+export class EnderecoRepository extends RepositoryBase<IEndereco> {
     
     async find(query: any): Promise<(IEndereco & { _id: string; })[]> {
         return await EnderecoModel.find(query);
