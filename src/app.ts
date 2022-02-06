@@ -32,7 +32,7 @@ class App {
     }
 
     private routes(): void {
-        this.express.use('/api', Routes);
+        this.express.use('/', Routes);
     }
 }
 

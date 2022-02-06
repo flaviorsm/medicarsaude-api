@@ -1,17 +1,16 @@
 import { PessoaFisicaModel } from '../models/PessoaFisica.model';
-import { connect } from './../../config/db.config';
 
 export class PessoaFisicaRepository {
 
-    constructor() {
-        connect()
+    async find(query: any) {
+        return await PessoaFisicaModel.find(query).populate('pessoa');
     }
 
-    async getAll() {
-        return await PessoaFisicaModel.find({});
+    async findOne(query: any) {
+        return await PessoaFisicaModel.findOne(query);
     }
 
-    async getById(id: string) {
+    async findById(id: string) {
         return await PessoaFisicaModel.findById(id);
     }
 
@@ -19,13 +18,12 @@ export class PessoaFisicaRepository {
         return await PessoaFisicaModel.create([entity], { session });
     }
 
-    async update(entity: any, session: any) {
-        return await PessoaFisicaModel.updateOne([entity], { session });
+    async update(id: string, entity: any, session: any) {
+        return await PessoaFisicaModel.findByIdAndUpdate(id, entity, { session });
     }
 
     async delete(id: string, session: any) {
         await PessoaFisicaModel.deleteOne({ _id: id }, session);
     }
-
 
 }

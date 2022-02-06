@@ -38,22 +38,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.PessoaFisicaRepository = void 0;
 var PessoaFisica_model_1 = require("../models/PessoaFisica.model");
-var db_config_1 = require("./../../config/db.config");
 var PessoaFisicaRepository = /** @class */ (function () {
     function PessoaFisicaRepository() {
-        (0, db_config_1.connect)();
     }
-    PessoaFisicaRepository.prototype.getAll = function () {
+    PessoaFisicaRepository.prototype.find = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.find({})];
+                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.find(query).populate('pessoa')];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.getById = function (id) {
+    PessoaFisicaRepository.prototype.findOne = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findOne(query)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PessoaFisicaRepository.prototype.findById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -73,11 +81,11 @@ var PessoaFisicaRepository = /** @class */ (function () {
             });
         });
     };
-    PessoaFisicaRepository.prototype.update = function (entity, session) {
+    PessoaFisicaRepository.prototype.update = function (id, entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.updateOne([entity], { session: session })];
+                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

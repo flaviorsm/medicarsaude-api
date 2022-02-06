@@ -1,33 +1,40 @@
 import * as mongoose from 'mongoose';
 import { Logger } from './../logger/logger';
-
 require('dotenv').config()
-let database: mongoose.Connection;
-const logger = new Logger();
 
-export const connect = () => {
-    const url = 'mongodb+srv://admin:admin@cluster0.5y686.mongodb.net/medicar-saude?retryWrites=true&w=majority';
 
-    if (!database) {
+export class Database {
 
-        mongoose.connect(url);
+    conn: mongoose.Connection;
+    logger: Logger;
 
-        database = mongoose.connection;
+    constructor() {
+        this.logger = new Logger();
+        this.connect();
+    }
 
-        database.on('error', () => logger.error('Error de conexão'));
+    connect() {
+        const url = 'mongodb+srv://admin:admin@cluster0.5y686.mongodb.net/medicar-saude?retryWrites=true&w=majority';
 
-        database.once('open', () => logger.info('A conexão com o banco de dados foi bem-sucedida'));
+        if (!this.conn) {
+
+            mongoose.connect(url);
+
+            this.conn = mongoose.connection;
+
+            this.conn.on('error', () => this.logger.error('Error de conexão'));
+
+            this.conn.once('open', () => this.logger.info('A conexão com o banco de dados foi bem-sucedida'));
+        }
+    }
+
+    disconnect() {
+        if (this.conn) {
+
+            mongoose.disconnect();
+
+            this.conn.once("close", () => this.logger.info("Desconectado do banco de dados"));
+        }
     }
 
 }
-
-export const disconnect = () => {
-    if (database) {
-
-        mongoose.disconnect();
-
-        database.once("close", () => logger.info("Desconectado do banco de dados"));
-    }
-};
-
-export default database;

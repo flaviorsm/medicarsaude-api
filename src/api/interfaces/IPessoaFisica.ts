@@ -1,10 +1,10 @@
 import { Document } from 'mongoose';
-import { Pessoa } from './Pessoa';
+import { IPessoa } from './IPessoa';
 
-export interface PessoaFisica extends Document {
+export interface IPessoaFisica extends Document {
     _id?: string;
     cpf: string;
     rg: string;
     dataNascimento: Date;
-    pessoa: Pessoa;
+    pessoa: IPessoa;
 }

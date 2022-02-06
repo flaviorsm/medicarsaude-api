@@ -38,22 +38,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.PessoaRepository = void 0;
 var Pessoa_model_1 = require("../models/Pessoa.model");
-var db_config_1 = require("./../../config/db.config");
 var PessoaRepository = /** @class */ (function () {
     function PessoaRepository() {
-        (0, db_config_1.connect)();
     }
-    PessoaRepository.prototype.getAll = function () {
+    PessoaRepository.prototype.find = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.find({})];
+                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.find(query)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaRepository.prototype.getById = function (id) {
+    PessoaRepository.prototype.findOne = function (query) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.findOne(query)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    PessoaRepository.prototype.findById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -73,11 +81,11 @@ var PessoaRepository = /** @class */ (function () {
             });
         });
     };
-    PessoaRepository.prototype.update = function (entity, session) {
+    PessoaRepository.prototype.update = function (id, entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.updateOne([entity], { session: session })];
+                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

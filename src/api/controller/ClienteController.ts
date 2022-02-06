@@ -1,6 +1,5 @@
-import { ClienteDTO } from '../dto/ClienteDTO';
-import { Cliente } from '../interfaces/Cliente';
-import { ClienteService } from '../services/ClienteService';
+import { Request, Response } from 'express-serve-static-core';
+import { ClienteService } from './../services/ClienteService';
 
 export class ClienteController {
 
@@ -10,23 +9,68 @@ export class ClienteController {
         this.clienteService = new ClienteService();
     }
 
-    async getAll() {
-        return await this.clienteService.getAll();
+    find(req: Request, res: Response) {
+
+        if (req.params.id || req.query.id) {
+            const id = (req.params.id || req.query.id) as string;
+            this.clienteService.findById(id).then(cli => {
+                if (cli) {
+                    res.status(200).send(cli);
+                } else {
+                    res.status(404).send({ message: `Nenhum cliente encontrado!` });
+                }
+            }).catch(err => res.status(500).send(err));
+        }
+        else if (req.query) {
+            this.clienteService.find(req.query).then(cli => {
+                if (cli) {
+                    res.status(200).send(cli);
+                } else {
+                    res.status(404).send({ message: `Nenhum cliente encontrado!` });
+                }
+            }).catch(err => res.status(500).send(err));
+        }
+        else {
+            this.clienteService.find().then(cli => {
+                if (cli) {
+                    res.status(200).send(cli);
+                } else {
+                    res.status(404).send({ message: `Nenhum cliente encontrado!` });
+                }
+            }).catch(err => res.status(500).send(err));
+        }
     }
 
-    async getById(id: string) {
-        return await this.clienteService.getById(id);
+    create(req: Request, res: Response) {
+        this.clienteService.create(req.body).then(cliente => res.status(201).send(cliente))
+            .catch(err => res.status(500).send(err));
     }
 
-    async create(dto: ClienteDTO) {
-        return await this.clienteService.create(dto);
+    update(req: Request, res: Response) {
+        this.clienteService.update(req.params.id, req.body).then(cliente => {
+            res.status(200).send(cliente);
+        }).catch(err => {
+            res.status(500).send(err);
+        });
     }
 
-    async update(entity: Cliente) {
-        return await this.clienteService.update(entity);
+    updateStatus(req: Request, res: Response) {
+        let status = null;
+        if (req.params.status) {
+            status = { status: req.params.status.toString().toUpperCase() };
+        } else {
+            status = req.body;
+        }
+
+        this.clienteService.updateStatus(req.params.id, status).then(() => {
+            res.status(200).send({ message: `Status alterado com sucesso!` });
+        }).catch(err => {
+            res.status(500).send(err);
+        });
     }
 
-    async delete(id: string) {
-        await this.clienteService.delete(id);
+    delete(req: Request, res: Response) {
+        this.clienteService.delete(req.params.id).then(() => res.status(200).send({ message: 'Excluído com sucesso' }))
+            .catch(err => res.status(500).json(err));
     }
 }

@@ -1,11 +1,6 @@
-import { Schema, model, Model } from 'mongoose';
-
-export interface IPessoa extends Document {
-    nome: string;
-    endereco: string;
-    email: string;
-    telefone: string;
-}
+import { model, Model, Schema } from 'mongoose';
+import { IPessoa } from '../interfaces/IPessoa';
+import { PessoaFisicaModel } from './PessoaFisica.model';
 
 const PessoaSchema = new Schema<IPessoa>({
     nome: { type: String, required: true },

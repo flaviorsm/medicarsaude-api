@@ -1,59 +1,10 @@
-import { Logger } from './../logger/logger';
+import { query, Router } from 'express';
 import { ClienteController } from './../api/controller/ClienteController';
-import { Router } from 'express';
 
 const router = Router();
 const clienteController = new ClienteController();
 
-router.get('/clientes', (req, res) => {
-  /*
-    #swagger.tags = ['Cliente']
-    #swagger.description = 'Lista todos os clientes'
-    #swagger.responses[200] = {
-      description: 'Clientes encontrados.'
-    }
-    #swagger.responses[404] = {
-      description: 'Cliente não encontrado!'
-    }
-    #swagger.responses[500] = {
-      description: 'Erro interno'
-    }
-  */
-  clienteController.getAll().then(clientes => {
-    if (clientes && clientes.length) {
-      res.status(200).json(clientes);
-    } else {
-      res.status(404).send({ message: `Nenhum cliente encontrado!` });
-    }
-  }).catch(err => res.status(500).json(err));
-});
-
-
-router.get('/cliente/:id', (req, res) => {
-  /*
-    #swagger.tags = ['Cliente']
-    #swagger.description = 'Buscar cliente pelo identificador.'
-    #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
-    #swagger.responses[200] = {
-      description: 'Cliente encontrado.'
-    }
-    #swagger.responses[404] = {
-      description: 'Cliente não encontrado!'
-    }
-    #swagger.responses[500] = {
-      description: 'Erro interno'
-    }
-  */
-  clienteController.getById(req.params.id).then(cliente => {
-    if (cliente) {
-      res.status(200).json(cliente);
-    } else {
-      res.status(404).send({ message: `Cliente não encontrado!` });
-    }
-  }).catch(err => res.status(500).json(err));
-});
-
-router.post('/cria', (req, res) => {
+router.post('/clientes', (req, res) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.parameters['cliente'] = {
@@ -78,17 +29,13 @@ router.post('/cria', (req, res) => {
         description: 'Erro interno'
     }
   */
-  clienteController.create(req.body).then(cliente => {
-    res.status(201).send(cliente);
-  }).catch(err => {
-    console.log(err);
-    res.status(500).send(err)
-  });
+  clienteController.create(req, res);
 });
 
-router.put('/cliente', (req, res) => {
+router.put('/clientes/:id', (req, res) => {
   /*
   #swagger.tags = ['Cliente']
+  #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
   #swagger.parameters['cliente'] = {
       in: 'body',
       description: 'Alterar cliente.',
@@ -115,12 +62,10 @@ router.put('/cliente', (req, res) => {
       description: 'Erro interno'
   }
 */
-  clienteController.update(req.body).then(cliente => {
-    res.status(200).json(cliente);
-  }).catch(err => res.status(500).json(err));
+  clienteController.update(req, res);
 });
 
-router.delete('/cliente/:id', (req, res) => {
+router.delete('/clientes/:id', (req, res) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.description = 'Exclui dados do cliente.'
@@ -135,9 +80,49 @@ router.delete('/cliente/:id', (req, res) => {
       description: 'Erro interno'
     }
   */
-  clienteController.delete(req.params.id).then(cliente => {
-    res.status(200).json('Excluído com sucesso');
-  }).catch(err => res.status(500).json(err));;
+  clienteController.delete(req, res);
 });
 
+router.patch('/clientes/:id/:status?', (req, res) => {
+   /*
+    #swagger.tags = ['Cliente']
+    #swagger.description = 'Alterar status do cliente.'
+    #swagger.parameters['status'] = {
+      in: 'body',
+      description: 'Status',
+      schema: {$status: 'ATIVO' ou 'SUSPENSO' ou 'INATIVO'}
+    }
+    #swagger.responses[200] = {
+      description: 'Status modificado.'
+    }
+    #swagger.responses[404] = {
+      description: 'Cliente não encontrado!'
+    }
+    #swagger.responses[500] = {
+      description: 'Erro interno'
+    }
+  */
+ clienteController.updateStatus(req, res);
+});
+
+router.get('/clientes/:id?', (req, res) => {
+  /*
+    #swagger.tags = ['Cliente']
+    #swagger.description = 'Escolha apenas um parâmetro.'
+    #swagger.parameters['nome'] = { description: 'Nome do cliente' }
+    #swagger.parameters['telefone'] = { description: 'Telefone do cliente' }
+    #swagger.parameters['email'] = { description: 'Email do cliente' }
+    #swagger.parameters['cpf'] = { description: 'CPF do cliente' }
+    #swagger.responses[200] = {
+      description: 'Cliente encontrado.'
+    }
+    #swagger.responses[404] = {
+      description: 'Cliente não encontrado!'
+    }
+    #swagger.responses[500] = {
+      description: 'Erro interno'
+    }
+  */
+  clienteController.find(req, res);
+});
 export default router;

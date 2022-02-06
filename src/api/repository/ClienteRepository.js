@@ -37,27 +37,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.ClienteRepository = void 0;
-var db_config_1 = require("../../config/db.config");
 var Cliente_model_1 = require("../models/Cliente.model");
 var ClienteRepository = /** @class */ (function () {
     function ClienteRepository() {
-        (0, db_config_1.connect)();
     }
-    ClienteRepository.prototype.getAll = function () {
+    ClienteRepository.prototype.find = function (query) {
+        if (query === void 0) { query = {}; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.find({})];
+                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.find(query).populate({
+                            path: 'pessoaFisica',
+                            populate: {
+                                path: 'pessoa'
+                            }
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    ClienteRepository.prototype.getById = function (id) {
+    ClienteRepository.prototype.findOne = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findById(id)];
+                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findOne(query).populate({
+                            path: 'pessoaFisica',
+                            populate: {
+                                path: 'pessoa'
+                            }
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    ClienteRepository.prototype.findById = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findById(id).populate({
+                            path: 'pessoaFisica',
+                            populate: {
+                                path: 'pessoa'
+                            }
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -73,11 +97,12 @@ var ClienteRepository = /** @class */ (function () {
             });
         });
     };
-    ClienteRepository.prototype.update = function (entity, session) {
+    ClienteRepository.prototype.update = function (id, entity, session) {
+        if (session === void 0) { session = null; }
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.updateOne([entity], { session: session })];
+                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

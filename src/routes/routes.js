@@ -16,7 +16,7 @@ var Routes = /** @class */ (function () {
         this.express.use(bodyParser.urlencoded({ extended: false }));
     };
     Routes.prototype.routes = function () {
-        this.express.use('/cliente', cliente_route_1["default"]);
+        this.express.use('/api', cliente_route_1["default"]);
     };
     return Routes;
 }());

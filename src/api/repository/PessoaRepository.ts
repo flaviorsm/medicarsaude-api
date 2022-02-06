@@ -1,16 +1,16 @@
 import { PessoaModel } from "../models/Pessoa.model";
-import { connect } from './../../config/db.config';
 
 export class PessoaRepository {
-    constructor() {
-        connect()
+
+    async find(query: any) {
+        return await PessoaModel.find(query);
     }
 
-    async getAll() {
-        return await PessoaModel.find({});
+    async findOne(query: any) {
+        return await PessoaModel.findOne(query);
     }
 
-    async getById(id: string) {
+    async findById(id: string) {
         return await PessoaModel.findById(id);
     }
 
@@ -18,8 +18,8 @@ export class PessoaRepository {
         return await PessoaModel.create([entity], { session });
     }
 
-    async update(entity: any, session: any) {
-        return await PessoaModel.updateOne([entity], { session });
+    async update(id: string, entity: any, session: any) {
+        return await PessoaModel.findByIdAndUpdate(id, entity, { session });
     }
 
     async delete(id: string, session: any) {

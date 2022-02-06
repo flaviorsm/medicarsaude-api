@@ -5,61 +5,13 @@
     "title": "Medicar Saúde",
     "description": "Cooperativa de Saúde"
   },
-  "host": "localhost:3000",
+  "host": "localhost:3000/api",
   "basePath": "/",
   "schemes": [
     "http"
   ],
   "paths": {
     "/clientes": {
-      "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Lista todos os clientes",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Clientes encontrados."
-          },
-          "404": {
-            "description": "Cliente não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-    "/cliente/{id}": {
-      "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "description": "Buscar cliente pelo identificador.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Cliente"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cliente encontrado."
-          },
-          "404": {
-            "description": "Cliente não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      }
-    },
-    "/criar": {
       "post": {
         "tags": [
           "Cliente"
@@ -134,13 +86,20 @@
         }
       }
     },
-    "/cliente": {
+    "/clientes/{id}": {
       "put": {
         "tags": [
           "Cliente"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Cliente"
+          },
           {
             "name": "cliente",
             "in": "body",
@@ -207,6 +166,82 @@
         "responses": {
           "200": {
             "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Alterar status do cliente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/clientes/{id?}": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Escolha apenas um parâmetro.",
+        "parameters": [
+          {
+            "name": "id?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "telefone",
+            "description": "Telefone do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Email do cliente",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cpf",
+            "description": "CPF do cliente",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente encontrado."
           },
           "404": {
             "description": "Cliente não encontrado!"

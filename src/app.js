@@ -20,7 +20,7 @@ var App = /** @class */ (function () {
         this.express.use(bodyParser.urlencoded({ extended: false }));
     };
     App.prototype.routes = function () {
-        this.express.use('/api', routes_1["default"]);
+        this.express.use('/', routes_1["default"]);
     };
     return App;
 }());

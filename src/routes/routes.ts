@@ -24,7 +24,7 @@ class Routes {
     }
 
     private routes(): void {
-        this.express.use('/cliente', ClienteRouter);
+        this.express.use('/api', ClienteRouter);
     }
 }
 

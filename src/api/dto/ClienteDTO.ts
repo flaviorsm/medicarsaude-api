@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 
 export interface ClienteDTO {
     nome: string;
@@ -10,6 +9,6 @@ export interface ClienteDTO {
     dataNascimento: Date,
     codigo: string;
     status: string;
-    pessoaFisica: Types.ObjectId;
-    pessoa: Types.ObjectId;
+    pessoaFisica: any;
+    pessoa: any;
 }

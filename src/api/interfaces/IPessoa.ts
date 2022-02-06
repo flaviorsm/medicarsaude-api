@@ -1,7 +1,6 @@
 import { Document } from "mongoose";
 
-
-export interface Pessoa extends Document {
+export interface IPessoa extends Document {
     nome: string;
     endereco: string;
     email: string;
