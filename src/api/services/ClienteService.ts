@@ -4,9 +4,9 @@ import { ParsedQs } from 'qs';
 import { Database } from '../../config/db.config';
 import { Logger } from '../../logger/logger';
 import { ClienteDTO } from '../dto/ClienteDTO';
-import { ClienteRepository } from "../repository/ClienteRepository";
-import { PessoaFisicaRepository } from '../repository/PessoaFisicaRepository';
-import { PessoaRepository } from '../repository/PessoaRepository';
+import { ClienteRepository } from "../repositories/ClienteRepository";
+import { PessoaFisicaRepository } from '../repositories/PessoaFisicaRepository';
+import { PessoaRepository } from '../repositories/PessoaRepository';
 
 export class ClienteService {
 
@@ -28,6 +28,9 @@ export class ClienteService {
     async find(query: any = {}) {
         this.logger.info('Query', query);
         if (query.nome || query.email || query.telefone) {
+            if(query.nome) {
+                query = { nome: { "$regex": query.nome, "$options": "i" } };
+            }
             let clientes = [];
             const pessoa = await this.pessoaRepository.find(query);
             for (const ps of pessoa) {
@@ -140,9 +143,9 @@ export class ClienteService {
             await this.pessoaRepository.delete(cliente.pessoaFisica.pessoa._id, session);
 
             await this.pessoaFisicaRepository.delete(cliente.pessoaFisica._id, session);
-            
+
             await this.clienteRepository.delete(id, session);
-            
+
             await session.commitTransaction();
 
         } catch (error) {

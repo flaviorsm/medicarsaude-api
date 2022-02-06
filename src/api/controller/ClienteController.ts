@@ -70,7 +70,8 @@ export class ClienteController {
     }
 
     delete(req: Request, res: Response) {
-        this.clienteService.delete(req.params.id).then(() => res.status(200).send({ message: 'Excluído com sucesso' }))
+        this.clienteService.delete(req.params.id)
+            .then(() => res.status(200).send({ message: 'Excluído com sucesso' }))
             .catch(err => res.status(500).json(err));
     }
 }

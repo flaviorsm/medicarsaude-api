@@ -6,7 +6,7 @@ const doc = {
         title: 'Medicar Saúde',
         description: 'Cooperativa de Saúde',
     },
-    host: 'localhost:3000/api',
+    host: 'http://localhost:3000/api',
     schemes: ['http'],
 };
 

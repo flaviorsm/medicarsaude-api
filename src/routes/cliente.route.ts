@@ -1,4 +1,4 @@
-import { query, Router } from 'express';
+import { Router } from 'express';
 import { ClienteController } from './../api/controller/ClienteController';
 
 const router = Router();
@@ -30,6 +30,28 @@ router.post('/clientes', (req, res) => {
     }
   */
   clienteController.create(req, res);
+});
+
+router.get('/clientes', (req, res) => {
+  /*
+    #swagger.tags = ['Cliente']
+    #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
+    #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
+    #swagger.parameters['nome'] = { description: 'Nome do cliente' }
+    #swagger.parameters['telefone'] = { description: 'Telefone do cliente' }
+    #swagger.parameters['email'] = { description: 'Email do cliente' }
+    #swagger.parameters['cpf'] = { description: 'CPF do cliente' }
+    #swagger.responses[200] = {
+      description: 'Cliente encontrado.'
+    }
+    #swagger.responses[404] = {
+      description: 'Cliente não encontrado!'
+    }
+    #swagger.responses[500] = {
+      description: 'Erro interno'
+    }
+  */
+  clienteController.find(req, res);
 });
 
 router.put('/clientes/:id', (req, res) => {
@@ -83,46 +105,23 @@ router.delete('/clientes/:id', (req, res) => {
   clienteController.delete(req, res);
 });
 
-router.patch('/clientes/:id/:status?', (req, res) => {
-   /*
-    #swagger.tags = ['Cliente']
-    #swagger.description = 'Alterar status do cliente.'
-    #swagger.parameters['status'] = {
-      in: 'body',
-      description: 'Status',
-      schema: {$status: 'ATIVO' ou 'SUSPENSO' ou 'INATIVO'}
-    }
-    #swagger.responses[200] = {
-      description: 'Status modificado.'
-    }
-    #swagger.responses[404] = {
-      description: 'Cliente não encontrado!'
-    }
-    #swagger.responses[500] = {
-      description: 'Erro interno'
-    }
-  */
- clienteController.updateStatus(req, res);
+router.patch('/clientes/:id/:status', (req, res) => {
+  /*
+   #swagger.tags = ['Cliente']
+   #swagger.description = 'Alterar status do cliente.'
+   #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
+   #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }
+   #swagger.responses[200] = {
+     description: 'Status modificado.'
+   }
+   #swagger.responses[404] = {
+     description: 'Cliente não encontrado!'
+   }
+   #swagger.responses[500] = {
+     description: 'Erro interno'
+   }
+ */
+  clienteController.updateStatus(req, res);
 });
 
-router.get('/clientes/:id?', (req, res) => {
-  /*
-    #swagger.tags = ['Cliente']
-    #swagger.description = 'Escolha apenas um parâmetro.'
-    #swagger.parameters['nome'] = { description: 'Nome do cliente' }
-    #swagger.parameters['telefone'] = { description: 'Telefone do cliente' }
-    #swagger.parameters['email'] = { description: 'Email do cliente' }
-    #swagger.parameters['cpf'] = { description: 'CPF do cliente' }
-    #swagger.responses[200] = {
-      description: 'Cliente encontrado.'
-    }
-    #swagger.responses[404] = {
-      description: 'Cliente não encontrado!'
-    }
-    #swagger.responses[500] = {
-      description: 'Erro interno'
-    }
-  */
-  clienteController.find(req, res);
-});
 export default router;

@@ -39,9 +39,9 @@ exports.__esModule = true;
 exports.ClienteService = void 0;
 var db_config_1 = require("../../config/db.config");
 var logger_1 = require("../../logger/logger");
-var ClienteRepository_1 = require("../repository/ClienteRepository");
-var PessoaFisicaRepository_1 = require("../repository/PessoaFisicaRepository");
-var PessoaRepository_1 = require("../repository/PessoaRepository");
+var ClienteRepository_1 = require("../repositories/ClienteRepository");
+var PessoaFisicaRepository_1 = require("../repositories/PessoaFisicaRepository");
+var PessoaRepository_1 = require("../repositories/PessoaRepository");
 var ClienteService = /** @class */ (function () {
     function ClienteService() {
         this.clienteRepository = new ClienteRepository_1.ClienteRepository();
@@ -59,6 +59,9 @@ var ClienteService = /** @class */ (function () {
                     case 0:
                         this.logger.info('Query', query);
                         if (!(query.nome || query.email || query.telefone)) return [3 /*break*/, 7];
+                        if (query.nome) {
+                            query = { nome: { "$regex": query.nome, "$options": "i" } };
+                        }
                         clientes = [];
                         return [4 /*yield*/, this.pessoaRepository.find(query)];
                     case 1:

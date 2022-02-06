@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc ./src/index.ts && node ./src/index.js",
-    "start:dev": "node src/config/swagger.js && nodemon ./src/index.js",
+    "start:dev": "nodemon ./src/index.js",
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint-fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "build": "webpack",

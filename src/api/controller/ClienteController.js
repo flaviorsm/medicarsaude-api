@@ -64,7 +64,8 @@ var ClienteController = /** @class */ (function () {
         });
     };
     ClienteController.prototype["delete"] = function (req, res) {
-        this.clienteService["delete"](req.params.id).then(function () { return res.status(200).send({ message: 'Excluído com sucesso' }); })["catch"](function (err) { return res.status(500).json(err); });
+        this.clienteService["delete"](req.params.id)
+            .then(function () { return res.status(200).send({ message: 'Excluído com sucesso' }); })["catch"](function (err) { return res.status(500).json(err); });
     };
     return ClienteController;
 }());
