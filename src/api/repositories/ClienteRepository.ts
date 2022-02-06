@@ -1,5 +1,3 @@
-import { ParsedQs } from 'qs';
-import { ICliente } from '../interfaces/ICliente';
 import { ClienteModel } from '../models/Cliente.model';
 
 export class ClienteRepository {
@@ -8,7 +6,10 @@ export class ClienteRepository {
         return await ClienteModel.find(query).populate({
             path: 'pessoaFisica',
             populate: {
-                path: 'pessoa'
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
             }
         });
     }
@@ -17,7 +18,10 @@ export class ClienteRepository {
         return await ClienteModel.findOne(query).populate({
             path: 'pessoaFisica',
             populate: {
-                path: 'pessoa'
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
             }
         });
     }
@@ -26,7 +30,10 @@ export class ClienteRepository {
         return await ClienteModel.findById(id).populate({
             path: 'pessoaFisica',
             populate: {
-                path: 'pessoa'
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
             }
         });
     }
@@ -38,10 +45,4 @@ export class ClienteRepository {
     async update(id: string, entity: any, session: any = null) {
         return await ClienteModel.findByIdAndUpdate(id, entity, { session });
     }
-
-    async delete(id: string, session: any) {
-        await ClienteModel.deleteOne({ _id: id }, session);
-    }
-
-
 }

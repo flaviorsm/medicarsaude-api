@@ -49,7 +49,10 @@ var ClienteRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.find(query).populate({
                             path: 'pessoaFisica',
                             populate: {
-                                path: 'pessoa'
+                                path: 'pessoa',
+                                populate: {
+                                    path: 'endereco'
+                                }
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -64,7 +67,10 @@ var ClienteRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findOne(query).populate({
                             path: 'pessoaFisica',
                             populate: {
-                                path: 'pessoa'
+                                path: 'pessoa',
+                                populate: {
+                                    path: 'endereco'
+                                }
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -79,7 +85,10 @@ var ClienteRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findById(id).populate({
                             path: 'pessoaFisica',
                             populate: {
-                                path: 'pessoa'
+                                path: 'pessoa',
+                                populate: {
+                                    path: 'endereco'
+                                }
                             }
                         })];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -104,18 +113,6 @@ var ClienteRepository = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    ClienteRepository.prototype["delete"] = function (id, session) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Cliente_model_1.ClienteModel.deleteOne({ _id: id }, session)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
                 }
             });
         });

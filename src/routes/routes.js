@@ -2,8 +2,9 @@
 exports.__esModule = true;
 var express = require("express");
 var bodyParser = require("body-parser");
-var logger_1 = require("../logger/logger");
+var logger_1 = require("../shared/logger/logger");
 var cliente_route_1 = require("./cliente.route");
+var parceiro_route_1 = require("./parceiro.route");
 var Routes = /** @class */ (function () {
     function Routes() {
         this.express = express();
@@ -17,6 +18,7 @@ var Routes = /** @class */ (function () {
     };
     Routes.prototype.routes = function () {
         this.express.use('/api', cliente_route_1["default"]);
+        this.express.use('/api', parceiro_route_1["default"]);
     };
     return Routes;
 }());

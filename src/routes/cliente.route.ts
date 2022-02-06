@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ClienteController } from './../api/controller/ClienteController';
+import { ClienteController } from '../api/controllers/ClienteController';
 
 const router = Router();
 const clienteController = new ClienteController();
@@ -19,7 +19,12 @@ router.post('/clientes', (req, res) => {
             $rg: 'String',
             $dataNascimento: 'Date',
             $codigo: 'String',
-            $status: 'String'
+            $status: 'String',
+            $cep: 'String',
+            $rua: 'String',
+            $bairro: 'String',
+            $cidade: 'String',
+            $estado: 'String'
         }
     }
     #swagger.responses[201] = {
@@ -62,7 +67,6 @@ router.put('/clientes/:id', (req, res) => {
       in: 'body',
       description: 'Alterar cliente.',
       schema: {
-          $id: 'String',
           $nome: 'String',
           $endereco: 'String',
           $email: 'String',
@@ -71,7 +75,12 @@ router.put('/clientes/:id', (req, res) => {
           $rg: 'String',
           $dataNascimento: 'Date',
           $codigo: 'String',
-          $status: 'Enum'
+          $status: 'String',
+          $cep: 'String',
+          $rua: 'String',
+          $bairro: 'String',
+          $cidade: 'String',
+          $estado: 'String'
       }
   }
   #swagger.responses[200] = {
@@ -121,7 +130,7 @@ router.patch('/clientes/:id/:status', (req, res) => {
      description: 'Erro interno'
    }
  */
-  clienteController.updateStatus(req, res);
+  clienteController.alterStatus(req, res);
 });
 
 export default router;

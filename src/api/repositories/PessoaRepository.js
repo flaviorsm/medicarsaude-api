@@ -92,16 +92,7 @@ var PessoaRepository = /** @class */ (function () {
         });
     };
     PessoaRepository.prototype["delete"] = function (id, session) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Pessoa_model_1.PessoaModel.deleteOne({ _id: id }, session)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
+        Pessoa_model_1.PessoaModel.deleteOne({ _id: id }, session);
     };
     return PessoaRepository;
 }());

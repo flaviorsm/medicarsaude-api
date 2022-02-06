@@ -1,8 +1,9 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { Logger } from '../logger/logger';
+import { Logger } from '../shared/logger/logger';
 
 import ClienteRouter from './cliente.route';
+import ParceiroRouter from './parceiro.route';
 
 class Routes {
 
@@ -25,6 +26,7 @@ class Routes {
 
     private routes(): void {
         this.express.use('/api', ClienteRouter);
+        this.express.use('/api', ParceiroRouter);
     }
 }
 

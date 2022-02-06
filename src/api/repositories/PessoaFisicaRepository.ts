@@ -22,8 +22,8 @@ export class PessoaFisicaRepository {
         return await PessoaFisicaModel.findByIdAndUpdate(id, entity, { session });
     }
 
-    async delete(id: string, session: any) {
-        await PessoaFisicaModel.deleteOne({ _id: id }, session);
+    delete(id: string, session: any) {
+        PessoaFisicaModel.deleteOne({ _id: id }, session);
     }
 
 }

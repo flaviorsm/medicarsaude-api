@@ -36,64 +36,64 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.PessoaFisicaRepository = void 0;
-var PessoaFisica_model_1 = require("../models/PessoaFisica.model");
-var PessoaFisicaRepository = /** @class */ (function () {
-    function PessoaFisicaRepository() {
+exports.EnderecoRepository = void 0;
+var Endereco_model_1 = require("./../models/Endereco.model");
+var EnderecoRepository = /** @class */ (function () {
+    function EnderecoRepository() {
     }
-    PessoaFisicaRepository.prototype.find = function (query) {
+    EnderecoRepository.prototype.find = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.find(query).populate('pessoa')];
+                    case 0: return [4 /*yield*/, Endereco_model_1.EnderecoModel.find(query)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.findOne = function (query) {
+    EnderecoRepository.prototype.findOne = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findOne(query)];
+                    case 0: return [4 /*yield*/, Endereco_model_1.EnderecoModel.findOne(query)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.findById = function (id) {
+    EnderecoRepository.prototype.findById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findById(id)];
+                    case 0: return [4 /*yield*/, Endereco_model_1.EnderecoModel.findById(id)];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.create = function (entity, session) {
+    EnderecoRepository.prototype.create = function (entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.create([entity], { session: session })];
+                    case 0: return [4 /*yield*/, Endereco_model_1.EnderecoModel.create([entity], { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.update = function (id, entity, session) {
+    EnderecoRepository.prototype.update = function (id, entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findByIdAndUpdate(id, entity, { session: session })];
+                    case 0: return [4 /*yield*/, Endereco_model_1.EnderecoModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype["delete"] = function (id, session) {
-        PessoaFisica_model_1.PessoaFisicaModel.deleteOne({ _id: id }, session);
+    EnderecoRepository.prototype["delete"] = function (id, session) {
+        Endereco_model_1.EnderecoModel.deleteOne({ _id: id }, session);
     };
-    return PessoaFisicaRepository;
+    return EnderecoRepository;
 }());
-exports.PessoaFisicaRepository = PessoaFisicaRepository;
+exports.EnderecoRepository = EnderecoRepository;

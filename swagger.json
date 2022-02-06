@@ -5,7 +5,7 @@
     "title": "Medicar Saúde",
     "description": "Cooperativa de Saúde"
   },
-  "host": "http://localhost:3000/api",
+  "host": "localhost:3000/api",
   "basePath": "/",
   "schemes": [
     "http"
@@ -60,6 +60,26 @@
                 "status": {
                   "type": "string",
                   "example": "String"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "String"
                 }
               },
               "required": [
@@ -71,7 +91,12 @@
                 "rg",
                 "dataNascimento",
                 "codigo",
-                "status"
+                "status",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
               ]
             }
           }
@@ -156,10 +181,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "String"
-                },
                 "nome": {
                   "type": "string",
                   "example": "String"
@@ -194,11 +215,30 @@
                 },
                 "status": {
                   "type": "string",
-                  "example": "Enum"
+                  "example": "String"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "String"
                 }
               },
               "required": [
-                "id",
                 "nome",
                 "endereco",
                 "email",
@@ -207,7 +247,12 @@
                 "rg",
                 "dataNascimento",
                 "codigo",
-                "status"
+                "status",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
               ]
             }
           }
@@ -253,6 +298,346 @@
           },
           "404": {
             "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/parceiros": {
+      "post": {
+        "tags": [
+          "Parceiro"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "parceiro",
+            "in": "body",
+            "description": "Adicionando novo parceiro.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoria": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "CRM": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "nomeFantasia": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "IE": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataFundacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "categoria",
+                "status",
+                "CRM",
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cnpj",
+                "nomeFantasia",
+                "IE",
+                "dataFundacao",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Parceiro"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identificador do Parceiro",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Parceiro",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "telefone",
+            "description": "Telefone do Parceiro",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Email do Parceiro",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cpf",
+            "description": "CPF do Parceiro",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cnpj",
+            "description": "CNPJ do Parceiro",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parceiro encontrado."
+          },
+          "404": {
+            "description": "Parceiro não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/parceiros/{id}": {
+      "put": {
+        "tags": [
+          "Parceiro"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Parceiro"
+          },
+          {
+            "name": "parceiro",
+            "in": "body",
+            "description": "Alterar parceiro.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoria": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "CRM": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "nomeFantasia": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "IE": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataFundacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "categoria",
+                "status",
+                "CRM",
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cnpj",
+                "nomeFantasia",
+                "IE",
+                "dataFundacao",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Parceiro não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/parceiros/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Parceiro"
+        ],
+        "description": "Alterar status do parceiro.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Parceiro"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "404": {
+            "description": "Parceiro não encontrado!"
           },
           "500": {
             "description": "Erro interno"

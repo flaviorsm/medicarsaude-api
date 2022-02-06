@@ -2,7 +2,7 @@
 exports.__esModule = true;
 var app_1 = require("./app");
 var http = require("http");
-var logger_1 = require("./logger/logger");
+var logger_1 = require("./shared/logger/logger");
 require('dotenv').config();
 var port = process.env.PORT || 3000;
 var logger = new logger_1.Logger();

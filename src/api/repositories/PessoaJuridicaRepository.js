@@ -36,64 +36,82 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.PessoaFisicaRepository = void 0;
-var PessoaFisica_model_1 = require("../models/PessoaFisica.model");
-var PessoaFisicaRepository = /** @class */ (function () {
-    function PessoaFisicaRepository() {
+exports.PessoaJuridicaRepository = void 0;
+var PessoaJuridica_model_1 = require("../models/PessoaJuridica.model");
+var PessoaJuridicaRepository = /** @class */ (function () {
+    function PessoaJuridicaRepository() {
     }
-    PessoaFisicaRepository.prototype.find = function (query) {
+    PessoaJuridicaRepository.prototype.find = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.find(query).populate('pessoa')];
+                    case 0: return [4 /*yield*/, PessoaJuridica_model_1.PessoaJuridicaModel.find(query)
+                            .populate({
+                            path: 'Pessoa',
+                            populate: {
+                                path: 'Endereco'
+                            }
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.findOne = function (query) {
+    PessoaJuridicaRepository.prototype.findOne = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findOne(query)];
+                    case 0: return [4 /*yield*/, PessoaJuridica_model_1.PessoaJuridicaModel.findOne(query)
+                            .populate({
+                            path: 'Pessoa',
+                            populate: {
+                                path: 'Endereco'
+                            }
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.findById = function (id) {
+    PessoaJuridicaRepository.prototype.findById = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findById(id)];
+                    case 0: return [4 /*yield*/, PessoaJuridica_model_1.PessoaJuridicaModel.findById(id)
+                            .populate({
+                            path: 'Pessoa',
+                            populate: {
+                                path: 'Endereco'
+                            }
+                        })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.create = function (entity, session) {
+    PessoaJuridicaRepository.prototype.create = function (entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.create([entity], { session: session })];
+                    case 0: return [4 /*yield*/, PessoaJuridica_model_1.PessoaJuridicaModel.create([entity], { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype.update = function (id, entity, session) {
+    PessoaJuridicaRepository.prototype.update = function (id, entity, session) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, PessoaFisica_model_1.PessoaFisicaModel.findByIdAndUpdate(id, entity, { session: session })];
+                    case 0: return [4 /*yield*/, PessoaJuridica_model_1.PessoaJuridicaModel.findByIdAndUpdate(id, entity, { session: session })];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    PessoaFisicaRepository.prototype["delete"] = function (id, session) {
-        PessoaFisica_model_1.PessoaFisicaModel.deleteOne({ _id: id }, session);
+    PessoaJuridicaRepository.prototype["delete"] = function (id, session) {
+        PessoaJuridica_model_1.PessoaJuridicaModel.deleteOne({ _id: id }, session);
     };
-    return PessoaFisicaRepository;
+    return PessoaJuridicaRepository;
 }());
-exports.PessoaFisicaRepository = PessoaFisicaRepository;
+exports.PessoaJuridicaRepository = PessoaJuridicaRepository;

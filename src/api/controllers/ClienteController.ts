@@ -1,5 +1,5 @@
 import { Request, Response } from 'express-serve-static-core';
-import { ClienteService } from './../services/ClienteService';
+import { ClienteService } from '../services/ClienteService';
 
 export class ClienteController {
 
@@ -31,7 +31,7 @@ export class ClienteController {
             }).catch(err => res.status(500).send(err));
         }
         else {
-            this.clienteService.find().then(cli => {
+            this.clienteService.find({}).then(cli => {
                 if (cli) {
                     res.status(200).send(cli);
                 } else {
@@ -54,19 +54,16 @@ export class ClienteController {
         });
     }
 
-    updateStatus(req: Request, res: Response) {
-        let status = null;
-        if (req.params.status) {
-            status = { status: req.params.status.toString().toUpperCase() };
-        } else {
-            status = req.body;
-        }
+    alterStatus(req: Request, res: Response) {
 
-        this.clienteService.updateStatus(req.params.id, status).then(() => {
-            res.status(200).send({ message: `Status alterado com sucesso!` });
-        }).catch(err => {
-            res.status(500).send(err);
-        });
+        const status = { status: req.params.status.toString().toUpperCase() };
+
+        this.clienteService.alterStatus(req.params.id, status)
+            .then(() => {
+                res.status(200).send({ message: `Status alterado com sucesso!` });
+            }).catch(err => {
+                res.status(500).send(err);
+            });
     }
 
     delete(req: Request, res: Response) {

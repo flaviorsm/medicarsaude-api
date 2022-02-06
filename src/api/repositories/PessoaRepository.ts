@@ -22,7 +22,7 @@ export class PessoaRepository {
         return await PessoaModel.findByIdAndUpdate(id, entity, { session });
     }
 
-    async delete(id: string, session: any) {
-        await PessoaModel.deleteOne({ _id: id }, session);
+    delete(id: string, session: any) {
+        PessoaModel.deleteOne({ _id: id }, session);
     }
 }

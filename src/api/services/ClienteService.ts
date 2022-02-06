@@ -1,34 +1,21 @@
-import { ICliente } from './../interfaces/ICliente';
-import { query } from 'express';
-import { ParsedQs } from 'qs';
-import { Database } from '../../config/db.config';
-import { Logger } from '../../logger/logger';
-import { ClienteDTO } from '../dto/ClienteDTO';
+import { StatusEnum } from '../../shared/enum/Status.enum';
+import { ServiceBase } from '../../shared/utils/ServiceBase';
+import { ClienteDTO } from '../dtos/ClienteDTO';
 import { ClienteRepository } from "../repositories/ClienteRepository";
-import { PessoaFisicaRepository } from '../repositories/PessoaFisicaRepository';
-import { PessoaRepository } from '../repositories/PessoaRepository';
+import { ICliente } from './../interfaces/ICliente';
 
-export class ClienteService {
+export class ClienteService extends ServiceBase<ICliente, ClienteDTO> {
 
-    private logger: Logger;
     private clienteRepository: ClienteRepository;
-    private pessoaRepository: PessoaRepository;
-    private pessoaFisicaRepository: PessoaFisicaRepository;
-
-    private database: Database;
 
     constructor() {
+        super();
         this.clienteRepository = new ClienteRepository();
-        this.pessoaRepository = new PessoaRepository();
-        this.pessoaFisicaRepository = new PessoaFisicaRepository();
-        this.logger = new Logger();
-        this.database = new Database();
     }
 
-    async find(query: any = {}) {
-        this.logger.info('Query', query);
+    async find(query: any): Promise<ICliente | ICliente[]> {
         if (query.nome || query.email || query.telefone) {
-            if(query.nome) {
+            if (query.nome) {
                 query = { nome: { "$regex": query.nome, "$options": "i" } };
             }
             let clientes = [];
@@ -53,20 +40,20 @@ export class ClienteService {
         else {
             return await this.clienteRepository.find();
         }
-
     }
 
-    async findById(id: string) {
+    async findById(id: string): Promise<ICliente & { _id: string; }> {
         return await this.clienteRepository.findById(id);
     }
 
-    async create(dto: ClienteDTO) {
-
+    async create(dto: ClienteDTO): Promise<ICliente & { _id: string; }> {
         let cliente = null;
         const session = await this.database.conn.startSession();
 
         try {
             session.startTransaction();
+
+            dto.endereco = await this.enderecoRepository.create(dto, session).then(ed => ed[0]._id);
 
             dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps[0]._id);
 
@@ -91,29 +78,34 @@ export class ClienteService {
         return cliente;
     }
 
-    async update(id: string, clienteDTO: ClienteDTO) {
+    async update(id: string, dto: ClienteDTO): Promise<ICliente & { _id: string; }> {
         const session = await this.database.conn.startSession();
 
         try {
             session.startTransaction();
 
-            const cliente = await this.clienteRepository.update(id, clienteDTO, session).then(cli => {
+            const cliente = await this.clienteRepository.update(id, dto, session).then(cli => {
                 if (cli) {
                     return cli;
                 }
-                throw new Error(`Cliente ${clienteDTO.nome} não encontrado`);
+                throw new Error(`Cliente ${dto.nome} não encontrado`);
             }).catch(err => {
                 throw new Error(`Erro ao alterar Cliente: ${err}`);
             });
 
-            const pessoaFisica = await this.pessoaFisicaRepository.update(cliente.pessoaFisica.toString(), clienteDTO, session).then(pf => pf)
+            const pessoaFisica = await this.pessoaFisicaRepository.update(cliente.pessoaFisica.toString(), dto, session).then(pf => pf)
                 .catch(err => {
                     throw new Error(`Erro ao alterar Pessoa Fisica: ${err}`);
                 });
 
-            await this.pessoaRepository.update(pessoaFisica.pessoa.toString(), clienteDTO, session).then(pes => pes)
+            const pessoa = await this.pessoaRepository.update(pessoaFisica.pessoa.toString(), dto, session).then(pes => pes)
                 .catch(err => {
                     throw new Error(`Erro ao alterar Pessoa: ${err}`);
+                });
+
+            await this.enderecoRepository.update(pessoa.endereco.toString(), dto, session).then(end => end)
+                .catch(err => {
+                    throw new Error(`Erro ao alterar Endereço: ${err}`);
                 });
 
             await session.commitTransaction();
@@ -125,36 +117,15 @@ export class ClienteService {
         }
 
         session.endSession();
-        return clienteDTO;
+        return await this.findById(id).then(res => res);
     }
 
-    async updateStatus(id: string, body: any) {
-        this.logger.info('===>', body)
-        return await this.clienteRepository.update(id, body)
+    delete(id: string): Promise<ICliente & { _id: string; }> {
+        return this.clienteRepository.update(id, { status: StatusEnum.INATIVO });
     }
 
-    async delete(id: string) {
-        const session = await this.database.conn.startSession();
-        try {
-            session.startTransaction();
-
-            const cliente = await this.clienteRepository.findById(id);
-
-            await this.pessoaRepository.delete(cliente.pessoaFisica.pessoa._id, session);
-
-            await this.pessoaFisicaRepository.delete(cliente.pessoaFisica._id, session);
-
-            await this.clienteRepository.delete(id, session);
-
-            await session.commitTransaction();
-
-        } catch (error) {
-            await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
-        }
-
-        session.endSession();
+    alterStatus(id: string, body: any): Promise<ICliente & { _id: string; }> {
+        return this.clienteRepository.update(id, body);
     }
 
 }

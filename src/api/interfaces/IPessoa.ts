@@ -1,8 +1,9 @@
 import { Document } from "mongoose";
+import { IEndereco } from "./IEndereco";
 
 export interface IPessoa extends Document {
     nome: string;
-    endereco: string;
     email: string;
     telefone: string;
+    endereco: IEndereco;
 }

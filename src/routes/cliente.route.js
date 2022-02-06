@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var express_1 = require("express");
-var ClienteController_1 = require("./../api/controller/ClienteController");
+var ClienteController_1 = require("../api/controllers/ClienteController");
 var router = (0, express_1.Router)();
 var clienteController = new ClienteController_1.ClienteController();
 router.post('/clientes', function (req, res) {
@@ -19,7 +19,12 @@ router.post('/clientes', function (req, res) {
               $rg: 'String',
               $dataNascimento: 'Date',
               $codigo: 'String',
-              $status: 'String'
+              $status: 'String',
+              $cep: 'String',
+              $rua: 'String',
+              $bairro: 'String',
+              $cidade: 'String',
+              $estado: 'String'
           }
       }
       #swagger.responses[201] = {
@@ -60,7 +65,6 @@ router.put('/clientes/:id', function (req, res) {
         in: 'body',
         description: 'Alterar cliente.',
         schema: {
-            $id: 'String',
             $nome: 'String',
             $endereco: 'String',
             $email: 'String',
@@ -69,7 +73,12 @@ router.put('/clientes/:id', function (req, res) {
             $rg: 'String',
             $dataNascimento: 'Date',
             $codigo: 'String',
-            $status: 'Enum'
+            $status: 'String',
+            $cep: 'String',
+            $rua: 'String',
+            $bairro: 'String',
+            $cidade: 'String',
+            $estado: 'String'
         }
     }
     #swagger.responses[200] = {
@@ -84,7 +93,7 @@ router.put('/clientes/:id', function (req, res) {
   */
     clienteController.update(req, res);
 });
-router["delete"]('/clientes', function (req, res) {
+router["delete"]('/clientes/:id', function (req, res) {
     /*
       #swagger.tags = ['Cliente']
       #swagger.description = 'Exclui dados do cliente.'
@@ -117,6 +126,6 @@ router.patch('/clientes/:id/:status', function (req, res) {
        description: 'Erro interno'
      }
    */
-    clienteController.updateStatus(req, res);
+    clienteController.alterStatus(req, res);
 });
 exports["default"] = router;

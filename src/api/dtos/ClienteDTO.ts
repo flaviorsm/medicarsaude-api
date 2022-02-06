@@ -1,7 +1,6 @@
 
 export interface ClienteDTO {
     nome: string;
-    endereco: string;
     email: string;
     telefone: string;
     cpf: string;
@@ -9,6 +8,12 @@ export interface ClienteDTO {
     dataNascimento: Date,
     codigo: string;
     status: string;
-    pessoaFisica: any;
-    pessoa: any;
+    cep: string;
+    rua: string;
+    bairro: string;
+    cidade: string;
+    estado: string;
+    pessoaFisica?: any;
+    pessoa?: any;
+    endereco?: any;
 }

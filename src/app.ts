@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { Logger } from './logger/logger';
+import { Logger } from './shared/logger/logger';
 import Routes from './routes/routes';
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('../swagger.json');

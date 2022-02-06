@@ -2,7 +2,7 @@
 exports.__esModule = true;
 exports.Database = void 0;
 var mongoose = require("mongoose");
-var logger_1 = require("./../logger/logger");
+var logger_1 = require("../shared/logger/logger");
 require('dotenv').config();
 var Database = /** @class */ (function () {
     function Database() {

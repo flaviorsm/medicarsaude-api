@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.ClienteController = void 0;
-var ClienteService_1 = require("./../services/ClienteService");
+var ClienteService_1 = require("../services/ClienteService");
 var ClienteController = /** @class */ (function () {
     function ClienteController() {
         this.clienteService = new ClienteService_1.ClienteService();
@@ -29,7 +29,7 @@ var ClienteController = /** @class */ (function () {
             })["catch"](function (err) { return res.status(500).send(err); });
         }
         else {
-            this.clienteService.find().then(function (cli) {
+            this.clienteService.find({}).then(function (cli) {
                 if (cli) {
                     res.status(200).send(cli);
                 }
@@ -49,15 +49,10 @@ var ClienteController = /** @class */ (function () {
             res.status(500).send(err);
         });
     };
-    ClienteController.prototype.updateStatus = function (req, res) {
-        var status = null;
-        if (req.params.status) {
-            status = { status: req.params.status.toString().toUpperCase() };
-        }
-        else {
-            status = req.body;
-        }
-        this.clienteService.updateStatus(req.params.id, status).then(function () {
+    ClienteController.prototype.alterStatus = function (req, res) {
+        var status = { status: req.params.status.toString().toUpperCase() };
+        this.clienteService.alterStatus(req.params.id, status)
+            .then(function () {
             res.status(200).send({ message: "Status alterado com sucesso!" });
         })["catch"](function (err) {
             res.status(500).send(err);

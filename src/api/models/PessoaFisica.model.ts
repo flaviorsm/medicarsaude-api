@@ -1,6 +1,5 @@
 import { model, Model, Schema } from 'mongoose';
 import { IPessoaFisica } from '../interfaces/IPessoaFisica';
-import { ClienteModel } from './Cliente.model';
 
 const PessoaFisicaSchema = new Schema<IPessoaFisica>({
     cpf: { type: String, required: true },

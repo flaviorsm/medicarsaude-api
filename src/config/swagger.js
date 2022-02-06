@@ -6,11 +6,11 @@ const doc = {
         title: 'Medicar Saúde',
         description: 'Cooperativa de Saúde',
     },
-    host: 'http://localhost:3000/api',
+    host: 'localhost:3000/api',
     schemes: ['http'],
 };
 
 const outputFile = './swagger.json';
-const controllersFiles = ['src/routes/cliente.route']
+const controllersFiles = ['src/routes/cliente.route', 'src/routes/parceiro.route']
 
 swaggerAutogen(outputFile, controllersFiles, doc);
