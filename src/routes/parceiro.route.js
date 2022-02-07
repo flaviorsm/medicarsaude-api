@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
-var ParceiroController_1 = require("./../api/controllers/ParceiroController");
 var express_1 = require("express");
+var ParceiroController_1 = require("./../api/controllers/ParceiroController");
 var router = (0, express_1.Router)();
 var controller = new ParceiroController_1.ParceiroController();
 router.post('/parceiros', function (req, res) {

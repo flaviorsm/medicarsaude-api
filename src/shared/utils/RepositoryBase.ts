@@ -1,5 +1,4 @@
 import { Logger } from "../logger/logger";
-
 export abstract class RepositoryBase<T> {
 
     protected logger: Logger;

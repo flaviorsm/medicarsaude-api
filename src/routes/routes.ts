@@ -1,14 +1,13 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { Logger } from '../shared/logger/logger';
 
 import ClienteRouter from './cliente.route';
 import ParceiroRouter from './parceiro.route';
+import PlanoRouter from './plano.route';
 
 class Routes {
 
     express: express.Application;
-    logger: Logger;
 
     clientes: any[];
 
@@ -16,7 +15,6 @@ class Routes {
         this.express = express();
         this.middleware();
         this.routes();
-        this.logger = new Logger();
     }
 
     private middleware(): void {
@@ -25,7 +23,9 @@ class Routes {
     }
 
     private routes(): void {
-        this.express.use('/api', ClienteRouter, ParceiroRouter);
+        this.express.use('/api', ClienteRouter);
+        this.express.use('/api', ParceiroRouter);
+        this.express.use('/api', PlanoRouter);
     }
 }
 

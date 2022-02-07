@@ -1,5 +1,5 @@
-import { ParceiroController } from './../api/controllers/ParceiroController';
 import { Router } from 'express';
+import { ParceiroController } from './../api/controllers/ParceiroController';
 
 const router = Router();
 const controller = new ParceiroController();

@@ -38,7 +38,6 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO> {
         }
 
         else if (query.cnpj) {
-            this.logger.info('===>', query)
             const pessoaJuridica = await this.pessoaJuridicaRepository.findOne(query);
             return await this.parceiroRepository.findOne({ pessoaJuridica: pessoaJuridica._id })
                 .catch(err => {

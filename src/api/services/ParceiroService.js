@@ -104,7 +104,6 @@ var ParceiroService = /** @class */ (function (_super) {
                     case 9: return [2 /*return*/, _a.sent()];
                     case 10:
                         if (!query.cnpj) return [3 /*break*/, 13];
-                        this.logger.info('===>', query);
                         return [4 /*yield*/, this.pessoaJuridicaRepository.findOne(query)];
                     case 11:
                         pessoaJuridica = _a.sent();
