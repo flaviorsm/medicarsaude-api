@@ -268,6 +268,32 @@
             "description": "Erro interno"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Cliente"
+        ],
+        "description": "Exclui dados do cliente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Cliente"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente deletado."
+          },
+          "404": {
+            "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
       }
     },
     "/clientes/{id}/{status}": {
@@ -608,6 +634,32 @@
             "description": "Erro interno"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Parceiro"
+        ],
+        "description": "Exclui dados do parceiro.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Parceiro"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parceiro deletado."
+          },
+          "404": {
+            "description": "Parceiro não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
       }
     },
     "/parceiros/{id}/{status}": {
@@ -776,6 +828,32 @@
         "responses": {
           "200": {
             "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Exclui dados do plano.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano deletado."
           },
           "404": {
             "description": "Plano não encontrado!"
