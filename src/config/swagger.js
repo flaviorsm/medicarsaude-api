@@ -11,6 +11,11 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const controllersFiles = ['src/routes/cliente.route', 'src/routes/parceiro.route', 'src/routes/plano.route']
+const controllersFiles = [
+    'src/routes/plano.route',
+    'src/routes/cliente.route', 
+    'src/routes/parceiro.route', 
+    'src/routes/colaborador.route'
+];
 
 swaggerAutogen(outputFile, controllersFiles, doc);

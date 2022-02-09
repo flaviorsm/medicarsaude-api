@@ -11,6 +11,208 @@
     "http"
   ],
   "paths": {
+    "/planos": {
+      "post": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "plano",
+            "in": "body",
+            "description": "Adicionando novo plano.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identificador do Plano",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Plano",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano encontrado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/planos/{id}": {
+      "put": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          },
+          {
+            "name": "plano",
+            "in": "body",
+            "description": "Alterar plano.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Exclui dados do plano.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano deletado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/planos/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Alterar status do plano.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
     "/clientes": {
       "post": {
         "tags": [
@@ -697,42 +899,107 @@
         }
       }
     },
-    "/planos": {
+    "/colaboradores": {
       "post": {
         "tags": [
-          "Plano"
+          "Colaborador"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "plano",
+            "name": "colaborador",
             "in": "body",
-            "description": "Adicionando novo plano.",
+            "description": "Adicionando novo colaborador.",
             "schema": {
               "type": "object",
               "properties": {
-                "nome": {
+                "codigo": {
                   "type": "string",
                   "example": "string"
-                },
-                "descricao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "valor": {
-                  "type": "string",
-                  "example": "Number"
                 },
                 "status": {
                   "type": "string",
                   "example": "StatusEnum"
+                },
+                "funcao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataContratacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "ctps": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "boolean"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
                 }
               },
               "required": [
+                "codigo",
+                "status",
+                "funcao",
+                "dataContratacao",
+                "ctps",
+                "usuario",
                 "nome",
-                "descricao",
-                "valor",
-                "status"
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
               ]
             }
           }
@@ -748,29 +1015,53 @@
       },
       "get": {
         "tags": [
-          "Plano"
+          "Colaborador"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
         "parameters": [
           {
             "name": "id",
-            "description": "Identificador do Plano",
+            "description": "Identificador do Colaborador",
             "in": "query",
             "type": "string"
           },
           {
             "name": "nome",
-            "description": "Nome do Plano",
+            "description": "Nome do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "telefone",
+            "description": "Telefone do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Email do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cpf",
+            "description": "CPF do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cnpj",
+            "description": "CNPJ do Colaborador",
             "in": "query",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Plano encontrado."
+            "description": "Colaborador encontrado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -778,10 +1069,10 @@
         }
       }
     },
-    "/planos/{id}": {
+    "/colaboradores/{id}": {
       "put": {
         "tags": [
-          "Plano"
+          "Colaborador"
         ],
         "description": "",
         "parameters": [
@@ -790,37 +1081,102 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Colaborador"
           },
           {
-            "name": "plano",
+            "name": "colaborador",
             "in": "body",
-            "description": "Alterar plano.",
+            "description": "Alterar colaborador.",
             "schema": {
               "type": "object",
               "properties": {
-                "nome": {
+                "codigo": {
                   "type": "string",
                   "example": "string"
-                },
-                "descricao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "valor": {
-                  "type": "string",
-                  "example": "Number"
                 },
                 "status": {
                   "type": "string",
                   "example": "StatusEnum"
+                },
+                "funcao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataContratacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "ctps": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "boolean"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
                 }
               },
               "required": [
+                "codigo",
+                "status",
+                "funcao",
+                "dataContratacao",
+                "ctps",
+                "usuario",
                 "nome",
-                "descricao",
-                "valor",
-                "status"
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
               ]
             }
           }
@@ -830,7 +1186,7 @@
             "description": "Alterado com sucesso."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -839,24 +1195,24 @@
       },
       "delete": {
         "tags": [
-          "Plano"
+          "Colaborador"
         ],
-        "description": "Exclui dados do plano.",
+        "description": "Exclui dados do colaborador.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Colaborador"
           }
         ],
         "responses": {
           "200": {
-            "description": "Plano deletado."
+            "description": "Colaborador deletado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -864,19 +1220,19 @@
         }
       }
     },
-    "/planos/{id}/{status}": {
+    "/colaboradores/{id}/{status}": {
       "patch": {
         "tags": [
-          "Plano"
+          "Colaborador"
         ],
-        "description": "Alterar status do plano.",
+        "description": "Alterar status do colaborador.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Colaborador"
           },
           {
             "name": "status",
@@ -891,7 +1247,7 @@
             "description": "Status modificado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"

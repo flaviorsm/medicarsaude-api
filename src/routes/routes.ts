@@ -4,6 +4,7 @@ import * as bodyParser from 'body-parser';
 import ClienteRouter from './cliente.route';
 import ParceiroRouter from './parceiro.route';
 import PlanoRouter from './plano.route';
+import ColaboradorRouter from './colaborador.route';
 
 class Routes {
 
@@ -26,6 +27,7 @@ class Routes {
         this.express.use('/api', ClienteRouter);
         this.express.use('/api', ParceiroRouter);
         this.express.use('/api', PlanoRouter);
+        this.express.use('/api', ColaboradorRouter);
     }
 }
 
