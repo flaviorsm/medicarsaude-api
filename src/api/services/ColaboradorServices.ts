@@ -1,52 +1,49 @@
-import { StatusEnum } from '../../shared/enum/Status.enum';
-import { ServiceBase } from "../../shared/utils/ServiceBase";
 import { IColaborador } from "../interfaces/IColaborador";
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
+import { ServiceAbstract } from './base/ServiceAbstract';
 
-export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO> {
-
-    private colaboradorRepository: ColaboradorRepository;
+export class ColaboradorService extends ServiceAbstract<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 
     constructor() {
-        super();
-        this.colaboradorRepository = new ColaboradorRepository();
+        super(ColaboradorRepository);
     }
 
     async find(query: any): Promise<IColaborador | IColaborador[]> {
-        if (query.nome || query.email || query.telefone) {
-            if (query.nome) {
-                query = { nome: { "$regex": query.nome, "$options": "i" } };
+        try {
+            if (query.nome || query.email || query.telefone) {
+                if (query.nome) {
+                    query = { nome: { "$regex": query.nome, "$options": "i" } };
+                }
+                let result = [];
+                const list = await this.pessoaRepository.find(query);
+                for (const ps of list) {
+                    const pf = await this.pessoaFisicaRepository.findOne({ pessoa: ps._id });
+                    const cl = await this.repository.findOne({ pessoaFisica: pf._id });
+                    result.push(cl as IColaborador);
+                }
+                return result;
             }
-            let clientes = [];
-            const pessoa = await this.pessoaRepository.find(query);
-            for (const ps of pessoa) {
-                const pf = await this.pessoaFisicaRepository.findOne({ pessoa: ps._id });
-                const cl = await this.colaboradorRepository.findOne({ pessoaFisica: pf._id });
-                clientes.push(cl as IColaborador);
+
+            else if (query.cpf) {
+                const pessoaFisica = await this.pessoaFisicaRepository.findOne(query);
+                return await this.repository.findOne({ pessoaFisica: pessoaFisica._id });
             }
-            return clientes;
-        }
 
-        else if (query.cpf) {
-            const pessoaFisica = await this.pessoaFisicaRepository.findOne(query);
-            return await this.colaboradorRepository.findOne({ pessoaFisica: pessoaFisica._id });
-        }
+            else if (query.codigo) {
+                return await this.repository.findOne(query);
+            }
 
-        else if (query.codigo) {
-            return await this.colaboradorRepository.findOne(query);
-        }
-
-        else {
-            return await this.colaboradorRepository.find({});
+            else {
+                return await this.repository.find({});
+            }
+        } catch (error) {
+            this.logger.error(error);
+            throw new Error(error);
         }
     }
 
-    async findById(id: string): Promise<IColaborador & { _id: string; }> {
-        return await this.colaboradorRepository.findById(id);
-    }
-
-    async create(dto: ColaboradorDTO): Promise<IColaborador & { _id: string; }> {
+    async create(dto: ColaboradorDTO): Promise<IColaborador> {
         let colaborador = null;
         const session = await this.database.conn.startSession();
 
@@ -59,7 +56,7 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
 
             dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf[0]._id);
 
-            colaborador = await this.colaboradorRepository.create(dto, session).then(res => res[0]);
+            colaborador = await this.repository.create(dto, session).then(res => res);
 
             await session.commitTransaction();
 
@@ -72,19 +69,19 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
         session.endSession();
 
         if (colaborador) {
-            return await this.colaboradorRepository.findById(colaborador._id);
+            return await this.repository.findById(colaborador._id);
         }
 
         return colaborador;
     }
 
-    async update(id: string, dto: ColaboradorDTO): Promise<IColaborador & { _id: string; }> {
+    async update(id: string, dto: ColaboradorDTO): Promise<IColaborador> {
         const session = await this.database.conn.startSession();
 
         try {
             session.startTransaction();
 
-            const cliente = await this.colaboradorRepository.update(id, dto, session).then(cli => {
+            const result = await this.repository.update(id, dto, session).then(cli => {
                 if (cli) {
                     return cli;
                 }
@@ -93,7 +90,7 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
                 throw new Error(`Erro ao alterar Cliente: ${err}`);
             });
 
-            const pessoaFisica = await this.pessoaFisicaRepository.update(cliente.pessoaFisica.toString(), dto, session).then(pf => pf)
+            const pessoaFisica = await this.pessoaFisicaRepository.update(result.pessoaFisica.toString(), dto, session).then(pf => pf)
                 .catch(err => {
                     throw new Error(`Erro ao alterar Pessoa Fisica: ${err}`);
                 });
@@ -117,15 +114,6 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
         }
 
         session.endSession();
-        return await this.findById(id).then(res => res);
+        return await this.findById(id);
     }
-
-    delete(id: string): Promise<IColaborador & { _id: string; }> {
-        return this.colaboradorRepository.update(id, { status: StatusEnum.INATIVO });
-    }
-
-    alterStatus(id: string, body: any): Promise<IColaborador & { _id: string; }> {
-        return this.colaboradorRepository.update(id, body);
-    }
-
 }

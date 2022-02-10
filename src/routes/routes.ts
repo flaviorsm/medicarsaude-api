@@ -5,6 +5,8 @@ import ClienteRouter from './cliente.route';
 import ParceiroRouter from './parceiro.route';
 import PlanoRouter from './plano.route';
 import ColaboradorRouter from './colaborador.route';
+import ContratoRouter from './contrato.route';
+import PagamentoRouter from './pagamento.route';
 
 class Routes {
 
@@ -24,10 +26,14 @@ class Routes {
     }
 
     private routes(): void {
-        this.express.use('/api', ClienteRouter);
-        this.express.use('/api', ParceiroRouter);
-        this.express.use('/api', PlanoRouter);
-        this.express.use('/api', ColaboradorRouter);
+        this.express.use('/api',
+            PlanoRouter,
+            ParceiroRouter,
+            ClienteRouter,
+            ColaboradorRouter,
+            ContratoRouter,
+            PagamentoRouter
+        );
     }
 }
 

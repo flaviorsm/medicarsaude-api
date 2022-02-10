@@ -49,7 +49,6 @@ router.get('/colaboradores', (req, res) => {
       #swagger.parameters['telefone'] = { description: 'Telefone do Colaborador' }
       #swagger.parameters['email'] = { description: 'Email do Colaborador' }
       #swagger.parameters['cpf'] = { description: 'CPF do Colaborador' }
-      #swagger.parameters['cnpj'] = { description: 'CNPJ do Colaborador' }
       #swagger.responses[200] = {
         description: 'Colaborador encontrado.'
       }

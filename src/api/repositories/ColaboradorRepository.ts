@@ -1,8 +1,9 @@
-import { Repository } from "../../shared/utils/Repository";
+import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorModel } from '../models/Colaborador.model';
 import { IColaborador } from './../interfaces/IColaborador';
+import { RepositoryBase } from './base/RepositoryBase';
 
-export class ColaboradorRepository extends Repository<IColaborador> {
+export class ColaboradorRepository extends RepositoryBase<IColaborador, ColaboradorDTO> {
 
     constructor() {
         super(ColaboradorModel)

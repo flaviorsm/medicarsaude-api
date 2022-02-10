@@ -1,8 +1,7 @@
-
 import { Request, Response } from 'express-serve-static-core';
-import { ServiceBase } from "./ServiceBase";
+import { IService } from './../../api/services/base/IService';
 
-export abstract class ControllerBase<TEntity, TDto, TService extends ServiceBase<TEntity, TDto>> {
+export abstract class ControllerBase<TEntity, TDto, TService extends IService<TEntity, TDto>> {
 
     protected service: TService;
 
