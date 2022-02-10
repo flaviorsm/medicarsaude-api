@@ -7,6 +7,7 @@ import PlanoRouter from './plano.route';
 import ColaboradorRouter from './colaborador.route';
 import ContratoRouter from './contrato.route';
 import PagamentoRouter from './pagamento.route';
+import VendaRouter from './venda.route';
 
 class Routes {
 
@@ -27,9 +28,10 @@ class Routes {
 
     private routes(): void {
         this.express.use('/api',
-            PlanoRouter,
-            ParceiroRouter,
+            VendaRouter,
             ClienteRouter,
+            ParceiroRouter,
+            PlanoRouter,
             ColaboradorRouter,
             ContratoRouter,
             PagamentoRouter

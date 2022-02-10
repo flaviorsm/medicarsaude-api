@@ -11,17 +11,17 @@
     "http"
   ],
   "paths": {
-    "/planos": {
+    "/vendas": {
       "post": {
         "tags": [
-          "Plano"
+          "Venda"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "plano",
+            "name": "venda",
             "in": "body",
-            "description": "Adicionando novo plano.",
+            "description": "Adicionando novo venda.",
             "schema": {
               "type": "object",
               "properties": {
@@ -62,29 +62,29 @@
       },
       "get": {
         "tags": [
-          "Plano"
+          "Venda"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
         "parameters": [
           {
             "name": "id",
-            "description": "Identificador do Plano",
+            "description": "Identificador do Venda",
             "in": "query",
             "type": "string"
           },
           {
             "name": "nome",
-            "description": "Nome do Plano",
+            "description": "Nome do Venda",
             "in": "query",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Plano encontrado."
+            "description": "Venda encontrado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -92,10 +92,10 @@
         }
       }
     },
-    "/planos/{id}": {
+    "/vendas/{id}": {
       "put": {
         "tags": [
-          "Plano"
+          "Venda"
         ],
         "description": "",
         "parameters": [
@@ -104,12 +104,12 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Venda"
           },
           {
-            "name": "plano",
+            "name": "venda",
             "in": "body",
-            "description": "Alterar plano.",
+            "description": "Alterar venda.",
             "schema": {
               "type": "object",
               "properties": {
@@ -144,7 +144,7 @@
             "description": "Alterado com sucesso."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -153,24 +153,24 @@
       },
       "delete": {
         "tags": [
-          "Plano"
+          "Venda"
         ],
-        "description": "Exclui dados do plano.",
+        "description": "Exclui dados do venda.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Venda"
           }
         ],
         "responses": {
           "200": {
-            "description": "Plano deletado."
+            "description": "Venda deletado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -178,19 +178,19 @@
         }
       }
     },
-    "/planos/{id}/{status}": {
+    "/vendas/{id}/{status}": {
       "patch": {
         "tags": [
-          "Plano"
+          "Venda"
         ],
-        "description": "Alterar status do plano.",
+        "description": "Alterar status do venda.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Identificador do Plano"
+            "description": "Identificador do Venda"
           },
           {
             "name": "status",
@@ -205,7 +205,7 @@
             "description": "Status modificado."
           },
           "404": {
-            "description": "Plano não encontrado!"
+            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -892,6 +892,208 @@
           },
           "404": {
             "description": "Parceiro não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/planos": {
+      "post": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "plano",
+            "in": "body",
+            "description": "Adicionando novo plano.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identificador do Plano",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Plano",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano encontrado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/planos/{id}": {
+      "put": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          },
+          {
+            "name": "plano",
+            "in": "body",
+            "description": "Alterar plano.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Exclui dados do plano.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plano deletado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/planos/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Plano"
+        ],
+        "description": "Alterar status do plano.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Plano"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "404": {
+            "description": "Plano não encontrado!"
           },
           "500": {
             "description": "Erro interno"

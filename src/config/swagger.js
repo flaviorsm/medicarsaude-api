@@ -12,12 +12,13 @@ const doc = {
 
 const outputFile = './swagger.json';
 const controllersFiles = [
-    'src/routes/plano.route',
+    'src/routes/venda.route',
     'src/routes/cliente.route', 
     'src/routes/parceiro.route', 
+    'src/routes/plano.route',
     'src/routes/colaborador.route',
     'src/routes/contrato.route',
-    'src/routes/pagamento.route'
+    'src/routes/pagamento.route',
 ];
 
 swaggerAutogen(outputFile, controllersFiles, doc);
