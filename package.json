@@ -2,6 +2,9 @@
   "name": "medicar-saude-api",
   "version": "1.0.0",
   "description": "Sistema de cooperativa de saúde",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "index.ts",
   "scripts": {
     "start": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js && node ./build/index.js",
