@@ -33,7 +33,7 @@ export class Database {
 
             mongoose.disconnect();
 
-            this.conn.once("close", () => this.logger.info("Desconectado do banco de dados"));
+            this.conn.once('close', () => this.logger.info('Desconectado do banco de dados'));
         }
     }
 

@@ -42,7 +42,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
             return await this.findById(entity._id);
         }
 
-        throw new Error("Erro ao criar parceiro!");
+        throw new Error('Erro ao criar parceiro!');
     }
 
     async update(id: string, dto: ParceiroDTO): Promise<IParceiro> {

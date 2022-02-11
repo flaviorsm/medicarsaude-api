@@ -1,12 +1,12 @@
-import { Database } from "../../config/db.config";
-import { StatusEnum } from "../../shared/enum/Status.enum";
-import { Logger } from "../../shared/logger/logger";
-import { IRepository } from "./IRepository";
-import { EnderecoRepository } from "../repositories/EnderecoRepository";
-import { PessoaFisicaRepository } from "../repositories/PessoaFisicaRepository";
-import { PessoaJuridicaRepository } from "../repositories/PessoaJuridicaRepository";
-import { PessoaRepository } from "../repositories/PessoaRepository";
-import { IService } from "./IService";
+import { Database } from '../../config/db.config';
+import { StatusEnum } from '../../shared/enum/Status.enum';
+import { Logger } from '../../shared/logger/logger';
+import { IRepository } from './IRepository';
+import { EnderecoRepository } from '../repositories/EnderecoRepository';
+import { PessoaFisicaRepository } from '../repositories/PessoaFisicaRepository';
+import { PessoaJuridicaRepository } from '../repositories/PessoaJuridicaRepository';
+import { PessoaRepository } from '../repositories/PessoaRepository';
+import { IService } from './IService';
 
 export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> implements IService<T, D> {
 
@@ -33,7 +33,7 @@ export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> i
         try {
             if (query.nome || query.email || query.telefone) {
                 if (query.nome) {
-                    query = { nome: { "$regex": query.nome, "$options": "i" } };
+                    query = { nome: { '$regex': query.nome, '$options': 'i' } };
                 }
                 const result = [];
                 const pessoa = await this.pessoaRepository.find(query);

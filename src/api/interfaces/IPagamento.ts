@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { IContrato } from "./IContrato";
+import { IContrato } from './IContrato';
 
 export interface IPagamento extends Document {
     codigo: string;
@@ -9,4 +9,4 @@ export interface IPagamento extends Document {
     dataPagamento: Date;
     status: string;
     contrato: IContrato;
-} 
+}

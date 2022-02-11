@@ -1,4 +1,4 @@
-import { IColaborador } from "../interfaces/IColaborador";
+import { IColaborador } from '../interfaces/IColaborador';
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
 import { ServiceBase } from '../core/ServiceBase';

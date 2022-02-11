@@ -1,4 +1,4 @@
-import { IVenda } from "../interfaces/IVenda";
+import { IVenda } from '../interfaces/IVenda';
 import { VendaDTO } from './../dtos/VendaDTO';
 import { VendaModel } from './../models/Venda.model';
 import { RepositoryBase } from '../core/RepositoryBase';
