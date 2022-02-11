@@ -1,5 +1,5 @@
-import { Document } from "mongoose";
-import { IPessoaFisica } from "./IPessoaFisica";
+import { Document } from 'mongoose';
+import { IPessoaFisica } from './IPessoaFisica';
 
 export interface ICliente extends Document {
     codigo: string;

@@ -1,7 +1,7 @@
-import { ParceiroDTO } from "../dtos/ParceiroDTO";
-import { IParceiro } from "../interfaces/IParceito";
-import { ParceiroModel } from "../models/Parceiro.model";
-import { RepositoryBase } from "../core/RepositoryBase";
+import { ParceiroDTO } from '../dtos/ParceiroDTO';
+import { IParceiro } from '../interfaces/IParceito';
+import { ParceiroModel } from '../models/Parceiro.model';
+import { RepositoryBase } from '../core/RepositoryBase';
 
 export class ParceiroRepository extends RepositoryBase<IParceiro, ParceiroDTO> {
 

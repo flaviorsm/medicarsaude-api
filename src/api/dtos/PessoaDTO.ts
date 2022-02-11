@@ -1,4 +1,4 @@
-import { EnderecoDTO } from "./EnderecoDTO";
+import { EnderecoDTO } from './EnderecoDTO';
 
 export interface PessoaDTO extends EnderecoDTO {
     nome: string;
