@@ -15,8 +15,7 @@ router.post('/contratos', (req, res) => {
             $status: 'StatusEnum',
             $plano: 'string',
             $cliente: 'string',
-            $vendedor: 'string',
-            $pagamentos: 'Array<string>'
+            $vendedor: 'string'
           }
       }
       #swagger.responses[201] = {

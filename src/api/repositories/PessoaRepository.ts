@@ -1,28 +1,24 @@
+import { PessoaDTO } from './../dtos/PessoaDTO';
+import { IPessoa } from './../interfaces/IPessoa';
 import { PessoaModel } from "../models/Pessoa.model";
+import { RepositoryBase } from "../core/RepositoryBase";
 
-export class PessoaRepository {
+export class PessoaRepository extends RepositoryBase<IPessoa, PessoaDTO> {
+
+    constructor() {
+        super(PessoaModel);
+    }
 
     async find(query: any) {
-        return await PessoaModel.find(query);
+        return await PessoaModel.find(query).populate('endereco');
     }
 
     async findOne(query: any) {
-        return await PessoaModel.findOne(query);
+        return await PessoaModel.findOne(query).populate('endereco');
     }
 
     async findById(id: string) {
-        return await PessoaModel.findById(id);
+        return await PessoaModel.findById(id).populate('endereco');
     }
 
-    async create(entity: any, session: any) {
-        return await PessoaModel.create([entity], { session });
-    }
-
-    async update(id: string, entity: any, session: any) {
-        return await PessoaModel.findByIdAndUpdate(id, entity, { session });
-    }
-
-    delete(id: string, session: any) {
-        PessoaModel.deleteOne({ _id: id }, session);
-    }
 }

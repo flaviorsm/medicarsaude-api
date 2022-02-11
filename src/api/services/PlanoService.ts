@@ -1,11 +1,9 @@
-import { StatusEnum } from './../../shared/enum/Status.enum';
-import { ServiceBase } from "../../shared/utils/ServiceBase";
 import { PlanoDTO } from "../dtos/PlanoDTO";
 import { IPlano } from "../interfaces/IPlano";
 import { PlanoRepository } from "../repositories/PlanoRepository";
-import { ServiceAbstract } from './base/ServiceAbstract';
+import { ServiceBase } from "../core/ServiceBase";
 
-export class PlanoService extends ServiceAbstract<IPlano, PlanoDTO, PlanoRepository> {
+export class PlanoService extends ServiceBase<IPlano, PlanoDTO, PlanoRepository> {
 
     constructor() {
         super(PlanoRepository);
@@ -14,9 +12,13 @@ export class PlanoService extends ServiceAbstract<IPlano, PlanoDTO, PlanoReposit
     async find(query: any): Promise<IPlano | IPlano[]> {
         if (query.nome) {
             query = { nome: { "$regex": query.nome, "$options": "i" } };
-        } else {
-            query = {};
+            return await this.repository.find(query);
+
+        } else if (query.codigo) {
+            return await this.repository.findOne(query);
+
         }
-        return await super.find(query);
+
+        return await super.find({});
     }
 }

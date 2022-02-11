@@ -3,9 +3,9 @@ export interface IService<T, D> {
 
     findById(id: string): Promise<T>;
 
-    create(dto: D): Promise<T>;
+    create(dto: D, session?: any): Promise<T>;
 
-    update(id: string, dto: D): Promise<T>;
+    update(id: string, dto: D, session?: any): Promise<T>;
 
     delete(id: string): Promise<T>;
 

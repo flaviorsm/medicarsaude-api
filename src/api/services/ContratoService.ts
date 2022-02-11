@@ -1,12 +1,12 @@
 import { ContratoDTO } from "../dtos/ContratoDTO";
 import { IContrato } from "../interfaces/IContrato";
 import { ContratoRepository } from "../repositories/ContratoRepository";
-import { ServiceAbstract } from './base/ServiceAbstract';
+import { ServiceBase } from '../core/ServiceBase';
 
-export class ContratoService extends ServiceAbstract<IContrato, ContratoDTO, ContratoRepository> {
+export class ContratoService extends ServiceBase<IContrato, ContratoDTO, ContratoRepository> {
 
     constructor() {
         super(ContratoRepository);
     }
-    
+
 }

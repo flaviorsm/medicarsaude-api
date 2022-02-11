@@ -1484,10 +1484,6 @@
                 "vendedor": {
                   "type": "string",
                   "example": "string"
-                },
-                "pagamentos": {
-                  "type": "string",
-                  "example": "Array<string>"
                 }
               },
               "required": [
@@ -1495,8 +1491,7 @@
                 "status",
                 "plano",
                 "cliente",
-                "vendedor",
-                "pagamentos"
+                "vendedor"
               ]
             }
           }

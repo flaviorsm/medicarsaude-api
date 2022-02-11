@@ -1,30 +1,11 @@
+import { EnderecoDTO } from '../dtos/EnderecoDTO';
 import { IEndereco } from '../interfaces/IEndereco';
 import { EnderecoModel } from './../models/Endereco.model';
-import { RepositoryBase } from "../../shared/utils/RepositoryBase";
+import { RepositoryBase } from '../core/RepositoryBase';
 
-export class EnderecoRepository extends RepositoryBase<IEndereco> {
-    
-    async find(query: any): Promise<(IEndereco & { _id: string; })[]> {
-        return await EnderecoModel.find(query);
+export class EnderecoRepository extends RepositoryBase<IEndereco, EnderecoDTO> {
+
+    constructor() {
+        super(EnderecoModel);
     }
-
-    async findOne(query: any): Promise<IEndereco & { _id: string; }> {
-        return await EnderecoModel.findOne(query);
-    }
-
-    async findById(id: string): Promise<IEndereco & { _id: string; }> {
-        return await EnderecoModel.findById(id);
-    }
-
-    async create(entity: any, session: any): Promise<(IEndereco & { _id: string; })[]> {
-        return await EnderecoModel.create([entity], { session });
-    }
-
-    async update(id: string, entity: any, session: any): Promise<(IEndereco & { _id: string; })> {
-        return await EnderecoModel.findByIdAndUpdate(id, entity, { session });
-    }
-
-    delete(id: string, session: any): void {
-        EnderecoModel.deleteOne({ _id: id }, session);
-    }    
 }

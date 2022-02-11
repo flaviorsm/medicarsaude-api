@@ -1,29 +1,44 @@
+import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
+import { IPessoaFisica } from './../interfaces/IPessoaFisica';
 import { PessoaFisicaModel } from '../models/PessoaFisica.model';
+import { RepositoryBase } from '../core/RepositoryBase';
 
-export class PessoaFisicaRepository {
+export class PessoaFisicaRepository extends RepositoryBase<IPessoaFisica, PessoaFisicaDTO> {
 
-    async find(query: any) {
-        return await PessoaFisicaModel.find(query).populate('pessoa');
+    constructor() {
+        super(PessoaFisicaModel);
     }
 
-    async findOne(query: any) {
-        return await PessoaFisicaModel.findOne(query);
+    async find(query: any): Promise<IPessoaFisica | IPessoaFisica[]> {
+        return await PessoaFisicaModel
+            .find(query)
+            .populate({
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
+            });
     }
 
-    async findById(id: string) {
-        return await PessoaFisicaModel.findById(id);
+    async findOne(query: any): Promise<IPessoaFisica> {
+        return await PessoaFisicaModel
+            .findOne(query)
+            .populate({
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
+            });
     }
 
-    async create(entity: any, session: any) {
-        return await PessoaFisicaModel.create([entity], { session });
+    async findById(id: string): Promise<IPessoaFisica> {
+        return await PessoaFisicaModel
+            .findById(id)
+            .populate({
+                path: 'pessoa',
+                populate: {
+                    path: 'endereco'
+                }
+            });
     }
-
-    async update(id: string, entity: any, session: any) {
-        return await PessoaFisicaModel.findByIdAndUpdate(id, entity, { session });
-    }
-
-    delete(id: string, session: any) {
-        PessoaFisicaModel.deleteOne({ _id: id }, session);
-    }
-
 }

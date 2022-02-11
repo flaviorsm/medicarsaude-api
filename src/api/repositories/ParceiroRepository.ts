@@ -1,10 +1,15 @@
+import { ParceiroDTO } from "../dtos/ParceiroDTO";
 import { IParceiro } from "../interfaces/IParceito";
 import { ParceiroModel } from "../models/Parceiro.model";
-import { RepositoryBase } from "../../shared/utils/RepositoryBase";
+import { RepositoryBase } from "../core/RepositoryBase";
 
-export class ParceiroRepository extends RepositoryBase<IParceiro> {
+export class ParceiroRepository extends RepositoryBase<IParceiro, ParceiroDTO> {
 
-    async find(query: any): Promise<(IParceiro & { _id: string; })[]> {
+    constructor() {
+        super(ParceiroModel);
+    }
+
+    async find(query: any): Promise<IParceiro[]> {
         return await ParceiroModel.find(query)
             .populate({
                 path: 'pessoaFisica',
@@ -22,7 +27,7 @@ export class ParceiroRepository extends RepositoryBase<IParceiro> {
             });
     }
 
-    async findOne(query: any): Promise<IParceiro & { _id: string; }> {
+    async findOne(query: any): Promise<IParceiro> {
         return await ParceiroModel.findOne(query)
             .populate({
                 path: 'pessoaFisica',
@@ -40,7 +45,7 @@ export class ParceiroRepository extends RepositoryBase<IParceiro> {
             });
     }
 
-    async findById(id: string): Promise<IParceiro & { _id: string; }> {
+    async findById(id: string): Promise<IParceiro> {
         return await ParceiroModel.findById(id)
             .populate({
                 path: 'pessoaFisica',
@@ -56,14 +61,6 @@ export class ParceiroRepository extends RepositoryBase<IParceiro> {
                     populate: 'endereco'
                 }
             });
-    }
-
-    async create(entity: any, session: any): Promise<(IParceiro & { _id: string; })[]> {
-        return await ParceiroModel.create([entity], { session });
-    }
-
-    async update(id: string, entity: any, session?: any): Promise<IParceiro & { _id: string; }> {
-        return await ParceiroModel.findByIdAndUpdate(id, entity, { session });
     }
 
 }

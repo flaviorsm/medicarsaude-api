@@ -1,7 +1,7 @@
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorModel } from '../models/Colaborador.model';
 import { IColaborador } from './../interfaces/IColaborador';
-import { RepositoryBase } from './base/RepositoryBase';
+import { RepositoryBase } from '../core/RepositoryBase';
 
 export class ColaboradorRepository extends RepositoryBase<IColaborador, ColaboradorDTO> {
 

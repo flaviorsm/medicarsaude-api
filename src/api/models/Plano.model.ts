@@ -7,6 +7,6 @@ const PlanoSchema = new Schema<IPlano>({
     descricao: { type: String, required: true },
     valor: { type: Number, required: true },
     status: { type: String, enum: StatusEnum, required: true },
-});
+}, { timestamps: true });
 
 export const PlanoModel: Model<IPlano> = model<IPlano>('planos', PlanoSchema);

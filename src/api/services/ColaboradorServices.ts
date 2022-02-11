@@ -1,46 +1,12 @@
 import { IColaborador } from "../interfaces/IColaborador";
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
-import { ServiceAbstract } from './base/ServiceAbstract';
+import { ServiceBase } from '../core/ServiceBase';
 
-export class ColaboradorService extends ServiceAbstract<IColaborador, ColaboradorDTO, ColaboradorRepository> {
+export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 
     constructor() {
         super(ColaboradorRepository);
-    }
-
-    async find(query: any): Promise<IColaborador | IColaborador[]> {
-        try {
-            if (query.nome || query.email || query.telefone) {
-                if (query.nome) {
-                    query = { nome: { "$regex": query.nome, "$options": "i" } };
-                }
-                let result = [];
-                const list = await this.pessoaRepository.find(query);
-                for (const ps of list) {
-                    const pf = await this.pessoaFisicaRepository.findOne({ pessoa: ps._id });
-                    const cl = await this.repository.findOne({ pessoaFisica: pf._id });
-                    result.push(cl as IColaborador);
-                }
-                return result;
-            }
-
-            else if (query.cpf) {
-                const pessoaFisica = await this.pessoaFisicaRepository.findOne(query);
-                return await this.repository.findOne({ pessoaFisica: pessoaFisica._id });
-            }
-
-            else if (query.codigo) {
-                return await this.repository.findOne(query);
-            }
-
-            else {
-                return await this.repository.find({});
-            }
-        } catch (error) {
-            this.logger.error(error);
-            throw new Error(error);
-        }
     }
 
     async create(dto: ColaboradorDTO): Promise<IColaborador> {
@@ -50,11 +16,11 @@ export class ColaboradorService extends ServiceAbstract<IColaborador, Colaborado
         try {
             session.startTransaction();
 
-            dto.endereco = await this.enderecoRepository.create(dto, session).then(ed => ed[0]._id);
+            dto.endereco = await this.enderecoRepository.create(dto, session).then(ed => ed._id);
 
-            dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps[0]._id);
+            dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps._id);
 
-            dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf[0]._id);
+            dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf._id);
 
             colaborador = await this.repository.create(dto, session).then(res => res);
 

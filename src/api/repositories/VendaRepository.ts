@@ -1,7 +1,7 @@
 import { IVenda } from "../interfaces/IVenda";
 import { VendaDTO } from './../dtos/VendaDTO';
 import { VendaModel } from './../models/Venda.model';
-import { RepositoryBase } from './base/RepositoryBase';
+import { RepositoryBase } from '../core/RepositoryBase';
 
 export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
 
