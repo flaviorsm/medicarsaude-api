@@ -3,13 +3,18 @@ import * as bodyParser from 'body-parser';
 import { Logger } from './shared/logger/logger';
 import Routes from './routes/routes';
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('../swagger.json');
+// const swaggerFile = require('./swagger.json');
+import fs = require('fs');
 
 class App {
 
     express: express.Application;
     users: any[];
     logger: Logger;
+
+    private swaggerFile: any = (process.cwd() + '/swagger.json');
+    private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
+    private swaggerDocument = JSON.parse(this.swaggerData);
 
     constructor() {
         this.express = express();
@@ -22,7 +27,7 @@ class App {
         this.express.use(
             '/api-docs',
             swaggerUi.serve,
-            swaggerUi.setup(swaggerFile)
+            swaggerUi.setup(this.swaggerDocument)
         );
     }
 

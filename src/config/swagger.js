@@ -10,7 +10,7 @@ const doc = {
     schemes: ['http'],
 };
 
-const outputFile = './swagger.json';
+const outputFile = '/swagger.json';
 const controllersFiles = [
     'src/routes/venda.route',
     'src/routes/cliente.route', 
