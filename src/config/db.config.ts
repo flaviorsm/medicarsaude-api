@@ -20,7 +20,9 @@ export class Database {
 
         if (!this.conn) {
 
-            mongoose.connect(url);
+            mongoose.connect(url)
+                .then(() => console.log('Mongodb conectado com sucesso!'))
+                .catch((err) => console.error(err));
 
             this.conn = mongoose.connection;
 
