@@ -13,7 +13,7 @@ export class Database {
     }
 
     connect() {
-        // const url = 'mongodb+srv://admin:admin@cluster0.5y686.mongodb.net/medicar-saude?retryWrites=true&w=majority';
+
         const url = process.env.MONGODB_URI;
 
         this.logger.info(`Iniciando coneção em ${url}`);
@@ -26,7 +26,7 @@ export class Database {
 
             this.conn = mongoose.connection;
 
-            this.conn.on('error', (err) => this.logger.info('Error de conexão', err));
+            this.conn.on('error', (err) => this.logger.info('Error de conexão', err.message));
 
             this.conn.once('open', () => this.logger.info('A conexão com o banco de dados foi bem-sucedida'));
         }
