@@ -26,9 +26,7 @@ export class Database {
 
             this.conn = mongoose.connection;
 
-            this.logger.info('mongoose.connection', mongoose.connection);
-
-            this.conn.on('error', () => this.logger.error('Error de conexão'));
+            this.conn.on('error', (err) => this.logger.info('Error de conexão', err));
 
             this.conn.once('open', () => this.logger.info('A conexão com o banco de dados foi bem-sucedida'));
         }
