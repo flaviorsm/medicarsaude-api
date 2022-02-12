@@ -7,8 +7,9 @@
   },
   "main": "index.ts",
   "scripts": {
-    "start": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js && node ./build/index.js",
-    "start:dev": "nodemon ./build/index.js",
+    "start": "node dist/api.bundle.js",
+    "dev": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js && node ./build/index.js",
+    "dev:watch": "nodemon ./build/index.js",
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint-fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "build": "webpack",
@@ -19,7 +20,7 @@
   "author": "Flávio Moreira",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^15.0.0",
+    "dotenv": "^15.0.1",
     "express": "^4.17.2",
     "mongodb": "^4.3.1",
     "mongoose": "^6.1.10",
