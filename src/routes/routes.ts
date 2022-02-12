@@ -27,6 +27,11 @@ class Routes {
     }
 
     private routes(): void {
+
+        this.express.get("/", (req, res, next) => {
+            res.send("API Medicar Saúde - /api-docs");
+        });
+
         this.express.use('/api',
             VendaRouter,
             ClienteRouter,

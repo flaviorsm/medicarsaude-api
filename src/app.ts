@@ -11,7 +11,7 @@ class App {
     users: any[];
     logger: Logger;
 
-    private swaggerFile: any = (process.cwd() + './swagger.json');
+    private swaggerFile: any = (process.cwd() + '/swagger.json');
     private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
     private swaggerDocument = JSON.parse(this.swaggerData);
 
