@@ -7,7 +7,7 @@
   },
   "main": "index.ts",
   "scripts": {
-    "start": "node dist/api.bundle.js",
+    "start": "node src/config/swagger.js && node dist/api.bundle.js",
     "dev": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js && node ./build/index.js",
     "dev:watch": "nodemon ./build/index.js",
     "tslint": "tslint --project tsconfig.json --config tslint.json",
