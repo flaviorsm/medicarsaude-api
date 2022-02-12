@@ -5,9 +5,10 @@
     "title": "Medicar Saúde",
     "description": "Cooperativa de Saúde"
   },
-  "host": "medicarsaude-api.herokuapp.com/api",
-  "basePath": "/",
+  "host": "",
+  "basePath": "/api",
   "schemes": [
+    "http",
     "https"
   ],
   "paths": {

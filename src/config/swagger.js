@@ -6,8 +6,9 @@ const doc = {
         title: 'Medicar Saúde',
         description: 'Cooperativa de Saúde',
     },
-    host: 'medicarsaude-api.herokuapp.com/api',
-    schemes: ['https'],
+    host: '',
+    basePath: '/api',
+    schemes: ['http', 'https'],
 };
 
 const outputFile = './swagger.json';
