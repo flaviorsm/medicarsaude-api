@@ -9,7 +9,7 @@ export class ClienteController {
         this.clienteService = new ClienteService();
     }
 
-    async find(req: Request, res: Response) {
+    find(req: Request, res: Response) {
 
         if (req.params.id || req.query.id) {
             const id = (req.params.id || req.query.id) as string;

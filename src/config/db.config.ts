@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 import { Logger } from '../shared/logger/logger';
 require('dotenv').config()
 
-
 export class Database {
 
     conn: mongoose.Connection;
@@ -14,7 +13,10 @@ export class Database {
     }
 
     connect() {
-        const url = 'mongodb+srv://admin:admin@cluster0.5y686.mongodb.net/medicar-saude?retryWrites=true&w=majority';
+        // const url = 'mongodb+srv://admin:admin@cluster0.5y686.mongodb.net/medicar-saude?retryWrites=true&w=majority';
+        const url = process.env.MONGODB_URI;
+
+        this.logger.info(`Iniciando coneção em ${url}`);
 
         if (!this.conn) {
 

@@ -17,7 +17,6 @@ class App {
 
     constructor() {
         this.express = express();
-        this.middleware();
         this.routes();
         this.swagger();
     }
@@ -28,11 +27,6 @@ class App {
             swaggerUi.serve,
             swaggerUi.setup(this.swaggerDocument)
         );
-    }
-
-    private middleware(): void {
-        this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: false }));
     }
 
     private routes(): void {
