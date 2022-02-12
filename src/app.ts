@@ -3,7 +3,6 @@ import * as bodyParser from 'body-parser';
 import { Logger } from './shared/logger/logger';
 import Routes from './routes/routes';
 const swaggerUi = require('swagger-ui-express');
-// const swaggerFile = require('./swagger.json');
 import fs = require('fs');
 
 class App {
@@ -12,7 +11,7 @@ class App {
     users: any[];
     logger: Logger;
 
-    private swaggerFile: any = (process.cwd() + '/swagger.json');
+    private swaggerFile: any = (process.cwd() + './swagger.json');
     private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
     private swaggerDocument = JSON.parse(this.swaggerData);
 
