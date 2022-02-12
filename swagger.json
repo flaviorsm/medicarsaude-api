@@ -8,8 +8,8 @@
   "host": "",
   "basePath": "/api",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/vendas": {
