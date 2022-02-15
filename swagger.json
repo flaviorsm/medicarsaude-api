@@ -12,6 +12,218 @@
     "http"
   ],
   "paths": {
+    "/usuarios": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Adicionando novo usuario.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Identificador do Usuario",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Usuario",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado."
+          },
+          "404": {
+            "description": "Usuario não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Usuario"
+          },
+          {
+            "name": "usuario",
+            "in": "body",
+            "description": "Alterar usuario.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "404": {
+            "description": "Usuario não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Exclui dados do usuario.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Usuario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario deletado."
+          },
+          "404": {
+            "description": "Usuario não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "Alterar status do usuario.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Usuario"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "404": {
+            "description": "Usuario não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
     "/vendas": {
       "post": {
         "tags": [

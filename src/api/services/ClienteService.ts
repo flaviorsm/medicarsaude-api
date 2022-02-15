@@ -1,7 +1,7 @@
 import { ClienteDTO } from '../dtos/ClienteDTO';
 import { ClienteRepository } from '../repositories/ClienteRepository';
 import { ICliente } from './../interfaces/ICliente';
-import { ServiceBase } from '../core/ServiceBase';
+import { ServiceBase } from '../../core/ServiceBase';
 
 export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRepository> {
 

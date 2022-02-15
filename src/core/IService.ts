@@ -1,4 +1,5 @@
 export interface IService<T, D> {
+
     find(query: any): Promise<T[] | T>;
 
     findById(id: string): Promise<T>;

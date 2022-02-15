@@ -1,14 +1,12 @@
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import { Logger } from './shared/logger/logger';
 import Routes from './routes/routes';
-const swaggerUi = require('swagger-ui-express');
+import { Logger } from './shared/logger/logger';
+import swaggerUi = require('swagger-ui-express');
 import fs = require('fs');
 
 class App {
 
     express: express.Application;
-    users: any[];
     logger: Logger;
 
     private swaggerFile: any = (process.cwd() + '/swagger.json');

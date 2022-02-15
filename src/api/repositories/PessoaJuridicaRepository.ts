@@ -1,7 +1,7 @@
 import { PessoaJuridicaDTO } from '../dtos/PessoaJuridicaDTO';
 import { IPessoaJuridica } from '../interfaces/IPessoaJuridica';
 import { PessoaJuridicaModel } from '../models/PessoaJuridica.model';
-import { RepositoryBase } from '../core/RepositoryBase';
+import { RepositoryBase } from '../../core/RepositoryBase';
 
 export class PessoaJuridicaRepository extends RepositoryBase<IPessoaJuridica, PessoaJuridicaDTO> {
 

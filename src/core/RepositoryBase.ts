@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Logger } from '../../shared/logger/logger';
+import { Logger } from '../shared/logger/logger';
 import { IRepository } from './IRepository';
 
 export abstract class RepositoryBase<T, D> implements IRepository<T, D> {

@@ -1,7 +1,7 @@
+import { ServiceBase } from '../../core/ServiceBase';
 import { PlanoDTO } from '../dtos/PlanoDTO';
 import { IPlano } from '../interfaces/IPlano';
 import { PlanoRepository } from '../repositories/PlanoRepository';
-import { ServiceBase } from '../core/ServiceBase';
 
 export class PlanoService extends ServiceBase<IPlano, PlanoDTO, PlanoRepository> {
 

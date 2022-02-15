@@ -8,12 +8,11 @@ import ColaboradorRouter from './colaborador.route';
 import ContratoRouter from './contrato.route';
 import PagamentoRouter from './pagamento.route';
 import VendaRouter from './venda.route';
+import UsuarioRouter from './usuario.route';
 
 class Routes {
 
     express: express.Application;
-
-    clientes: any[];
 
     constructor() {
         this.express = express();
@@ -38,7 +37,8 @@ class Routes {
             PlanoRouter,
             ColaboradorRouter,
             ContratoRouter,
-            PagamentoRouter
+            PagamentoRouter,
+            UsuarioRouter,
         );
     }
 }

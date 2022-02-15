@@ -1,6 +1,6 @@
 import { ClienteModel } from './../models/Cliente.model';
 import { ICliente } from './../interfaces/ICliente';
-import { RepositoryBase } from '../core/RepositoryBase';
+import { RepositoryBase } from '../../core/RepositoryBase';
 import { ClienteDTO } from '../dtos/ClienteDTO';
 
 export class ClienteRepository extends RepositoryBase<ICliente, ClienteDTO> {

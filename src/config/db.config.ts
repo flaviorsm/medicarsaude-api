@@ -16,7 +16,7 @@ export class Database {
 
         const url = process.env.MONGODB_URI;
 
-        this.logger.info(`Iniciando coneção em ${url}`);
+        this.logger.info(`Iniciando conexão em ${url}`);
 
         if (!this.conn) {
 

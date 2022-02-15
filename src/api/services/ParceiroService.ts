@@ -1,7 +1,7 @@
 import { ParceiroDTO } from './../dtos/ParceiroDTO';
 import { IParceiro } from './../interfaces/IParceito';
 import { ParceiroRepository } from './../repositories/ParceiroRepository';
-import { ServiceBase } from '../core/ServiceBase';
+import { ServiceBase } from '../../core/ServiceBase';
 
 export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, ParceiroRepository> {
 

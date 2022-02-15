@@ -1,11 +1,12 @@
-import { Database } from '../../config/db.config';
-import { StatusEnum } from '../../shared/enum/Status.enum';
-import { Logger } from '../../shared/logger/logger';
+
+import { EnderecoRepository } from '../api/repositories/EnderecoRepository';
+import { PessoaFisicaRepository } from '../api/repositories/PessoaFisicaRepository';
+import { PessoaJuridicaRepository } from '../api/repositories/PessoaJuridicaRepository';
+import { PessoaRepository } from '../api/repositories/PessoaRepository';
+import { Database } from '../config/db.config';
+import { StatusEnum } from '../shared/enum/Status.enum';
+import { Logger } from '../shared/logger/logger';
 import { IRepository } from './IRepository';
-import { EnderecoRepository } from '../repositories/EnderecoRepository';
-import { PessoaFisicaRepository } from '../repositories/PessoaFisicaRepository';
-import { PessoaJuridicaRepository } from '../repositories/PessoaJuridicaRepository';
-import { PessoaRepository } from '../repositories/PessoaRepository';
 import { IService } from './IService';
 
 export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> implements IService<T, D> {

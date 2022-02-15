@@ -1,7 +1,7 @@
 import { IColaborador } from '../interfaces/IColaborador';
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
-import { ServiceBase } from '../core/ServiceBase';
+import { ServiceBase } from '../../core/ServiceBase';
 
 export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 

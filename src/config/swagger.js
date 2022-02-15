@@ -13,6 +13,7 @@ const doc = {
 
 const outputFile = './swagger.json';
 const controllersFiles = [
+    'src/routes/usuario.route',
     'src/routes/venda.route',
     'src/routes/cliente.route', 
     'src/routes/parceiro.route', 
