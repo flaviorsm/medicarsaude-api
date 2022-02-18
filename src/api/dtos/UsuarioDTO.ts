@@ -1,5 +1,5 @@
-import { TipoUsuarioEnum } from './../../shared/enum/TipoUsuarioEnum';
 import { StatusEnum } from "../../shared/enum/Status.enum";
+import { TipoUsuarioEnum } from './../../shared/enum/TipoUsuarioEnum';
 
 export interface UsuarioDTO {
     nome: string;
@@ -9,4 +9,5 @@ export interface UsuarioDTO {
     senha: string;
     status: StatusEnum;
     tipo: TipoUsuarioEnum;
+    pessoaFisica?: string;
 }

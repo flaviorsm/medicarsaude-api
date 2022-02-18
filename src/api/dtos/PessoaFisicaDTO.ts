@@ -4,4 +4,5 @@ export interface PessoaFisicaDTO extends PessoaDTO {
     cpf: string;
     rg: string;
     dataNascimento: Date;
+    pessoa?: any;
 }
