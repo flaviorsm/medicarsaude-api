@@ -19,21 +19,12 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
 
         try {
             session.startTransaction();
-            this.logger.info('===> session ok');
-
-            const pessoa = { nome: dto.nome, email: dto.email, telefone: dto.telefone } as PessoaDTO;
-            this.logger.info('===> pessoa', pessoa);
-            const pessoaId = await this.pessoaRepository.create(pessoa, session).then(ps => ps._id);
-            this.logger.info(pessoaId);
-            const pessoaFisica = { cpf: dto.cpf, pessoa: pessoaId } as PessoaFisicaDTO;
-
+            dto.pessoa = { nome: dto.nome, email: dto.email, telefone: dto.telefone };
+            const pessoaId = await this.pessoaRepository.create(dto.pessoa, session).then(ps => ps._id);
+            const pessoaFisica = { cpf: dto.cpf, pessoa: pessoaId, dataNascimento: dto.dataNascimento } as PessoaFisicaDTO;
             dto.pessoaFisica = await this.pessoaFisicaRepository.create(pessoaFisica, session).then(pf => pf._id);
-            this.logger.info(dto.pessoaFisica);
-
             dto.senha = await bcrypt.hash(dto.senha, 10);
-            this.logger.info('===>', dto);
             usuario = await super.create(dto, session);
-
             await session.commitTransaction();
 
         } catch (error) {

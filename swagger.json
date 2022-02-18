@@ -45,6 +45,10 @@
                 "senha": {
                   "type": "string",
                   "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "yyyy-mm-dd"
                 }
               },
               "required": [
@@ -52,7 +56,8 @@
                 "email",
                 "telefone",
                 "cpf",
-                "senha"
+                "senha",
+                "dataNascimento"
               ]
             }
           }

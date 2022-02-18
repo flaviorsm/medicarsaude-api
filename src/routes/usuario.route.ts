@@ -16,6 +16,7 @@ router.post('/usuarios', (req, res) => {
           $telefone: 'string',
           $cpf: 'string',
           $senha: 'string',
+          $dataNascimento: "yyyy-mm-dd"
         }
     }
     #swagger.responses[201] = {
