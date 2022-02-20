@@ -1,5 +1,5 @@
 import * as express from 'express';
-import Routes from './routes/routes';
+import Routes from './routes';
 import { Logger } from './shared/logger/logger';
 import swaggerUi = require('swagger-ui-express');
 import fs = require('fs');

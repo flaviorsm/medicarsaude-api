@@ -1,12 +1,16 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { PagamentoController } from './../api/controllers/PagamentoController';
 
 const router = Router();
 const controller = new PagamentoController();
 
-router.post('/pagamentos', (req, res) => {
+router.post('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Pagamento']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.parameters['pagamento'] = {
           in: 'body',
           description: 'Adicionando novo pagamento.',
@@ -30,9 +34,10 @@ router.post('/pagamentos', (req, res) => {
     controller.create(req, res);
 });
 
-router.get('/pagamentos', (req, res) => {
+router.get('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Pagamento']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
       #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
       #swagger.parameters['nome'] = { description: 'Nome do Cliente' }
@@ -50,9 +55,10 @@ router.get('/pagamentos', (req, res) => {
     controller.find(req, res);
 });
 
-router.put('/pagamentos/:id', (req, res) => {
+router.put('/pagamentos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
     #swagger.tags = ['Pagamento']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
     #swagger.parameters['pagamento'] = {
         in: 'body',
@@ -80,9 +86,10 @@ router.put('/pagamentos/:id', (req, res) => {
     controller.update(req, res);
 });
 
-router.delete('/pagamentos/:id', (req, res) => {
+router.delete('/pagamentos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Pagamento']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Exclui dados do pagamento.'
       #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
       #swagger.responses[200] = {
@@ -98,9 +105,10 @@ router.delete('/pagamentos/:id', (req, res) => {
     controller.delete(req, res);
 });
 
-router.patch('/pagamentos/:id/:status', (req, res) => {
+router.patch('/pagamentos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
     /*
      #swagger.tags = ['Pagamento']
+     #swagger.security = [{ "apiKeyAuth": [] }]
      #swagger.description = 'Alterar status do pagamento.'
      #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
      #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }

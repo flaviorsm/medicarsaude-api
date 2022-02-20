@@ -1,15 +1,15 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
-import ClienteRouter from './cliente.route';
-import ParceiroRouter from './parceiro.route';
-import PlanoRouter from './plano.route';
-import ColaboradorRouter from './colaborador.route';
-import ContratoRouter from './contrato.route';
-import PagamentoRouter from './pagamento.route';
-import VendaRouter from './venda.route';
-import UsuarioRouter from './usuario.route';
-import AutenticacaoRouter from './autenticacao.route';
+import ClienteRouter from './routes/cliente.route';
+import ParceiroRouter from './routes/parceiro.route';
+import PlanoRouter from './routes/plano.route';
+import ColaboradorRouter from './routes/colaborador.route';
+import ContratoRouter from './routes/contrato.route';
+import PagamentoRouter from './routes/pagamento.route';
+import VendaRouter from './routes/venda.route';
+import UsuarioRouter from './routes/usuario.route';
+import AutenticacaoRouter from './routes/autenticacao.route';
 
 class Routes {
 

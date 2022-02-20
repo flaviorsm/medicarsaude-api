@@ -289,7 +289,13 @@
           "Venda"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "venda",
             "in": "body",
@@ -327,17 +333,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Venda"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Venda",
@@ -355,13 +375,21 @@
           "200": {
             "description": "Venda encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/vendas/{id}": {
@@ -370,6 +398,7 @@
           "Venda"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -377,6 +406,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Venda"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "venda",
@@ -415,19 +449,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Venda"
         ],
         "description": "Exclui dados do venda.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -435,11 +478,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Venda"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Venda deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Venda não encontrado!"
@@ -447,7 +498,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/vendas/{id}/{status}": {
@@ -456,6 +512,7 @@
           "Venda"
         ],
         "description": "Alterar status do venda.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -470,11 +527,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Venda não encontrado!"
@@ -482,7 +547,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/clientes": {
@@ -881,7 +951,13 @@
           "Parceiro"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "parceiro",
             "in": "body",
@@ -989,17 +1065,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Parceiro"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Parceiro",
@@ -1041,13 +1131,21 @@
           "200": {
             "description": "Parceiro encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Parceiro não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/parceiros/{id}": {
@@ -1056,6 +1154,7 @@
           "Parceiro"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1063,6 +1162,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Parceiro"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "parceiro",
@@ -1171,19 +1275,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Parceiro não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Parceiro"
         ],
         "description": "Exclui dados do parceiro.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1191,11 +1304,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Parceiro"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Parceiro deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Parceiro não encontrado!"
@@ -1203,7 +1324,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/parceiros/{id}/{status}": {
@@ -1212,6 +1338,7 @@
           "Parceiro"
         ],
         "description": "Alterar status do parceiro.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1226,11 +1353,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Parceiro não encontrado!"
@@ -1238,7 +1373,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/planos": {
@@ -1247,7 +1387,13 @@
           "Plano"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "plano",
             "in": "body",
@@ -1285,17 +1431,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Plano"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Plano",
@@ -1313,13 +1473,21 @@
           "200": {
             "description": "Plano encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Plano não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/planos/{id}": {
@@ -1328,6 +1496,7 @@
           "Plano"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1335,6 +1504,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Plano"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "plano",
@@ -1373,19 +1547,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Plano não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Plano"
         ],
         "description": "Exclui dados do plano.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1393,11 +1576,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Plano"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Plano deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Plano não encontrado!"
@@ -1405,7 +1596,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/planos/{id}/{status}": {
@@ -1414,6 +1610,7 @@
           "Plano"
         ],
         "description": "Alterar status do plano.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1428,11 +1625,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Plano não encontrado!"
@@ -1440,7 +1645,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/colaboradores": {
@@ -1449,7 +1659,13 @@
           "Colaborador"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "colaborador",
             "in": "body",
@@ -1552,17 +1768,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Colaborador"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Colaborador",
@@ -1598,13 +1828,21 @@
           "200": {
             "description": "Colaborador encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/colaboradores/{id}": {
@@ -1613,6 +1851,7 @@
           "Colaborador"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1620,6 +1859,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Colaborador"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "colaborador",
@@ -1723,19 +1967,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Colaborador não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Colaborador"
         ],
         "description": "Exclui dados do colaborador.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1743,11 +1996,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Colaborador"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Colaborador deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Colaborador não encontrado!"
@@ -1755,7 +2016,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/colaboradores/{id}/{status}": {
@@ -1764,6 +2030,7 @@
           "Colaborador"
         ],
         "description": "Alterar status do colaborador.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1778,11 +2045,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Colaborador não encontrado!"
@@ -1790,7 +2065,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/contratos": {
@@ -1799,7 +2079,13 @@
           "Contrato"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "contrato",
             "in": "body",
@@ -1842,17 +2128,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Contrato"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Contrato",
@@ -1876,13 +2176,21 @@
           "200": {
             "description": "Contrato encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Contrato não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/contratos/{id}": {
@@ -1891,6 +2199,7 @@
           "Contrato"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1898,6 +2207,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Contrato"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "contrato",
@@ -1936,19 +2250,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Contrato não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Contrato"
         ],
         "description": "Exclui dados do contrato.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1956,11 +2279,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Contrato"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Contrato deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Contrato não encontrado!"
@@ -1968,7 +2299,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/contratos/{id}/{status}": {
@@ -1977,6 +2313,7 @@
           "Contrato"
         ],
         "description": "Alterar status do contrato.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -1991,11 +2328,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Contrato não encontrado!"
@@ -2003,7 +2348,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/pagamentos": {
@@ -2012,7 +2362,13 @@
           "Pagamento"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "pagamento",
             "in": "body",
@@ -2065,17 +2421,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Pagamento"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Pagamento",
@@ -2099,13 +2469,21 @@
           "200": {
             "description": "Pagamento encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Pagamento não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/pagamentos/{id}": {
@@ -2114,6 +2492,7 @@
           "Pagamento"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -2121,6 +2500,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Pagamento"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "pagamento",
@@ -2174,19 +2558,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Pagamento não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Pagamento"
         ],
         "description": "Exclui dados do pagamento.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -2194,11 +2587,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Pagamento"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Pagamento deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Pagamento não encontrado!"
@@ -2206,7 +2607,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/pagamentos/{id}/{status}": {
@@ -2215,6 +2621,7 @@
           "Pagamento"
         ],
         "description": "Alterar status do pagamento.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -2229,11 +2636,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Pagamento não encontrado!"
@@ -2241,7 +2656,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     }
   }

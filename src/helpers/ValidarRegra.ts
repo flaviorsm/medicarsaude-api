@@ -4,7 +4,7 @@ import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { Logger } from '../shared/logger/logger';
 const logger = new Logger();
 
-export const regra = (regras: RegraEnum[]) => {
+export const validarRegra = (regras: RegraEnum[]) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = res.locals.jwtPayload.userId;

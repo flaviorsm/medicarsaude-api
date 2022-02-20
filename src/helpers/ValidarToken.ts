@@ -13,7 +13,6 @@ export const validarToken = (req: Request, res: Response, next: NextFunction) =>
     try {
         jwtPayload = (jwt.verify(token, process.env.jwtSecret) as any);
         res.locals.jwtPayload = jwtPayload;
-
     } catch (error) {
         logger.info(`Erro ao validar token: `, error);
         res.status(401).send({ messagem: 'Token inválido!' });

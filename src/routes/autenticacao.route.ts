@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { validarToken } from '../helpers/ValidarToken';
 import { AutenticacaoController } from './../api/controllers/AutenticacaoController';
 
 const router = Router();

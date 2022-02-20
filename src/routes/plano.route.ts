@@ -1,12 +1,16 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { PlanoController } from './../api/controllers/PlanoController';
 
 const router = Router();
 const controller = new PlanoController();
 
-router.post('/planos', (req, res) => {
+router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Plano']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.parameters['plano'] = {
           in: 'body',
           description: 'Adicionando novo plano.',
@@ -27,9 +31,10 @@ router.post('/planos', (req, res) => {
     controller.create(req, res);
 });
 
-router.get('/planos', (req, res) => {
+router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Plano']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
       #swagger.parameters['id'] = { description: 'Identificador do Plano' }
       #swagger.parameters['nome'] = { description: 'Nome do Plano' }
@@ -46,9 +51,10 @@ router.get('/planos', (req, res) => {
     controller.find(req, res);
 });
 
-router.put('/planos/:id', (req, res) => {
+router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
     /*
     #swagger.tags = ['Plano']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.parameters['id'] = { description: 'Identificador do Plano' }
     #swagger.parameters['plano'] = {
         in: 'body',
@@ -73,9 +79,10 @@ router.put('/planos/:id', (req, res) => {
     controller.update(req, res);
 });
 
-router.delete('/planos/:id', (req, res) => {
+router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
     /*
       #swagger.tags = ['Plano']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Exclui dados do plano.'
       #swagger.parameters['id'] = { description: 'Identificador do Plano' }
       #swagger.responses[200] = {
@@ -91,9 +98,10 @@ router.delete('/planos/:id', (req, res) => {
     controller.delete(req, res);
 });
 
-router.patch('/planos/:id/:status', (req, res) => {
+router.patch('/planos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
     /*
      #swagger.tags = ['Plano']
+     #swagger.security = [{ "apiKeyAuth": [] }]
      #swagger.description = 'Alterar status do plano.'
      #swagger.parameters['id'] = { description: 'Identificador do Plano' }
      #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }

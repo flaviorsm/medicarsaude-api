@@ -1,9 +1,8 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { ClienteController } from '../api/controllers/ClienteController';
-import { regra } from '../helpers/ValidarRegra';
+import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
-import { Request, Response } from 'express-serve-static-core';
 
 const router = Router();
 const clienteController = new ClienteController();
@@ -103,7 +102,7 @@ router.put('/clientes/:id', [validarToken], (req: Request, res: Response) => {
   clienteController.update(req, res);
 });
 
-router.delete('/clientes/:id', [validarToken, regra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -122,7 +121,7 @@ router.delete('/clientes/:id', [validarToken, regra([RegraEnum.ADMIN])], (req: R
   clienteController.delete(req, res);
 });
 
-router.patch('/clientes/:id/:status', [validarToken, regra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.patch('/clientes/:id/:status', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
    #swagger.tags = ['Cliente']
    #swagger.security = [{ "apiKeyAuth": [] }]

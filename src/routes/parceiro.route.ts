@@ -1,12 +1,16 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { ParceiroController } from './../api/controllers/ParceiroController';
 
 const router = Router();
 const controller = new ParceiroController();
 
-router.post('/parceiros', (req, res) => {
+router.post('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Parceiro']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.parameters['parceiro'] = {
         in: 'body',
         description: 'Adicionando novo parceiro.',
@@ -41,9 +45,10 @@ router.post('/parceiros', (req, res) => {
   controller.create(req, res);
 });
 
-router.get('/parceiros', (req, res) => {
+router.get('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Parceiro']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
     #swagger.parameters['id'] = { description: 'Identificador do Parceiro' }
     #swagger.parameters['nome'] = { description: 'Nome do Parceiro' }
@@ -64,9 +69,10 @@ router.get('/parceiros', (req, res) => {
   controller.find(req, res);
 });
 
-router.put('/parceiros/:id', (req, res) => {
+router.put('/parceiros/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
   #swagger.tags = ['Parceiro']
+  #swagger.security = [{ "apiKeyAuth": [] }]
   #swagger.parameters['id'] = { description: 'Identificador do Parceiro' }
   #swagger.parameters['parceiro'] = {
       in: 'body',
@@ -105,9 +111,10 @@ router.put('/parceiros/:id', (req, res) => {
   controller.update(req, res);
 });
 
-router.delete('/parceiros/:id', (req, res) => {
+router.delete('/parceiros/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Parceiro']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Exclui dados do parceiro.'
     #swagger.parameters['id'] = { description: 'Identificador do Parceiro' }
     #swagger.responses[200] = {
@@ -123,9 +130,10 @@ router.delete('/parceiros/:id', (req, res) => {
   controller.delete(req, res);
 });
 
-router.patch('/parceiros/:id/:status', (req, res) => {
+router.patch('/parceiros/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
   /*
    #swagger.tags = ['Parceiro']
+   #swagger.security = [{ "apiKeyAuth": [] }]
    #swagger.description = 'Alterar status do parceiro.'
    #swagger.parameters['id'] = { description: 'Identificador do Parceiro' }
    #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }

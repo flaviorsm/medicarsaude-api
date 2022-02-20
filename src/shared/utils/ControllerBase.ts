@@ -1,4 +1,4 @@
-import { Request, Response } from 'express-serve-static-core';
+import { Request, Response } from 'express';
 import { IService } from '../../core/IService';
 
 export abstract class ControllerBase<TEntity, TDto, TService extends IService<TEntity, TDto>> {

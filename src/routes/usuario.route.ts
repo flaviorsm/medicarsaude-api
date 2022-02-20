@@ -1,9 +1,8 @@
-import { Router } from 'express';
-import { UsuarioController } from './../api/controllers/UsuarioController';
+import { Request, Response, Router } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
-import { regra } from '../helpers/ValidarRegra';
-import { Request, Response } from 'express-serve-static-core';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
+import { UsuarioController } from './../api/controllers/UsuarioController';
 
 const router = Router();
 const controller = new UsuarioController();
@@ -33,13 +32,13 @@ router.post('/usuarios', (req, res) => {
   controller.create(req, res);
 });
 
-router.get('/usuarios', [validarToken, regra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.get('/usuarios', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Usuario']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
     #swagger.parameters['id'] = { description: 'Identificador do Usuario' }
     #swagger.parameters['nome'] = { description: 'Nome do Usuario' }
-    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.responses[200] = {
       description: 'Usuario encontrado.'
     }
@@ -56,10 +55,10 @@ router.get('/usuarios', [validarToken, regra([RegraEnum.COLABORADOR])], (req: Re
 router.get('/usuarios/:id', [validarToken], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Usuario']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
     #swagger.parameters['id'] = { description: 'Identificador do Usuario' }
     #swagger.parameters['nome'] = { description: 'Nome do Usuario' }
-    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.responses[200] = {
       description: 'Usuario encontrado.'
     }
@@ -73,7 +72,7 @@ router.get('/usuarios/:id', [validarToken], (req: Request, res: Response) => {
   controller.find(req, res);
 });
 
-router.put('/usuarios/:id', [validarToken, regra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
   /*
   #swagger.tags = ['Usuario']
   #swagger.security = [{ "apiKeyAuth": [] }]
