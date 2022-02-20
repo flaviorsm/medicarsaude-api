@@ -1,6 +1,6 @@
 export interface IRepository<T, D> {
 
-    find(query: any): Promise<T[] | T>;
+    find(query: any): Promise<T[]>;
 
     findOne(query: any): Promise<T>;
 

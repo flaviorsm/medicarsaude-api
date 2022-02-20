@@ -2,6 +2,7 @@ import { IColaborador } from '../interfaces/IColaborador';
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
 import { ServiceBase } from '../../core/ServiceBase';
+import APIException from '../../shared/utils/exceptions/APIException';
 
 export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 
@@ -28,8 +29,7 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();
@@ -75,8 +75,7 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();

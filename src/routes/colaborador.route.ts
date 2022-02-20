@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
@@ -7,7 +7,7 @@ import { ColaboradorController } from './../api/controllers/ColaboradorControlle
 const router = Router();
 const controller = new ColaboradorController();
 
-router.post('/colaboradores', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.post('/colaboradores', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -41,10 +41,10 @@ router.post('/colaboradores', [validarToken, validarRegra([RegraEnum.ADMIN])], (
           description: 'Erro interno'
       }
     */
-    controller.create(req, res);
+    controller.create(req, res, next);
 });
 
-router.get('/colaboradores', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.get('/colaboradores', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -64,10 +64,10 @@ router.get('/colaboradores', [validarToken, validarRegra([RegraEnum.COLABORADOR]
         description: 'Erro interno'
       }
     */
-    controller.find(req, res);
+    controller.find(req, res, next);
 });
 
-router.put('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.put('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
     #swagger.tags = ['Colaborador']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -105,10 +105,10 @@ router.put('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.COLABORA
         description: 'Erro interno'
     }
   */
-    controller.update(req, res);
+    controller.update(req, res, next);
 });
 
-router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -124,10 +124,10 @@ router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMIN
         description: 'Erro interno'
       }
     */
-    controller.delete(req, res);
+    controller.delete(req, res, next);
 });
 
-router.patch('/colaboradores/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.patch('/colaboradores/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
     /*
      #swagger.tags = ['Colaborador']
      #swagger.security = [{ "apiKeyAuth": [] }]
@@ -144,7 +144,7 @@ router.patch('/colaboradores/:id/:status', [validarToken, validarRegra([RegraEnu
        description: 'Erro interno'
      }
    */
-    controller.alterStatus(req, res);
+    controller.alterStatus(req, res, next);
 });
 
 export default router;

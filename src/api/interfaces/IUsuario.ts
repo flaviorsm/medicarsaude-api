@@ -4,7 +4,7 @@ import { StatusEnum } from './../../shared/enum/Status.enum';
 import { IPessoaFisica } from './IPessoaFisica';
 
 export interface IUsuario extends Document {
-    email: string;
+    usuario: string;
     senha: string;
     regra: RegraEnum;
     status: StatusEnum;

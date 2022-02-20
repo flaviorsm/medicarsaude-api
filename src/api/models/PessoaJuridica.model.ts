@@ -2,7 +2,7 @@ import { IPessoaJuridica } from '../interfaces/IPessoaJuridica';
 import { model, Model, Schema } from 'mongoose';
 
 const PessoaJuridicaSchema = new Schema<IPessoaJuridica>({
-    cnpj: { type: String, required: true },
+    cnpj: { type: String, required: true, unique: true },
     nomeFantasia: { type: String },
     IE: { type: String },
     dataFundacao: { type: Date },

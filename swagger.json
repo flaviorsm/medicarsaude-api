@@ -23,7 +23,7 @@
     "/login": {
       "post": {
         "tags": [
-          "Login"
+          "Autenticação"
         ],
         "description": "",
         "parameters": [
@@ -34,7 +34,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "email": {
+                "usuario": {
                   "type": "string",
                   "example": "string"
                 },
@@ -44,7 +44,7 @@
                 }
               },
               "required": [
-                "email",
+                "usuario",
                 "senha"
               ]
             }
@@ -83,6 +83,10 @@
                   "type": "string",
                   "example": "string"
                 },
+                "usuario": {
+                  "type": "string",
+                  "example": "string"
+                },
                 "senha": {
                   "type": "string",
                   "example": "string"
@@ -97,6 +101,7 @@
                 "email",
                 "telefone",
                 "cpf",
+                "usuario",
                 "senha",
                 "dataNascimento"
               ]
@@ -177,20 +182,11 @@
             "name": "token",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "nome",
-            "description": "Nome do Usuario",
-            "in": "query",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Usuario encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Usuario não encontrado!"
@@ -655,9 +651,6 @@
           "201": {
             "description": "Criado com sucesso."
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Erro interno"
           }
@@ -714,9 +707,6 @@
         "responses": {
           "200": {
             "description": "Cliente encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Cliente não encontrado!"
@@ -838,9 +828,6 @@
         "responses": {
           "200": {
             "description": "Alterado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Cliente não encontrado!"
@@ -2175,9 +2162,6 @@
         "responses": {
           "200": {
             "description": "Contrato encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "404": {
             "description": "Contrato não encontrado!"

@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { VendaController } from '../api/controllers/VendaController';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
@@ -7,7 +7,7 @@ import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 const router = Router();
 const controller = new VendaController();
 
-router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -28,10 +28,10 @@ router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (r
         description: 'Erro interno'
     }
   */
-  controller.create(req, res);
+  controller.create(req, res, next);
 });
 
-router.get('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.get('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -48,10 +48,10 @@ router.get('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (re
       description: 'Erro interno'
     }
   */
-  controller.find(req, res);
+  controller.find(req, res, next);
 });
 
-router.put('/vendas/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.put('/vendas/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Venda']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -76,10 +76,10 @@ router.put('/vendas/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
       description: 'Erro interno'
   }
 */
-  controller.update(req, res);
+  controller.update(req, res, next);
 });
 
-router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -95,10 +95,10 @@ router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
       description: 'Erro interno'
     }
   */
-  controller.delete(req, res);
+  controller.delete(req, res, next);
 });
 
-router.patch('/vendas/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.patch('/vendas/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Venda']
    #swagger.security = [{ "apiKeyAuth": [] }]
@@ -115,7 +115,7 @@ router.patch('/vendas/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN
      description: 'Erro interno'
    }
  */
-  controller.alterStatus(req, res);
+  controller.alterStatus(req, res, next);
 });
 
 export default router;

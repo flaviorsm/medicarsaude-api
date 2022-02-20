@@ -4,7 +4,7 @@ import { RegraEnum } from '../../shared/enum/TipoUsuarioEnum';
 import { IUsuario } from '../interfaces/IUsuario';
 
 const UsuarioSchema = new Schema<IUsuario>({
-    email: { type: String, required: true },
+    usuario: { type: String, required: true, unique: true },
     senha: { type: String, required: true, select: false },
     regra: { type: Number, enum: RegraEnum,  required: true, select: false, default: RegraEnum.CLIENTE },
     status: { type: Number, enum: StatusEnum, required: true, default: StatusEnum.ATIVO },

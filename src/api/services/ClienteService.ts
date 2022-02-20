@@ -2,6 +2,7 @@ import { ClienteDTO } from '../dtos/ClienteDTO';
 import { ClienteRepository } from '../repositories/ClienteRepository';
 import { ICliente } from './../interfaces/ICliente';
 import { ServiceBase } from '../../core/ServiceBase';
+import APIException from '../../shared/utils/exceptions/APIException';
 
 export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRepository> {
 
@@ -28,8 +29,7 @@ export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRep
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();
@@ -75,8 +75,7 @@ export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRep
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();

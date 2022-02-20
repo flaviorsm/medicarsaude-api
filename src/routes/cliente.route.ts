@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { ClienteController } from '../api/controllers/ClienteController';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
@@ -7,7 +7,7 @@ import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 const router = Router();
 const clienteController = new ClienteController();
 
-router.post('/clientes', [validarToken], (req: Request, res: Response) => {
+router.post('/clientes', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -38,10 +38,10 @@ router.post('/clientes', [validarToken], (req: Request, res: Response) => {
         description: 'Erro interno'
     }
   */
-  clienteController.create(req, res);
+  clienteController.create(req, res, next);
 });
 
-router.get('/clientes', [validarToken], (req: Request, res: Response) => {
+router.get('/clientes', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -61,10 +61,10 @@ router.get('/clientes', [validarToken], (req: Request, res: Response) => {
       description: 'Erro interno'
     }
   */
-  clienteController.find(req, res);
+  clienteController.find(req, res, next);
 });
 
-router.put('/clientes/:id', [validarToken], (req: Request, res: Response) => {
+router.put('/clientes/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Cliente']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -99,10 +99,10 @@ router.put('/clientes/:id', [validarToken], (req: Request, res: Response) => {
       description: 'Erro interno'
   }
 */
-  clienteController.update(req, res);
+  clienteController.update(req, res, next);
 });
 
-router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -118,10 +118,10 @@ router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], 
       description: 'Erro interno'
     }
   */
-  clienteController.delete(req, res);
+  clienteController.delete(req, res, next);
 });
 
-router.patch('/clientes/:id/:status', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.patch('/clientes/:id/:status', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Cliente']
    #swagger.security = [{ "apiKeyAuth": [] }]
@@ -138,7 +138,7 @@ router.patch('/clientes/:id/:status', [validarToken, validarRegra([RegraEnum.COL
      description: 'Erro interno'
    }
  */
-  clienteController.alterStatus(req, res);
+  clienteController.alterStatus(req, res, next);
 });
 
 export default router;

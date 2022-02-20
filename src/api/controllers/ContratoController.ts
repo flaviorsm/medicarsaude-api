@@ -1,5 +1,5 @@
 import { ContratoDTO } from '../dtos/ContratoDTO';
-import { ControllerBase } from '../../shared/utils/ControllerBase';
+import { ControllerBase } from '../../core/ControllerBase';
 import { IContrato } from '../interfaces/IContrato';
 import { ContratoService } from '../services/ContratoService';
 

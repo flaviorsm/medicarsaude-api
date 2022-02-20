@@ -3,7 +3,7 @@ import { StatusEnum } from '../../shared/enum/Status.enum';
 import { IContrato } from './../interfaces/IContrato';
 
 const ContratoSchema = new Schema<IContrato>({
-    codigo: { type: String, required: true },
+    codigo: { type: String, required: true, unique: true },
     status: { type: String, enum: StatusEnum, required: true },
     plano: { type: Schema.Types.ObjectId, ref: 'Plano' },
     cliente: { type: Schema.Types.ObjectId, ref: 'Cliente' },

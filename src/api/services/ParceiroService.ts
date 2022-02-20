@@ -2,6 +2,7 @@ import { ParceiroDTO } from './../dtos/ParceiroDTO';
 import { IParceiro } from './../interfaces/IParceito';
 import { ParceiroRepository } from './../repositories/ParceiroRepository';
 import { ServiceBase } from '../../core/ServiceBase';
+import APIException from '../../shared/utils/exceptions/APIException';
 
 export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, ParceiroRepository> {
 
@@ -32,8 +33,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();
@@ -87,8 +87,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
 
         } catch (error) {
             await session.abortTransaction();
-            this.logger.error(error);
-            throw new Error(error);
+            throw new APIException(error);
         }
 
         session.endSession();

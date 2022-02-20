@@ -4,19 +4,19 @@ import { AutenticacaoController } from './../api/controllers/AutenticacaoControl
 const router = Router();
 const controller = new AutenticacaoController();
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     /*
-    #swagger.tags = ['Login']
+    #swagger.tags = ['Autenticação']
     #swagger.parameters['login'] = {
         in: 'body',
         description: 'Email e senha.',
         schema: {
-            $email: 'string',
+            $usuario: 'string',
             $senha: 'string'
         }
     }
     */
-    controller.login(req, res);
+    controller.login(req, res, next);
 });
 
 export default router;

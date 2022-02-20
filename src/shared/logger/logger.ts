@@ -8,7 +8,7 @@ export class Logger {
         logger.info(`${message}   ${undefined !== data ? JSON.stringify(data) : ''}`);
     }
 
-    error(message: string) {
-        logger.error(message);
+    error(message: string, data?: any) {
+        logger.error(`${message}   ${undefined !== data ? JSON.stringify(data) : ''}`);
     }
 }

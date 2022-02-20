@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
@@ -7,7 +7,7 @@ import { ContratoController } from './../api/controllers/ContratoController';
 const router = Router();
 const controller = new ContratoController();
 
-router.post('/contratos', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.post('/contratos', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Contrato']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -29,10 +29,10 @@ router.post('/contratos', [validarToken, validarRegra([RegraEnum.ADMIN])], (req:
         description: 'Erro interno'
     }
   */
-  controller.create(req, res);
+  controller.create(req, res, next);
 });
 
-router.get('/contratos', [validarToken], (req: Request, res: Response) => {
+router.get('/contratos', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Contrato']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -50,10 +50,10 @@ router.get('/contratos', [validarToken], (req: Request, res: Response) => {
       description: 'Erro interno'
     }
   */
-  controller.find(req, res);
+  controller.find(req, res, next);
 });
 
-router.put('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.put('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Contrato']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -78,10 +78,10 @@ router.put('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
       description: 'Erro interno'
   }
 */
-  controller.update(req, res);
+  controller.update(req, res, next);
 });
 
-router.delete('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Contrato']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -97,10 +97,10 @@ router.delete('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])],
       description: 'Erro interno'
     }
   */
-  controller.delete(req, res);
+  controller.delete(req, res, next);
 });
 
-router.patch('/contratos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.patch('/contratos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Contrato']
    #swagger.security = [{ "apiKeyAuth": [] }]
@@ -117,7 +117,7 @@ router.patch('/contratos/:id/:status', [validarToken, validarRegra([RegraEnum.AD
      description: 'Erro interno'
    }
  */
-  controller.alterStatus(req, res);
+  controller.alterStatus(req, res, next);
 });
 
 export default router;

@@ -3,7 +3,7 @@ import { StatusEnum } from '../../shared/enum/Status.enum';
 import { IPagamento } from '../interfaces/IPagamento';
 
 const PagamentoSchema = new Schema<IPagamento>({
-    codigo: { type: String, required: true },
+    codigo: { type: String, required: true, unique: true },
     status: { type: String, enum: StatusEnum, required: true },
     dataVencimento: { type: Date },
     dataPagamento: { type: Date },

@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
@@ -7,7 +7,7 @@ import { UsuarioController } from './../api/controllers/UsuarioController';
 const router = Router();
 const controller = new UsuarioController();
 
-router.post('/usuarios', (req, res) => {
+router.post('/usuarios', (req, res, next) => {
   /*
     #swagger.tags = ['Usuario']
     #swagger.parameters['usuario'] = {
@@ -18,6 +18,7 @@ router.post('/usuarios', (req, res) => {
           $email: 'string',
           $telefone: 'string',
           $cpf: 'string',
+          $usuario: 'string',
           $senha: 'string',
           $dataNascimento: 'yyyy-mm-dd'
         }
@@ -29,10 +30,10 @@ router.post('/usuarios', (req, res) => {
         description: 'Erro interno'
     }
   */
-  controller.create(req, res);
+  controller.create(req, res, next);
 });
 
-router.get('/usuarios', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.get('/usuarios', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Usuario']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -49,16 +50,15 @@ router.get('/usuarios', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (
       description: 'Erro interno'
     }
   */
-  controller.find(req, res);
+  controller.find(req, res, next);
 });
 
-router.get('/usuarios/:id', [validarToken], (req: Request, res: Response) => {
+router.get('/usuarios/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Usuario']
     #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
     #swagger.parameters['id'] = { description: 'Identificador do Usuario' }
-    #swagger.parameters['nome'] = { description: 'Nome do Usuario' }
     #swagger.responses[200] = {
       description: 'Usuario encontrado.'
     }
@@ -69,10 +69,10 @@ router.get('/usuarios/:id', [validarToken], (req: Request, res: Response) => {
       description: 'Erro interno'
     }
   */
-  controller.find(req, res);
+  controller.find(req, res, next);
 });
 
-router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Usuario']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -98,7 +98,7 @@ router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (re
       description: 'Erro interno'
   }
 */
-  controller.update(req, res);
+  controller.update(req, res, next);
 });
 
 export default router;

@@ -9,7 +9,11 @@ export class UsuarioRepository extends RepositoryBase<IUsuario, UsuarioDTO> {
         super(UsuarioModel)
     }
 
-    obterSenhaRegra(id: string) {
-        return UsuarioModel.findById(id, { regra: true, senha: true });
+    obterSenhaRegraPorUsuario(nome: string) {
+        return UsuarioModel.findOne({ usuario: nome }, { _id: true, regra: true, senha: true });
+    }
+
+    obterSenhaRegraPorId(id: string) {
+        return UsuarioModel.findById(id, { _id: true, regra: true, senha: true });
     }
 }

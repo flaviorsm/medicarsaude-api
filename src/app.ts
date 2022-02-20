@@ -1,4 +1,6 @@
+import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import errorMiddleware from './shared/utils/Error.middleware';
 import Routes from './routes';
 import { Logger } from './shared/logger/logger';
 import swaggerUi = require('swagger-ui-express');
@@ -15,8 +17,15 @@ class App {
 
     constructor() {
         this.express = express();
-        this.routes();
+        this.middleware();
         this.swagger();
+        this.routes();
+        this.initializeErrorHandling();
+    }
+
+    private middleware(): void {
+        this.express.use(bodyParser.json());
+        this.express.use(bodyParser.urlencoded({ extended: false }));
     }
 
     private swagger() {
@@ -29,6 +38,10 @@ class App {
 
     private routes(): void {
         this.express.use('/', Routes);
+    }
+
+    private initializeErrorHandling() {
+        this.express.use(errorMiddleware);
     }
 }
 

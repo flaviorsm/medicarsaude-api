@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { validarRegra } from '../helpers/ValidarRegra';
 import { validarToken } from '../helpers/ValidarToken';
 import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
@@ -7,7 +7,7 @@ import { PlanoController } from './../api/controllers/PlanoController';
 const router = Router();
 const controller = new PlanoController();
 
-router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -28,10 +28,10 @@ router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (r
           description: 'Erro interno'
       }
     */
-    controller.create(req, res);
+    controller.create(req, res, next);
 });
 
-router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -48,10 +48,10 @@ router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (re
         description: 'Erro interno'
       }
     */
-    controller.find(req, res);
+    controller.find(req, res, next);
 });
 
-router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
+router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
     #swagger.tags = ['Plano']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -76,10 +76,10 @@ router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
         description: 'Erro interno'
     }
   */
-    controller.update(req, res);
+    controller.update(req, res, next);
 });
 
-router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -95,10 +95,10 @@ router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
         description: 'Erro interno'
       }
     */
-    controller.delete(req, res);
+    controller.delete(req, res, next);
 });
 
-router.patch('/planos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
+router.patch('/planos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
     /*
      #swagger.tags = ['Plano']
      #swagger.security = [{ "apiKeyAuth": [] }]
@@ -115,7 +115,7 @@ router.patch('/planos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN
        description: 'Erro interno'
      }
    */
-    controller.alterStatus(req, res);
+    controller.alterStatus(req, res, next);
 });
 
 export default router;

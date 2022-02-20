@@ -8,7 +8,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "node dist/api.bundle.js",
-    "dev": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.ts && node ./build/index.js",
+    "dev": "tsc ./src/index.ts --outDir ./build && node ./build/index.js",
     "dev:watch": "nodemon ./build/index.js",
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint-fix": "tslint --project tsconfig.json --config tslint.json --fix",
@@ -23,6 +23,7 @@
     "-": "0.0.1",
     "@types/bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.13.2",
     "dotenv": "^15.0.1",
     "express": "^4.17.2",
     "express-unless": "^1.0.0",

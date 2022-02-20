@@ -1,6 +1,4 @@
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-
 import ClienteRouter from './routes/cliente.route';
 import ParceiroRouter from './routes/parceiro.route';
 import PlanoRouter from './routes/plano.route';
@@ -17,13 +15,7 @@ class Routes {
 
     constructor() {
         this.express = express();
-        this.middleware();
         this.routes();
-    }
-
-    private middleware(): void {
-        this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: false }));
     }
 
     private routes(): void {

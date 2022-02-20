@@ -10,7 +10,7 @@ export abstract class RepositoryBase<T, D> implements IRepository<T, D> {
         this.logger = new Logger();
     }
 
-    async find(query: any): Promise<T | T[]> {
+    async find(query: any): Promise<T[]> {
         return await this.model.find(query);
     }
 

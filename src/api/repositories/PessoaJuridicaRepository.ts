@@ -9,7 +9,7 @@ export class PessoaJuridicaRepository extends RepositoryBase<IPessoaJuridica, Pe
         super(PessoaJuridicaModel);
     }
 
-    async find(query: any): Promise<IPessoaJuridica | IPessoaJuridica[]> {
+    async find(query: any): Promise<IPessoaJuridica[]> {
         return await PessoaJuridicaModel
             .find(query)
             .populate({

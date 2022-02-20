@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ClienteService } from '../services/ClienteService';
 
 export class ClienteController {
@@ -9,7 +9,7 @@ export class ClienteController {
         this.clienteService = new ClienteService();
     }
 
-    find(req: Request, res: Response) {
+    find(req: Request, res: Response, next: NextFunction) {
 
         if (req.params.id || req.query.id) {
             const id = (req.params.id || req.query.id) as string;
@@ -41,12 +41,12 @@ export class ClienteController {
         }
     }
 
-    create(req: Request, res: Response) {
+    create(req: Request, res: Response, next: NextFunction) {
         this.clienteService.create(req.body).then(cliente => res.status(201).send(cliente))
             .catch(err => res.status(500).send(err));
     }
 
-    update(req: Request, res: Response) {
+    update(req: Request, res: Response, next: NextFunction) {
         this.clienteService.update(req.params.id, req.body).then(cliente => {
             res.status(200).send(cliente);
         }).catch(err => {
@@ -54,7 +54,7 @@ export class ClienteController {
         });
     }
 
-    alterStatus(req: Request, res: Response) {
+    alterStatus(req: Request, res: Response, next: NextFunction) {
 
         const status = { status: req.params.status.toString().toUpperCase() };
 
@@ -66,7 +66,7 @@ export class ClienteController {
             });
     }
 
-    delete(req: Request, res: Response) {
+    delete(req: Request, res: Response, next: NextFunction) {
         this.clienteService.delete(req.params.id)
             .then(() => res.status(200).send({ message: 'Excluído com sucesso' }))
             .catch(err => res.status(500).json(err));

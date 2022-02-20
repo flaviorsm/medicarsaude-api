@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 import { Logger } from '../shared/logger/logger';
+import HttpException from '../shared/utils/exceptions/HttpException';
 
 require('dotenv').config()
 const logger = new Logger();
@@ -14,9 +15,8 @@ export const validarToken = (req: Request, res: Response, next: NextFunction) =>
         jwtPayload = (jwt.verify(token, process.env.jwtSecret) as any);
         res.locals.jwtPayload = jwtPayload;
     } catch (error) {
-        logger.info(`Erro ao validar token: `, error);
-        res.status(401).send({ messagem: 'Token inválido!' });
-        return;
+        logger.error(`Validar Regra ==> ${error.message}`);
+        throw new HttpException(401, error.message);
     }
 
     const { userId, username } = jwtPayload;
