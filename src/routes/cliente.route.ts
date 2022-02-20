@@ -1,12 +1,17 @@
 import { Router } from 'express';
 import { ClienteController } from '../api/controllers/ClienteController';
+import { regra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
+import { Request, Response } from 'express-serve-static-core';
 
 const router = Router();
 const clienteController = new ClienteController();
 
-router.post('/clientes', (req, res) => {
+router.post('/clientes', [validarToken], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Cliente']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.parameters['cliente'] = {
         in: 'body',
         description: 'Adicionando novo cliente.',
@@ -37,9 +42,10 @@ router.post('/clientes', (req, res) => {
   clienteController.create(req, res);
 });
 
-router.get('/clientes', (req, res) => {
+router.get('/clientes', [validarToken], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Cliente']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
     #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
     #swagger.parameters['nome'] = { description: 'Nome do cliente' }
@@ -59,9 +65,10 @@ router.get('/clientes', (req, res) => {
   clienteController.find(req, res);
 });
 
-router.put('/clientes/:id', (req, res) => {
+router.put('/clientes/:id', [validarToken], (req: Request, res: Response) => {
   /*
   #swagger.tags = ['Cliente']
+  #swagger.security = [{ "apiKeyAuth": [] }]
   #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
   #swagger.parameters['cliente'] = {
       in: 'body',
@@ -96,9 +103,10 @@ router.put('/clientes/:id', (req, res) => {
   clienteController.update(req, res);
 });
 
-router.delete('/clientes/:id', (req, res) => {
+router.delete('/clientes/:id', [validarToken, regra([RegraEnum.ADMIN])], (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Cliente']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.description = 'Exclui dados do cliente.'
     #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
     #swagger.responses[200] = {
@@ -114,9 +122,10 @@ router.delete('/clientes/:id', (req, res) => {
   clienteController.delete(req, res);
 });
 
-router.patch('/clientes/:id/:status', (req, res) => {
+router.patch('/clientes/:id/:status', [validarToken, regra([RegraEnum.COLABORADOR])], (req: Request, res: Response) => {
   /*
    #swagger.tags = ['Cliente']
+   #swagger.security = [{ "apiKeyAuth": [] }]
    #swagger.description = 'Alterar status do cliente.'
    #swagger.parameters['id'] = { description: 'Identificador do Cliente' }
    #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }

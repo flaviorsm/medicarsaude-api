@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "Medicar Saúde",
     "description": "Cooperativa de Saúde"
   },
@@ -11,7 +11,48 @@
     "https",
     "http"
   ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "token",
+      "description": ""
+    }
+  },
   "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Email e senha.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "email",
+                "senha"
+              ]
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/usuarios": {
       "post": {
         "tags": [
@@ -76,7 +117,13 @@
           "Usuario"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Usuario",
@@ -94,21 +141,30 @@
           "200": {
             "description": "Usuario encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Usuario não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/usuarios/{id}": {
-      "put": {
+      "get": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -116,6 +172,57 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Usuario"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Usuario",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Usuario não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Usuario"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "usuario",
@@ -159,31 +266,8 @@
           "200": {
             "description": "Alterado com sucesso."
           },
-          "404": {
-            "description": "Usuario não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Usuario"
-        ],
-        "description": "Exclui dados do usuario.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Usuario"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Usuario deletado."
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Usuario não encontrado!"
@@ -191,42 +275,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
-      }
-    },
-    "/usuarios/{id}/{status}": {
-      "patch": {
-        "tags": [
-          "Usuario"
-        ],
-        "description": "Alterar status do usuario.",
-        "parameters": [
+        },
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Usuario"
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ATIVO ou SUSPENSO ou INATIVO"
+            "apiKeyAuth": []
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status modificado."
-          },
-          "404": {
-            "description": "Usuario não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        }
+        ]
       }
     },
     "/vendas": {
@@ -437,7 +491,13 @@
           "Cliente"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "cliente",
             "in": "body",
@@ -525,17 +585,31 @@
           "201": {
             "description": "Criado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "get": {
         "tags": [
           "Cliente"
         ],
         "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "id",
             "description": "Identificador do Cliente",
@@ -571,13 +645,21 @@
           "200": {
             "description": "Cliente encontrado."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Cliente não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/clientes/{id}": {
@@ -586,6 +668,7 @@
           "Cliente"
         ],
         "description": "",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -593,6 +676,11 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Cliente"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "cliente",
@@ -681,19 +769,28 @@
           "200": {
             "description": "Alterado com sucesso."
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Cliente não encontrado!"
           },
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
           "Cliente"
         ],
         "description": "Exclui dados do cliente.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -701,11 +798,19 @@
             "required": true,
             "type": "string",
             "description": "Identificador do Cliente"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Cliente deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Cliente não encontrado!"
@@ -713,7 +818,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/clientes/{id}/{status}": {
@@ -722,6 +832,7 @@
           "Cliente"
         ],
         "description": "Alterar status do cliente.",
+        "produces": [],
         "parameters": [
           {
             "name": "id",
@@ -736,11 +847,19 @@
             "required": true,
             "type": "string",
             "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Cliente não encontrado!"
@@ -748,7 +867,12 @@
           "500": {
             "description": "Erro interno"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       }
     },
     "/parceiros": {

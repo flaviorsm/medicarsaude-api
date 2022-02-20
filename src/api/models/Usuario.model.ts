@@ -1,12 +1,12 @@
 import { Model, model, Schema } from 'mongoose';
 import { StatusEnum } from '../../shared/enum/Status.enum';
-import { TipoUsuarioEnum } from '../../shared/enum/TipoUsuarioEnum';
+import { RegraEnum } from '../../shared/enum/TipoUsuarioEnum';
 import { IUsuario } from '../interfaces/IUsuario';
 
 const UsuarioSchema = new Schema<IUsuario>({
     email: { type: String, required: true },
     senha: { type: String, required: true, select: false },
-    tipo: { type: Number, enum: TipoUsuarioEnum,  required: true, default: TipoUsuarioEnum.CLIENTE },
+    regra: { type: Number, enum: RegraEnum,  required: true, select: false, default: RegraEnum.CLIENTE },
     status: { type: Number, enum: StatusEnum, required: true, default: StatusEnum.ATIVO },
     pessoaFisica: { type: Schema.Types.ObjectId, ref: 'PessoaFisica' }
 }, { timestamps: true });

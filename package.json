@@ -8,13 +8,13 @@
   "main": "index.ts",
   "scripts": {
     "start": "node dist/api.bundle.js",
-    "dev": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js && node ./build/index.js",
+    "dev": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.ts && node ./build/index.js",
     "dev:watch": "nodemon ./build/index.js",
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint-fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "build": "webpack",
     "prod": "node dist/api.bundle.js",
-    "swagger-autogen": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.js",
+    "swagger-autogen": "tsc ./src/index.ts --outDir ./build && node src/config/swagger.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Flávio Moreira",

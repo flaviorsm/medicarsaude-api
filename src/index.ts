@@ -13,9 +13,9 @@ const server = http.createServer(app);
 server.listen(port);
 
 server.on('listening', (): void => {
-        const addr = server.address();
-        const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
-        logger.info(`Escutando em ${bind}`);
-    });
+    const addr = server.address();
+    const bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;
+    logger.info(`Escutando ${bind}`);
+});
 
 module.exports = app;

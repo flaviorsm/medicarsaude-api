@@ -1,4 +1,4 @@
-export enum TipoUsuarioEnum {
+export enum RegraEnum {
     ADMIN,
     CLIENTE,
     COLABORADOR

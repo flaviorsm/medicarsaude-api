@@ -9,6 +9,7 @@ import ContratoRouter from './contrato.route';
 import PagamentoRouter from './pagamento.route';
 import VendaRouter from './venda.route';
 import UsuarioRouter from './usuario.route';
+import AutenticacaoRouter from './autenticacao.route';
 
 class Routes {
 
@@ -39,6 +40,7 @@ class Routes {
             ContratoRouter,
             PagamentoRouter,
             UsuarioRouter,
+            AutenticacaoRouter,
         );
     }
 }

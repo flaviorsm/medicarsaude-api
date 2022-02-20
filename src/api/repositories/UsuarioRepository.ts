@@ -8,4 +8,8 @@ export class UsuarioRepository extends RepositoryBase<IUsuario, UsuarioDTO> {
     constructor() {
         super(UsuarioModel)
     }
+
+    obterSenhaRegra(id: string) {
+        return UsuarioModel.findById(id, { regra: true, senha: true });
+    }
 }

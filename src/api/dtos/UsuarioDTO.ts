@@ -1,12 +1,12 @@
 import { PessoaFisicaDTO } from './PessoaFisicaDTO';
 import { PessoaDTO } from './PessoaDTO';
 import { StatusEnum } from "../../shared/enum/Status.enum";
-import { TipoUsuarioEnum } from './../../shared/enum/TipoUsuarioEnum';
+import { RegraEnum } from './../../shared/enum/TipoUsuarioEnum';
 
 export interface UsuarioDTO extends PessoaFisicaDTO {
     senha: string;
     status: StatusEnum;
-    tipo: TipoUsuarioEnum;
+    regra: RegraEnum;
 
     pessoaFisica?: any;
     pessoa?: any;
