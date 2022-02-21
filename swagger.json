@@ -2187,174 +2187,6 @@
         ]
       }
     },
-    "/contratos/{id}": {
-      "put": {
-        "tags": [
-          "Contrato"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Contrato"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "contrato",
-            "in": "body",
-            "description": "Alterar contrato.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "StatusEnum"
-                },
-                "plano": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "cliente": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "vendedor": {
-                  "type": "string",
-                  "example": "string"
-                }
-              },
-              "required": [
-                "codigo",
-                "status",
-                "plano",
-                "cliente",
-                "vendedor"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Alterado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Contrato não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Contrato"
-        ],
-        "description": "Exclui dados do contrato.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Contrato"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Contrato deletado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Contrato não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/contratos/{id}/{status}": {
-      "patch": {
-        "tags": [
-          "Contrato"
-        ],
-        "description": "Alterar status do contrato.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Contrato"
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ATIVO ou SUSPENSO ou INATIVO"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status modificado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Contrato não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
     "/pagamentos": {
       "post": {
         "tags": [
@@ -2460,6 +2292,12 @@
           {
             "name": "codigo",
             "description": "Código do Pagamento",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "contrato",
+            "description": "Identificador do contrato",
             "in": "query",
             "type": "string"
           }

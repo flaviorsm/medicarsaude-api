@@ -1,4 +1,3 @@
-import { ContratoDTO } from './ContratoDTO';
 
 export interface PagamentoDTO {
     codigo: string;
@@ -7,5 +6,5 @@ export interface PagamentoDTO {
     dataVencimento: Date;
     dataPagamento: Date;
     status: string;
-    contrato: ContratoDTO;
+    contrato?: any;
 }

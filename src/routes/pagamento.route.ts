@@ -42,6 +42,7 @@ router.get('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
       #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
       #swagger.parameters['nome'] = { description: 'Nome do Cliente' }
       #swagger.parameters['codigo'] = { description: 'Código do Pagamento' }
+      #swagger.parameters['contrato'] = { description: 'Identificador do contrato' }
       #swagger.responses[200] = {
         description: 'Pagamento encontrado.'
       }

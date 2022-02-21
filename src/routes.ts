@@ -24,14 +24,14 @@ class Routes {
         });
 
         this.express.use('/api',
-            VendaRouter,
+            ContratoRouter,
             ClienteRouter,
             ParceiroRouter,
-            PlanoRouter,
             ColaboradorRouter,
-            ContratoRouter,
-            PagamentoRouter,
             UsuarioRouter,
+            PagamentoRouter,
+            PlanoRouter,
+            VendaRouter,
             AutenticacaoRouter,
         );
     }
