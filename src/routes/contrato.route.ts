@@ -62,10 +62,11 @@ router.put('/contratos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
       in: 'body',
       description: 'Alterar contrato.',
       schema: {
-          $nome: 'string',
-          $descricao: 'string',
-          $valor: 'Number',
+          $codigo: 'string',
           $status: 'StatusEnum',
+          $plano: 'string',
+          $cliente: 'string',
+          $vendedor: 'string'
       }
   }
   #swagger.responses[200] = {

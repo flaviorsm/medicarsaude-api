@@ -85,7 +85,9 @@ router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (re
           $email: 'string',
           $telefone: 'string',
           $cpf: 'string',
+          $usuario: 'string',
           $senha: 'string',
+          $dataNascimento: 'yyyy-mm-dd'
       }
   }
   #swagger.responses[200] = {

@@ -17,14 +17,18 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
     }
 
     async create(dto: UsuarioDTO): Promise<IUsuario> {
-
         let usuario = null;
         const session = await this.database.conn.startSession();
 
         try {
             session.startTransaction();
-            dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps._id);
-            dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf._id);
+            const pessoaFisica = await this.pessoaFisicaRepository.findOne({ cpf: dto.cpf });
+            if(!pessoaFisica) {
+                dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps._id);
+                dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf._id);
+            } else {
+                dto.pessoaFisica = pessoaFisica._id;
+            }
             dto.senha = await bcrypt.hash(dto.senha, 10);
             usuario = await super.create(dto, session);
             await session.commitTransaction();

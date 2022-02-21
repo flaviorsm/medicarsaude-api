@@ -243,9 +243,17 @@
                   "type": "string",
                   "example": "string"
                 },
+                "usuario": {
+                  "type": "string",
+                  "example": "string"
+                },
                 "senha": {
                   "type": "string",
                   "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "yyyy-mm-dd"
                 }
               },
               "required": [
@@ -253,7 +261,9 @@
                 "email",
                 "telefone",
                 "cpf",
-                "senha"
+                "usuario",
+                "senha",
+                "dataNascimento"
               ]
             }
           }
@@ -267,278 +277,6 @@
           },
           "404": {
             "description": "Usuario não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/vendas": {
-      "post": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "venda",
-            "in": "body",
-            "description": "Adicionando novo venda.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "descricao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "valor": {
-                  "type": "string",
-                  "example": "Number"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "StatusEnum"
-                }
-              },
-              "required": [
-                "nome",
-                "descricao",
-                "valor",
-                "status"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Criado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "description": "Identificador do Venda",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "nome",
-            "description": "Nome do Venda",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Venda encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Venda não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/vendas/{id}": {
-      "put": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Venda"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "venda",
-            "in": "body",
-            "description": "Alterar venda.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "descricao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "valor": {
-                  "type": "string",
-                  "example": "Number"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "StatusEnum"
-                }
-              },
-              "required": [
-                "nome",
-                "descricao",
-                "valor",
-                "status"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Alterado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Venda não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "Exclui dados do venda.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Venda"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Venda deletado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Venda não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/vendas/{id}/{status}": {
-      "patch": {
-        "tags": [
-          "Venda"
-        ],
-        "description": "Alterar status do venda.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Venda"
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ATIVO ou SUSPENSO ou INATIVO"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status modificado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -920,6 +658,698 @@
           },
           "404": {
             "description": "Cliente não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/colaboradores": {
+      "post": {
+        "tags": [
+          "Colaborador"
+        ],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "colaborador",
+            "in": "body",
+            "description": "Adicionando novo colaborador.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                },
+                "funcao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataContratacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "ctps": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "boolean"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "codigo",
+                "status",
+                "funcao",
+                "dataContratacao",
+                "ctps",
+                "usuario",
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Colaborador"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "Identificador do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "telefone",
+            "description": "Telefone do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "description": "Email do Colaborador",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "cpf",
+            "description": "CPF do Colaborador",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Colaborador encontrado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Colaborador não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/colaboradores/{id}": {
+      "put": {
+        "tags": [
+          "Colaborador"
+        ],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Colaborador"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "colaborador",
+            "in": "body",
+            "description": "Alterar colaborador.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                },
+                "funcao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataContratacao": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "ctps": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "usuario": {
+                  "type": "string",
+                  "example": "boolean"
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rg": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "rua": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "string"
+                }
+              },
+              "required": [
+                "codigo",
+                "status",
+                "funcao",
+                "dataContratacao",
+                "ctps",
+                "usuario",
+                "nome",
+                "email",
+                "telefone",
+                "cpf",
+                "rg",
+                "dataNascimento",
+                "cep",
+                "rua",
+                "bairro",
+                "cidade",
+                "estado"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Colaborador não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Colaborador"
+        ],
+        "description": "Exclui dados do colaborador.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Colaborador"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Colaborador deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Colaborador não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/colaboradores/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Colaborador"
+        ],
+        "description": "Alterar status do colaborador.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Colaborador"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Colaborador não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vendas": {
+      "post": {
+        "tags": [
+          "Venda"
+        ],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "venda",
+            "in": "body",
+            "description": "Adicionando novo venda.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Venda"
+        ],
+        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "description": "Identificador do Venda",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "description": "Nome do Venda",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Venda encontrado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Venda não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vendas/{id}": {
+      "put": {
+        "tags": [
+          "Venda"
+        ],
+        "description": "",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Venda"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "venda",
+            "in": "body",
+            "description": "Alterar venda.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "valor": {
+                  "type": "string",
+                  "example": "Number"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "StatusEnum"
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor",
+                "status"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Venda não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Venda"
+        ],
+        "description": "Exclui dados do venda.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Venda"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Venda deletado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Venda não encontrado!"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vendas/{id}/{status}": {
+      "patch": {
+        "tags": [
+          "Venda"
+        ],
+        "description": "Alterar status do venda.",
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador do Venda"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ATIVO ou SUSPENSO ou INATIVO"
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status modificado."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Venda não encontrado!"
           },
           "500": {
             "description": "Erro interno"
@@ -1640,426 +2070,6 @@
         ]
       }
     },
-    "/colaboradores": {
-      "post": {
-        "tags": [
-          "Colaborador"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "colaborador",
-            "in": "body",
-            "description": "Adicionando novo colaborador.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "StatusEnum"
-                },
-                "funcao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "dataContratacao": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "ctps": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "usuario": {
-                  "type": "string",
-                  "example": "boolean"
-                },
-                "nome": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "telefone": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "cpf": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "rg": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "dataNascimento": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "rua": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "bairro": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "cidade": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "estado": {
-                  "type": "string",
-                  "example": "string"
-                }
-              },
-              "required": [
-                "codigo",
-                "status",
-                "funcao",
-                "dataContratacao",
-                "ctps",
-                "usuario",
-                "nome",
-                "email",
-                "telefone",
-                "cpf",
-                "rg",
-                "dataNascimento",
-                "cep",
-                "rua",
-                "bairro",
-                "cidade",
-                "estado"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Criado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "Colaborador"
-        ],
-        "description": "Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "description": "Identificador do Colaborador",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "nome",
-            "description": "Nome do Colaborador",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "telefone",
-            "description": "Telefone do Colaborador",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "email",
-            "description": "Email do Colaborador",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "cpf",
-            "description": "CPF do Colaborador",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Colaborador encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Colaborador não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/colaboradores/{id}": {
-      "put": {
-        "tags": [
-          "Colaborador"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Colaborador"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "colaborador",
-            "in": "body",
-            "description": "Alterar colaborador.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "StatusEnum"
-                },
-                "funcao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "dataContratacao": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "ctps": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "usuario": {
-                  "type": "string",
-                  "example": "boolean"
-                },
-                "nome": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "telefone": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "cpf": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "rg": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "dataNascimento": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "rua": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "bairro": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "cidade": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "estado": {
-                  "type": "string",
-                  "example": "string"
-                }
-              },
-              "required": [
-                "codigo",
-                "status",
-                "funcao",
-                "dataContratacao",
-                "ctps",
-                "usuario",
-                "nome",
-                "email",
-                "telefone",
-                "cpf",
-                "rg",
-                "dataNascimento",
-                "cep",
-                "rua",
-                "bairro",
-                "cidade",
-                "estado"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Alterado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Colaborador não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Colaborador"
-        ],
-        "description": "Exclui dados do colaborador.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Colaborador"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Colaborador deletado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Colaborador não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/colaboradores/{id}/{status}": {
-      "patch": {
-        "tags": [
-          "Colaborador"
-        ],
-        "description": "Alterar status do colaborador.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Colaborador"
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ATIVO ou SUSPENSO ou INATIVO"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status modificado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Colaborador não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
     "/contratos": {
       "post": {
         "tags": [
@@ -2204,28 +2214,33 @@
             "schema": {
               "type": "object",
               "properties": {
-                "nome": {
+                "codigo": {
                   "type": "string",
                   "example": "string"
-                },
-                "descricao": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "valor": {
-                  "type": "string",
-                  "example": "Number"
                 },
                 "status": {
                   "type": "string",
                   "example": "StatusEnum"
+                },
+                "plano": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "cliente": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "vendedor": {
+                  "type": "string",
+                  "example": "string"
                 }
               },
               "required": [
-                "nome",
-                "descricao",
-                "valor",
-                "status"
+                "codigo",
+                "status",
+                "plano",
+                "cliente",
+                "vendedor"
               ]
             }
           }
@@ -2452,184 +2467,6 @@
         "responses": {
           "200": {
             "description": "Pagamento encontrado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Pagamento não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/pagamentos/{id}": {
-      "put": {
-        "tags": [
-          "Pagamento"
-        ],
-        "description": "",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Pagamento"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "pagamento",
-            "in": "body",
-            "description": "Alterar pagamento.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "codigo": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "referencia": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "valorPago": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "dataVencimento": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "dataPagamento": {
-                  "type": "string",
-                  "example": "Date"
-                },
-                "status": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "contrato": {
-                  "type": "string",
-                  "example": "string"
-                }
-              },
-              "required": [
-                "codigo",
-                "referencia",
-                "valorPago",
-                "dataVencimento",
-                "dataPagamento",
-                "status",
-                "contrato"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Alterado com sucesso."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Pagamento não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Pagamento"
-        ],
-        "description": "Exclui dados do pagamento.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Pagamento"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Pagamento deletado."
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Pagamento não encontrado!"
-          },
-          "500": {
-            "description": "Erro interno"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ]
-      }
-    },
-    "/pagamentos/{id}/{status}": {
-      "patch": {
-        "tags": [
-          "Pagamento"
-        ],
-        "description": "Alterar status do pagamento.",
-        "produces": [],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Identificador do Pagamento"
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "ATIVO ou SUSPENSO ou INATIVO"
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status modificado."
           },
           "401": {
             "description": "Unauthorized"
