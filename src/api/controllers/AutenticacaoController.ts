@@ -13,7 +13,7 @@ export class AutenticacaoController {
         const { usuario, senha } = req.body;
         if (usuario && senha) {
             this.usuarioService.login(usuario, senha)
-                .then(token => res.status(200).send({ token }))
+                .then(auth => res.status(200).send(auth))
                 .catch(error => next(error));
         }
     }
