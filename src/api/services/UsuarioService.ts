@@ -23,7 +23,7 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
         try {
             session.startTransaction();
             const pessoaFisica = await this.pessoaFisicaRepository.findOne({ cpf: dto.cpf });
-            if(!pessoaFisica) {
+            if (!pessoaFisica) {
                 dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps._id);
                 dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf._id);
             } else {
@@ -65,7 +65,7 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
                 process.env.jwtSecret,
                 { expiresIn: '1h' }
             );
-            return token;
+            return { userId: usuario._id, username: nomeUsuario, role: usuario.regra, token };
 
         } catch (error) {
             throw new APIException(error);

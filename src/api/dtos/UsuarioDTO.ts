@@ -4,9 +4,10 @@ import { PessoaFisicaDTO } from './PessoaFisicaDTO';
 
 export interface UsuarioDTO extends PessoaFisicaDTO {
     usuario: string;
-    senha: string;
     status: StatusEnum;
     regra: RegraEnum;
+    senha: string;
+    token?: string;
 
     pessoaFisica?: any;
     pessoa?: any;
