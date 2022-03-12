@@ -11,4 +11,8 @@ export interface IService<T, D> {
     delete(id: string): Promise<T>;
 
     alterStatus(id: string, body: any): Promise<T>;
+
+    entityToDTO(entity: T): D;
+
+    entitiesToDtos(entities: T[]): D[]
 }

@@ -1,12 +1,14 @@
+import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
+import { PessoaDTO } from './../dtos/PessoaDTO';
+import { IPessoaFisica } from './../interfaces/IPessoaFisica';
+import * as jwt from 'jsonwebtoken';
 import { ServiceBase } from "../../core/ServiceBase";
+import APIException from "../../shared/utils/exceptions/APIException";
+import HttpException from "../../shared/utils/exceptions/HttpException";
 import { UsuarioDTO } from "../dtos/UsuarioDTO";
 import { IUsuario } from "../interfaces/IUsuario";
 import { UsuarioRepository } from "../repositories/UsuarioRepository";
-import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
-import * as jwt from 'jsonwebtoken';
 import bcrypt = require('bcryptjs');
-import HttpException from "../../shared/utils/exceptions/HttpException";
-import APIException from "../../shared/utils/exceptions/APIException";
 
 require('dotenv').config()
 
@@ -14,6 +16,19 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
 
     constructor() {
         super(UsuarioRepository);
+    }
+
+    entityToDTO(entity: IUsuario): UsuarioDTO {
+        return {
+            usuario: entity.usuario,
+            cpf: entity.pessoaFisica.cpf,
+            dataNascimento: entity.pessoaFisica.dataNascimento,
+            nome: entity.pessoaFisica.pessoa.nome,
+            email: entity.pessoaFisica.pessoa.email,
+            telefone: entity.pessoaFisica.pessoa.telefone,
+            regra: entity.regra,
+            status: entity.status,
+        };
     }
 
     async create(dto: UsuarioDTO): Promise<IUsuario> {
@@ -24,8 +39,11 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
             session.startTransaction();
             const pessoaFisica = await this.pessoaFisicaRepository.findOne({ cpf: dto.cpf });
             if (!pessoaFisica) {
-                dto.pessoa = await this.pessoaRepository.create(dto, session).then(ps => ps._id);
-                dto.pessoaFisica = await this.pessoaFisicaRepository.create(dto, session).then(pf => pf._id);
+                const pessoaDto: PessoaDTO = { nome: dto.nome, email: dto.email, telefone: dto.telefone };
+                dto.pessoa = await this.pessoaRepository.create(pessoaDto, session).then(ps => ps._id);
+
+                const pessoaFisicaDto: PessoaFisicaDTO = { cpf: dto.cpf, dataNascimento: dto.dataNascimento, pessoa: dto.pessoa };
+                dto.pessoaFisica = await this.pessoaFisicaRepository.create(pessoaFisicaDto, session).then(pf => pf._id);
             } else {
                 dto.pessoaFisica = pessoaFisica._id;
             }
@@ -75,6 +93,4 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
     private verificaSenhaEhValida(sehnaDescriptografada: string, senhaCriptografada: string) {
         return bcrypt.compareSync(sehnaDescriptografada, senhaCriptografada);
     }
-
-
 }

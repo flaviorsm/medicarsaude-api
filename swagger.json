@@ -30,7 +30,7 @@
           {
             "name": "login",
             "in": "body",
-            "description": "Email e senha.",
+            "description": "Usuario e senha.",
             "schema": {
               "type": "object",
               "properties": {
@@ -1110,28 +1110,33 @@
             "schema": {
               "type": "object",
               "properties": {
-                "nome": {
+                "codigo": {
                   "type": "string",
                   "example": "string"
                 },
-                "descricao": {
+                "cliente": {
                   "type": "string",
                   "example": "string"
                 },
-                "valor": {
+                "plano": {
                   "type": "string",
-                  "example": "Number"
+                  "example": "string"
                 },
-                "status": {
+                "vendedor": {
                   "type": "string",
-                  "example": "StatusEnum"
+                  "example": "string"
+                },
+                "dataVenda": {
+                  "type": "string",
+                  "example": "Date"
                 }
               },
               "required": [
-                "nome",
-                "descricao",
-                "valor",
-                "status"
+                "codigo",
+                "cliente",
+                "plano",
+                "vendedor",
+                "dataVenda"
               ]
             }
           }

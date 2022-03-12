@@ -6,7 +6,7 @@ import { IPlano } from './IPlano';
 
 export interface IContrato extends Document {
     codigo: string;
-    status: string;
+    status: number;
     plano: IPlano;
     cliente: ICliente;
     vendedor: IColaborador;

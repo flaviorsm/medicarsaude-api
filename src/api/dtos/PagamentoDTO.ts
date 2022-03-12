@@ -1,5 +1,6 @@
 
 export interface PagamentoDTO {
+    id?: string;
     codigo: string;
     referencia: Date;
     valorPago: number;

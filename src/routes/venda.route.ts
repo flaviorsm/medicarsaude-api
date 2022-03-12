@@ -15,10 +15,11 @@ router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (r
         in: 'body',
         description: 'Adicionando novo venda.',
         schema: {
-          $nome: 'string',
-          $descricao: 'string',
-          $valor: 'Number',
-          $status: 'StatusEnum',
+          $codigo: 'string',
+          $cliente: 'string',
+          $plano: 'string',
+          $vendedor: 'string',
+          $dataVenda: 'Date',
         }
     }
     #swagger.responses[201] = {

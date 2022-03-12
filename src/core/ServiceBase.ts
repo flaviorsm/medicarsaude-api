@@ -31,6 +31,16 @@ export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> i
         this.enderecoRepository = new EnderecoRepository();
     }
 
+    abstract entityToDTO(entity: T): D;
+
+    entitiesToDtos(entities: T[]): D[] {
+        const dtos = [] as D[];
+        for (const entity of entities) {
+            dtos.push(this.entityToDTO(entity));
+        }
+        return dtos;
+    }
+
     async find(query: any): Promise<T[]> {
         try {
             const result = [];

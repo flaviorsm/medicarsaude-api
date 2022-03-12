@@ -1,7 +1,7 @@
-import { PagamentoDTO } from '../dtos/PagamentoDTO';
-import { IPagamento } from './../interfaces/IPagamento';
 import { ControllerBase } from '../../core/ControllerBase';
+import { PagamentoDTO } from '../dtos/PagamentoDTO';
 import { PagamentoService } from '../services/PagamentoService';
+import { IPagamento } from './../interfaces/IPagamento';
 
 export class PagamentoController extends ControllerBase<IPagamento, PagamentoDTO, PagamentoService> {
 

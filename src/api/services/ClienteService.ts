@@ -1,14 +1,36 @@
-import { ClienteDTO } from '../dtos/ClienteDTO';
-import { ClienteRepository } from '../repositories/ClienteRepository';
-import { ICliente } from './../interfaces/ICliente';
 import { ServiceBase } from '../../core/ServiceBase';
 import APIException from '../../shared/utils/exceptions/APIException';
 import HttpException from '../../shared/utils/exceptions/HttpException';
+import { ClienteDTO } from '../dtos/ClienteDTO';
+import { ClienteRepository } from '../repositories/ClienteRepository';
+import { ICliente } from './../interfaces/ICliente';
 
 export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRepository> {
 
     constructor() {
         super(ClienteRepository);
+    }
+
+    entityToDTO(entity: ICliente): ClienteDTO {
+        return {
+            id: entity._id,
+            codigo: entity.codigo,
+            status: entity.status,
+
+            cpf: entity.pessoaFisica.cpf,
+            rg: entity.pessoaFisica.rg,
+            dataNascimento: entity.pessoaFisica.dataNascimento,
+
+            nome: entity.pessoaFisica.pessoa.nome,
+            email: entity.pessoaFisica.pessoa.email,
+            telefone: entity.pessoaFisica.pessoa.telefone,
+
+            cep: entity.pessoaFisica.pessoa.endereco.cep,
+            rua: entity.pessoaFisica.pessoa.endereco.rua,
+            bairro: entity.pessoaFisica.pessoa.endereco.bairro,
+            cidade: entity.pessoaFisica.pessoa.endereco.cidade,
+            estado: entity.pessoaFisica.pessoa.endereco.estado,
+        }
     }
 
     async create(dto: ClienteDTO): Promise<ICliente> {

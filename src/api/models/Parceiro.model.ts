@@ -4,7 +4,7 @@ import { IParceiro } from '../interfaces/IParceito';
 
 const ParceiroSchema = new Schema<IParceiro>({
     categoria: { type: String, required: true },
-    status: { type: String, enum: StatusEnum, required: true },
+    status: { type: Number, enum: StatusEnum, required: true },
     pessoaFisica: { type: Schema.Types.ObjectId, ref: 'PessoaFisica' },
     pessoaJuridica: { type: Schema.Types.ObjectId, ref: 'PessoaJuridica' },
     CRM: { type: String, unique: true },

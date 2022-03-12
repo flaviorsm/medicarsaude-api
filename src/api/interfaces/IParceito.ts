@@ -4,7 +4,7 @@ import { IPessoaJuridica } from './IPessoaJuridica';
 
 export interface IParceiro extends Document {
     categoria: string;
-    status: string;
+    status: number;
     pessoaFisica?: IPessoaFisica;
     pessoaJuridica?: IPessoaJuridica;
     CRM?: string;

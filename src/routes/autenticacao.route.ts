@@ -9,7 +9,7 @@ router.post('/login', (req, res, next) => {
     #swagger.tags = ['Autenticação']
     #swagger.parameters['login'] = {
         in: 'body',
-        description: 'Email e senha.',
+        description: 'Usuario e senha.',
         schema: {
             $usuario: 'string',
             $senha: 'string'

@@ -1,7 +1,7 @@
+import { RepositoryBase } from '../../core/RepositoryBase';
+import { PessoaModel } from '../models/Pessoa.model';
 import { PessoaDTO } from './../dtos/PessoaDTO';
 import { IPessoa } from './../interfaces/IPessoa';
-import { PessoaModel } from '../models/Pessoa.model';
-import { RepositoryBase } from '../../core/RepositoryBase';
 
 export class PessoaRepository extends RepositoryBase<IPessoa, PessoaDTO> {
 

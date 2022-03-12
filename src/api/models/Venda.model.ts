@@ -7,6 +7,6 @@ const VendaSchema = new Schema<IVenda>({
     plano: { type: Schema.Types.ObjectId, ref: 'Plano' },
     vendedor: { type: Schema.Types.ObjectId, ref: 'Colaborador' },
     dataVenda: { type: Date, required: true }
-});
+}, { timestamps: true });
 
 export const VendaModel: Model<IVenda> = model<IVenda>('vendas', VendaSchema);

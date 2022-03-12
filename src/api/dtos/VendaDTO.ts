@@ -1,11 +1,9 @@
-import { ColaboradorDTO } from './ColaboradorDTO';
-import { PlanoDTO } from './PlanoDTO';
-import { ClienteDTO } from './ClienteDTO';
 
 export interface VendaDTO {
+    id?: string;
     codigo: string;
-    cliente: ClienteDTO | string;
-    plano: PlanoDTO | string;
-    vendedor: ColaboradorDTO | string;
+    cliente: any;
+    plano: any;
+    vendedor: any;
     dataVenda: Date;
 }

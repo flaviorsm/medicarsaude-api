@@ -3,11 +3,11 @@ import { StatusEnum } from '../../shared/enum/Status.enum';
 import { RegraEnum } from '../../shared/enum/TipoUsuarioEnum';
 import APIException from '../../shared/utils/exceptions/APIException';
 import HttpException from '../../shared/utils/exceptions/HttpException';
+import { UsuarioDTO } from '../dtos/UsuarioDTO';
 import { IColaborador } from '../interfaces/IColaborador';
+import { UsuarioRepository } from '../repositories/UsuarioRepository';
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
-import { UsuarioDTO } from './../dtos/UsuarioDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
-import { UsuarioRepository } from './../repositories/UsuarioRepository';
 
 export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 
@@ -16,6 +16,32 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
     constructor() {
         super(ColaboradorRepository);
         this.usuarioRepository = new UsuarioRepository();
+    }
+
+    entityToDTO(entity: IColaborador): ColaboradorDTO {
+        return {
+            id: entity._id,
+            usuario: entity.usuario,
+            codigo: entity.codigo,
+            status: entity.status,
+            ctps: entity.ctps,
+            dataContratacao: entity.dataContratacao,
+            funcao: entity.funcao,
+
+            rg: entity.pessoaFisica.rg,
+            cpf: entity.pessoaFisica.cpf,
+            dataNascimento: entity.pessoaFisica.dataNascimento,
+
+            nome: entity.pessoaFisica.pessoa.nome,
+            telefone: entity.pessoaFisica.pessoa.telefone,
+            email: entity.pessoaFisica.pessoa.email,
+
+            cep: entity.pessoaFisica.pessoa.endereco.cep,
+            rua: entity.pessoaFisica.pessoa.endereco.rua,
+            bairro: entity.pessoaFisica.pessoa.endereco.bairro,
+            cidade: entity.pessoaFisica.pessoa.endereco.cidade,
+            estado: entity.pessoaFisica.pessoa.endereco.estado,
+        };
     }
 
     async create(dto: ColaboradorDTO): Promise<IColaborador> {

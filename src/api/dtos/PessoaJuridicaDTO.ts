@@ -1,6 +1,6 @@
 import { PessoaDTO } from './PessoaDTO';
 
-export interface PessoaJuridicaDTO extends PessoaDTO {
+export interface PessoaJuridicaDTO {
     cnpj: string;
     nomeFantasia: string;
     IE: string;

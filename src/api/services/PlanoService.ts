@@ -10,6 +10,16 @@ export class PlanoService extends ServiceBase<IPlano, PlanoDTO, PlanoRepository>
         super(PlanoRepository);
     }
 
+    entityToDTO(entity: IPlano): PlanoDTO {
+        return {
+            id: entity._id,
+            nome: entity.nome,
+            descricao: entity.descricao,
+            status: entity.status,
+            valor: entity.valor,
+        };
+    }
+
     async find(query: any): Promise<IPlano[]> {
         try {
             const planos = [];

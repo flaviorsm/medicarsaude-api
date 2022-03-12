@@ -4,7 +4,7 @@ import { IColaborador } from './../interfaces/IColaborador';
 
 const ColaboradorSchema = new Schema<IColaborador>({
     codigo: { type: String, required: true, unique: true },
-    status: { type: String, enum: StatusEnum, required: true },
+    status: { type: Number, enum: StatusEnum, required: true },
     funcao: { type: String },
     dataContratacao: { type: Date },
     ctps: { type: String, unique: true },

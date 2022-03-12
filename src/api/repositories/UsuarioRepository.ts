@@ -16,4 +16,32 @@ export class UsuarioRepository extends RepositoryBase<IUsuario, UsuarioDTO> {
     obterSenhaRegraPorId(id: string) {
         return UsuarioModel.findById(id, { _id: true, regra: true, senha: true });
     }
+
+    async find(query: any = {}) {
+        return await UsuarioModel.find(query).populate({
+            path: 'pessoaFisica',
+            populate: {
+                path: 'pessoa'
+            }
+        });
+    }
+
+    async findOne(query: any) {
+        return await UsuarioModel.findOne(query).populate({
+            path: 'pessoaFisica',
+            populate: {
+                path: 'pessoa'
+            }
+        });
+    }
+
+    async findById(id: string) {
+        return await UsuarioModel.findById(id).populate({
+            path: 'pessoaFisica',
+            populate: {
+                path: 'pessoa'
+            }
+        });
+    }
+
 }

@@ -18,7 +18,7 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                 if (result) {
                     res.status(200).send({
                         response: 'successfull',
-                        data: result
+                        data: this.service.entityToDTO(result)
                     });
                 } else {
                     next(new PostNotFoundException(id));
@@ -31,7 +31,7 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                 if (result.length > 0) {
                     res.status(200).send({
                         response: 'successfull',
-                        data: result,
+                        data: this.service.entitiesToDtos(result),
                         count: result.length
                     });
                 } else {
@@ -45,7 +45,7 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                 if (result.length > 0) {
                     res.status(200).send({
                         response: 'successfull',
-                        data: result,
+                        data: this.service.entitiesToDtos(result),
                         count: result.length
                     });
                 } else {
@@ -57,13 +57,13 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
 
     create(req: Request, res: Response, next: NextFunction) {
         this.service.create(req.body)
-            .then(result => res.status(201).send(result))
+            .then(result => res.status(201).send(this.service.entityToDTO(result)))
             .catch(err => next(err));
     }
 
     update(req: Request, res: Response, next: NextFunction) {
         this.service.update(req.params.id, req.body)
-            .then(result => res.status(200).send(result))
+            .then(result => res.status(200).send(this.service.entityToDTO(result)))
             .catch(err => next(err));
     }
 
