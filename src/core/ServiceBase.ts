@@ -127,8 +127,8 @@ export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> i
             });
     }
 
-    async delete(id: string): Promise<T> {
-        return await this.repository.update(id, { status: StatusEnum.INATIVO })
+    async delete(id: string): Promise<boolean> {
+        return await this.repository.delete(id)
             .then(res => res)
             .catch(error => {
                 throw new APIException(error);

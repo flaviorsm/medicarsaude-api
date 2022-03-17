@@ -9,4 +9,6 @@ export interface IRepository<T, D> {
     create(dto: D, session?: any): Promise<T>;
 
     update(id: string, dto: any, session?: any): Promise<T>;
+
+    delete(id: string): Promise<boolean>;
 }

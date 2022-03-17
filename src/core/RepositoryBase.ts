@@ -29,4 +29,9 @@ export abstract class RepositoryBase<T, D> implements IRepository<T, D> {
     async update(id: string, dto: D, session?: any): Promise<T> {
         return await this.model.findByIdAndUpdate(id, dto, { session });
     }
+
+    async delete(id: string): Promise<boolean> {
+        const result = await this.model.findByIdAndDelete(id);
+        return result ? true : false
+    }
 }

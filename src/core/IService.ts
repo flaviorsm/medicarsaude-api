@@ -8,7 +8,7 @@ export interface IService<T, D> {
 
     update(id: string, dto: D, session?: any): Promise<T>;
 
-    delete(id: string): Promise<T>;
+    delete(id: string): Promise<boolean>;
 
     alterStatus(id: string, body: any): Promise<T>;
 
