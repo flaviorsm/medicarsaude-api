@@ -16,16 +16,16 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
         return await VendaModel.find(query)
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
-                path: 'cliente', model: ClienteModel, select: 'pessoaFisica -_id',
+                path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
                 populate: {
-                    path: 'pessoaFisica', select: 'cpf pessoa -_id',
+                    path: 'pessoaFisica', select: 'cpf dataNascimento pessoa -_id',
                     populate: {
                         path: 'pessoa', select: 'nome email telefone -_id'
                     }
                 }
             })
             .populate({
-                path: 'vendedor', model: ColaboradorModel, select: 'codigo pessoaFisica -_id',
+                path: 'vendedor', model: ColaboradorModel, select: '_id codigo pessoaFisica',
                 populate: {
                     path: 'pessoaFisica', select: 'pessoa -_id',
                     populate: {
@@ -39,16 +39,16 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
         return await VendaModel.findOne(query)
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
-                path: 'cliente', model: ClienteModel, select: 'pessoaFisica -_id',
+                path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
                 populate: {
-                    path: 'pessoaFisica', select: 'cpf pessoa -_id',
+                    path: 'pessoaFisica', select: 'cpf dataNascimento pessoa -_id',
                     populate: {
                         path: 'pessoa', select: 'nome email telefone -_id'
                     }
                 }
             })
             .populate({
-                path: 'vendedor', model: ColaboradorModel, select: 'codigo pessoaFisica -_id',
+                path: 'vendedor', model: ColaboradorModel, select: '_id codigo pessoaFisica',
                 populate: {
                     path: 'pessoaFisica', select: 'pessoa -_id',
                     populate: {
@@ -62,16 +62,16 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
         return await VendaModel.findById(id)
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
-                path: 'cliente', model: ClienteModel, select: 'pessoaFisica -_id',
+                path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
                 populate: {
-                    path: 'pessoaFisica', select: 'cpf pessoa -_id',
+                    path: 'pessoaFisica', select: 'cpf dataNascimento pessoa -_id',
                     populate: {
                         path: 'pessoa', select: 'nome email telefone -_id'
                     }
                 }
             })
             .populate({
-                path: 'vendedor', model: ColaboradorModel, select: 'codigo pessoaFisica -_id',
+                path: 'vendedor', model: ColaboradorModel, select: '_id codigo pessoaFisica',
                 populate: {
                     path: 'pessoaFisica', select: 'pessoa -_id',
                     populate: {

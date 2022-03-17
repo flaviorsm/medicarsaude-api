@@ -21,14 +21,17 @@ export class VendaService extends ServiceBase<IVenda, VendaDTO, VendaRepository>
             codigo: entity.codigo,
             dataVenda: entity.dataVenda,
             cliente: {
+                id: entity.cliente._id,
                 nome: entity.cliente.pessoaFisica.pessoa.nome,
                 cpf: entity.cliente.pessoaFisica.cpf,
                 email: entity.cliente.pessoaFisica.pessoa.email,
                 telefone: entity.cliente.pessoaFisica.pessoa.telefone,
                 endereco: entity.cliente.pessoaFisica.pessoa.endereco,
+                dataNascimento: entity.cliente.pessoaFisica.dataNascimento,
             },
             plano: this.planoService.entityToDTO(entity.plano),
             vendedor: {
+                id: entity.vendedor._id,
                 codigo: entity.vendedor.codigo,
                 nome: entity.vendedor.pessoaFisica.pessoa.nome,
                 email: entity.vendedor.pessoaFisica.pessoa.email,

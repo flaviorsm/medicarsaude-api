@@ -42,6 +42,7 @@ export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> i
     }
 
     async find(query: any): Promise<T[]> {
+        this.logger.info("-->", query);
         try {
             const result = [];
             let entity = {} as T;
