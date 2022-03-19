@@ -1,8 +1,8 @@
 export interface ParceiroDTO {
     id?: string;
-    categoria: string;
+    categoria: any;
     status: number;
-    CRM: string;
+    planos: any[];
 
     nome: string;
     email: string;
@@ -10,6 +10,7 @@ export interface ParceiroDTO {
 
     cpf?: string;
     rg?: string;
+    CRM: string;
     dataNascimento?: Date;
 
     cnpj?: string;

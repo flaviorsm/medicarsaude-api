@@ -1,3 +1,4 @@
+import { PlanoService } from './PlanoService';
 import { IPessoa } from './../interfaces/IPessoa';
 import { ParceiroDTO } from './../dtos/ParceiroDTO';
 import { IParceiro } from './../interfaces/IParceito';
@@ -7,8 +8,11 @@ import APIException from '../../shared/utils/exceptions/APIException';
 
 export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, ParceiroRepository> {
 
+    private planoService: PlanoService
+
     constructor() {
         super(ParceiroRepository);
+        this.planoService = new PlanoService();
     }
 
     entityToDTO(entity: IParceiro): ParceiroDTO {
@@ -19,7 +23,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
             id: entity._id,
             categoria: entity.categoria,
             status: entity.status,
-            CRM: entity.CRM,
+            planos: this.planoService.entitiesToDtos(entity.planos),
 
             nome: dadosParceiro.pessoa.nome,
             email: dadosParceiro.pessoa.email,
@@ -27,6 +31,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
 
             cpf: entity.pessoaFisica?.cpf,
             rg: entity.pessoaFisica?.rg,
+            CRM: entity.CRM,
             dataNascimento: entity.pessoaFisica?.dataNascimento,
 
             cnpj: entity.pessoaJuridica?.cnpj,
@@ -50,13 +55,14 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
             session.startTransaction();
 
             dto.endereco = await this.enderecoRepository.create(dto, session).then(ed => ed._id);
+            const pessoaDto = { nome: dto.nome, email: dto.email, telefone: dto.telefone, endereco: dto.endereco };
 
             if (dto.cpf) {
                 const pessoaFisica = await this.pessoaFisicaRepository.findOne({ cpf: dto.cpf });
                 if (!pessoaFisica) {
-                    dto.pessoa = await this.pessoaRepository.create({ nome: dto.nome, email: dto.email, telefone: dto.telefone }, session).then(ps => ps._id);
+                    dto.pessoa = await this.pessoaRepository.create(pessoaDto, session).then(ps => ps._id);
 
-                    const pfDto = { cpf: dto.cpf, dataNascimento: dto.dataNascimento, pessoa: dto.pessoa };
+                    const pfDto = { cpf: dto.cpf, rg: dto.rg, dataNascimento: dto.dataNascimento, pessoa: dto.pessoa };
                     dto.pessoaFisica = await this.pessoaFisicaRepository.create(pfDto, session).then(pf => pf._id);
                 } else {
                     dto.pessoaFisica = pessoaFisica._id;
@@ -64,7 +70,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
             } else {
                 const pessoaJuridica = await this.pessoaJuridicaRepository.findOne({ cnpj: dto.cnpj });
                 if (!pessoaJuridica) {
-                    dto.pessoa = await this.pessoaRepository.create({ nome: dto.nome, email: dto.email, telefone: dto.telefone }, session).then(ps => ps._id);
+                    dto.pessoa = await this.pessoaRepository.create(pessoaDto, session).then(ps => ps._id);
 
                     const pjDto = { cnpj: dto.cnpj, nomeFantasia: dto.nomeFantasia, IE: dto.IE, dataFundacao: dto.dataFundacao, pessoa: dto.pessoa };
                     dto.pessoaJuridica = await this.pessoaJuridicaRepository.create(pjDto, session).then(pf => pf._id);
@@ -109,7 +115,7 @@ export class ParceiroService extends ServiceBase<IParceiro, ParceiroDTO, Parceir
             let pessoa: IPessoa;
 
             if (parceiro.pessoaFisica) {
-                const pfDto = { cpf: dto.cpf, dataNascimento: dto.dataNascimento };
+                const pfDto = { cpf: dto.cpf, rg: dto.rg, dataNascimento: dto.dataNascimento };
                 await this.pessoaFisicaRepository.update(parceiro.pessoaFisica._id, pfDto, session)
                     .then(res => res)
                     .catch(error => {
