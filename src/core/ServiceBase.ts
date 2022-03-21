@@ -143,4 +143,12 @@ export abstract class ServiceBase<T, D, TRepository extends IRepository<T, D>> i
                 throw new APIException(error);
             });
     }
+
+    async patch(id: string, body: any): Promise<T> {
+        return await this.repository.update(id, body)
+            .then(res => res)
+            .catch(error => {
+                throw new APIException(error);
+            });
+    }
 }

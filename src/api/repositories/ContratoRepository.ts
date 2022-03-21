@@ -1,3 +1,4 @@
+import { VendaModel } from './../models/Venda.model';
 import { RepositoryBase } from '../../core/RepositoryBase';
 import { ContratoDTO } from '../dtos/ContratoDTO';
 import { IContrato } from '../interfaces/IContrato';
@@ -16,25 +17,30 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
     async find(query: any): Promise<IContrato[]> {
         return await ContratoModel
             .find(query)
-            .populate({ path: 'plano', model: PlanoModel, select: '-_id' })
+            .populate({ path: 'pagamentos', model: PagamentoModel })
             .populate({
-                path: 'cliente', model: ClienteModel, select: 'pessoaFisica -_id',
-                populate: {
-                    path: 'pessoaFisica', select: 'cpf pessoa -_id',
+                path: 'venda', model: VendaModel, select: '-_id',
+                populate: [{
+                    path: 'plano', model: PlanoModel, select: '-_id',
+                },
+                {
+                    path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
                     populate: {
-                        path: 'pessoa', select: 'nome email telefone -_id'
+                        path: 'pessoaFisica', select: 'cpf dataNascimento pessoa -_id',
+                        populate: {
+                            path: 'pessoa', select: 'nome email telefone -_id'
+                        }
                     }
-                }
-            })
-            .populate({
-                path: 'vendedor', model: ColaboradorModel, select: 'codigo pessoaFisica -_id',
-                populate: {
-                    path: 'pessoaFisica', select: 'pessoa -_id',
+                },
+                {
+                    path: 'vendedor', model: ColaboradorModel, select: '_id codigo pessoaFisica',
                     populate: {
-                        path: 'pessoa', select: 'nome email telefone -_id'
+                        path: 'pessoaFisica', select: 'pessoa -_id',
+                        populate: {
+                            path: 'pessoa', select: 'nome email telefone -_id'
+                        }
                     }
-                }
-            })
-            .populate({ path: 'pagamentos', model: PagamentoModel });
+                }]
+            });
     }
 }

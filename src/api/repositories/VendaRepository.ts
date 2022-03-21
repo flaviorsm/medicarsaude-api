@@ -1,3 +1,4 @@
+import { ContratoModel } from './../models/Contrato.model';
 import { ColaboradorModel } from './../models/Colaborador.model';
 import { PlanoModel } from './../models/Plano.model';
 import { IVenda } from '../interfaces/IVenda';
@@ -14,6 +15,7 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
 
     async find(query: any = {}) {
         return await VendaModel.find(query)
+            .populate({ path: 'contrato', model: ContratoModel, select: '-venda' })
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
                 path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
@@ -37,6 +39,7 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
 
     async findOne(query: any) {
         return await VendaModel.findOne(query)
+            .populate({ path: 'contrato', model: ContratoModel, select: '-venda' })
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
                 path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
@@ -60,6 +63,7 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
 
     async findById(id: string) {
         return await VendaModel.findById(id)
+            .populate({ path: 'contrato', model: ContratoModel, select: '-venda' })
             .populate({ path: 'plano', model: PlanoModel })
             .populate({
                 path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',

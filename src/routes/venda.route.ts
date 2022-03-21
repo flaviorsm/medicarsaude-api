@@ -99,13 +99,19 @@ router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
   controller.delete(req, res, next);
 });
 
-router.patch('/vendas/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Venda']
    #swagger.security = [{ "apiKeyAuth": [] }]
-   #swagger.description = 'Alterar status do venda.'
+   #swagger.description = 'Alterar campo da venda.'
    #swagger.parameters['id'] = { description: 'Identificador do Venda' }
-   #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }
+   #swagger.parameters['campo'] = {
+        in: 'body',
+        description: 'Adicionando novo venda.',
+        schema: {
+          $campo: 'valor'
+        }
+    }
    #swagger.responses[200] = {
      description: 'Status modificado.'
    }
@@ -116,7 +122,7 @@ router.patch('/vendas/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN
      description: 'Erro interno'
    }
  */
-  controller.alterStatus(req, res, next);
+  controller.patch(req, res, next);
 });
 
 export default router;

@@ -1,3 +1,4 @@
+import { VendaModel } from './../models/Venda.model';
 import { ContratoModel } from './../models/Contrato.model';
 import { RepositoryBase } from '../../core/RepositoryBase';
 import { PagamentoDTO } from '../dtos/PagamentoDTO';
@@ -15,7 +16,7 @@ export class PagamentoRepository extends RepositoryBase<IPagamento, PagamentoDTO
         return await PagamentoModel.find(query).populate({
             path: 'contrato', model: ContratoModel, select: '-id',
             populate: {
-                path: 'plano', model: PlanoModel, select: '-id'
+                path: 'venda', model: VendaModel, select: '-id'
             }
         });
     }
@@ -24,7 +25,7 @@ export class PagamentoRepository extends RepositoryBase<IPagamento, PagamentoDTO
         return await PagamentoModel.findOne(query).populate({
             path: 'contrato', model: ContratoModel,
             populate: {
-                path: 'plano', model: PlanoModel, select: '-id'
+                path: 'venda', model: VendaModel, select: '-id'
             }
         });
     }
@@ -33,7 +34,7 @@ export class PagamentoRepository extends RepositoryBase<IPagamento, PagamentoDTO
         return await PagamentoModel.findById(id).populate({
             path: 'contrato', model: ContratoModel,
             populate: {
-                path: 'plano', model: PlanoModel, select: '-id'
+                path: 'venda', model: VendaModel, select: '-id'
             }
         });
     }

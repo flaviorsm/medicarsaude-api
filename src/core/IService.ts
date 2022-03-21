@@ -10,6 +10,8 @@ export interface IService<T, D> {
 
     delete(id: string): Promise<boolean>;
 
+    patch(id: string, body: any): Promise<T>;
+
     alterStatus(id: string, body: any): Promise<T>;
 
     entityToDTO(entity: T): D;

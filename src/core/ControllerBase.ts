@@ -67,6 +67,12 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
             .catch(err => next(err));
     }
 
+    patch(req: Request, res: Response, next: NextFunction) {
+        this.service.patch(req.params.id, req.body)
+            .then(() => res.status(200).send(req.body))
+            .catch(err => next(err));
+    }
+
     alterStatus(req: Request, res: Response, next: NextFunction) {
         const status = { status: req.params.status.toString().toUpperCase() };
         this.service.alterStatus(req.params.id, status)

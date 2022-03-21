@@ -5,7 +5,6 @@ import { PagamentoDTO } from '../dtos/PagamentoDTO';
 import { IPagamento } from '../interfaces/IPagamento';
 import { PagamentoRepository } from './../repositories/PagamentoRepository';
 import { ContratoService } from './ContratoService';
-import { PlanoService } from './PlanoService';
 
 export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, PagamentoRepository> {
 
@@ -25,11 +24,7 @@ export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, Paga
             referencia: entity.referencia,
             status: entity.status,
             valorPago: entity.valorPago,
-            contrato: {
-                codigo: entity.contrato.codigo,
-                status: entity.contrato.status,
-                plano: new PlanoService().entityToDTO(entity.contrato.plano),
-            }
+            contrato: this.contratoService.entityToDTO(entity.contrato)
         }
     }
 

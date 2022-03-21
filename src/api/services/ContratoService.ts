@@ -2,12 +2,14 @@ import { ServiceBase } from '../../core/ServiceBase';
 import { ContratoDTO } from '../dtos/ContratoDTO';
 import { IContrato } from '../interfaces/IContrato';
 import { ContratoRepository } from '../repositories/ContratoRepository';
-import { PlanoService } from './PlanoService';
+import { VendaService } from './VendaService';
 
 export class ContratoService extends ServiceBase<IContrato, ContratoDTO, ContratoRepository> {
 
+    private vendaService: VendaService;
     constructor() {
         super(ContratoRepository);
+        this.vendaService = new VendaService();
     }
 
     entityToDTO(entity: IContrato): ContratoDTO {
@@ -15,20 +17,7 @@ export class ContratoService extends ServiceBase<IContrato, ContratoDTO, Contrat
             id: entity._id,
             codigo: entity.codigo,
             status: entity.status,
-            plano: new PlanoService().entityToDTO(entity.plano),
-            cliente: {
-                nome: entity.cliente.pessoaFisica.pessoa.nome,
-                cpf: entity.cliente.pessoaFisica.cpf,
-                email: entity.cliente.pessoaFisica.pessoa.email,
-                telefone: entity.cliente.pessoaFisica.pessoa.telefone,
-                endereco: entity.cliente.pessoaFisica.pessoa.endereco,
-            },
-            vendedor: {
-                codigo: entity.vendedor.codigo,
-                nome: entity.vendedor.pessoaFisica.pessoa.nome,
-                email: entity.vendedor.pessoaFisica.pessoa.email,
-                telefone: entity.vendedor.pessoaFisica.pessoa.telefone,
-            },
+            venda: !entity.venda?._id ? this.vendaService.entityToDTO(entity.venda) : entity.venda,
             pagamentos: entity.pagamentos,
         };
     }
