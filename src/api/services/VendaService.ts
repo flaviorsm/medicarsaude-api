@@ -28,6 +28,7 @@ export class VendaService extends ServiceBase<IVenda, VendaDTO, VendaRepository>
             codigo: entity.codigo,
             dataVenda: entity.dataVenda,
             statusPagamento: entity.statusPagamento,
+            diaVencimento: entity.diaVencimento,
             contrato,
             cliente: {
                 id: entity.cliente?._id,

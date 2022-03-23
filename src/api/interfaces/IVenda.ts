@@ -12,5 +12,6 @@ export interface IVenda extends Document {
     cliente: ICliente;
     vendedor: IColaborador;
     dataVenda: Date;
+    diaVencimento: number;
     contrato: IContrato;
 }

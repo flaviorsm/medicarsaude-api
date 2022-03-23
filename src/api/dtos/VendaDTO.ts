@@ -8,6 +8,7 @@ export interface VendaDTO {
     plano: any;
     vendedor: any;
     dataVenda: Date;
+    diaVencimento: number;
     statusPagamento: StatusPagamentoEnum;
     contrato?: ContratoDTO;
 }

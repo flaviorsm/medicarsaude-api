@@ -9,6 +9,7 @@ const VendaSchema = new Schema<IVenda>({
     plano: { type: Schema.Types.ObjectId, ref: 'Plano' },
     vendedor: { type: Schema.Types.ObjectId, ref: 'Colaborador' },
     dataVenda: { type: Date, required: true },
+    diaVencimento: { type: Number, required: true },
     contrato: { type: Schema.Types.ObjectId, ref: 'Contrato' }
 }, { timestamps: true });
 

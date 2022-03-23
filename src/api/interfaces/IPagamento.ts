@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { StatusPagamentoEnum } from '../../shared/enum/StatusPagamento.enum';
 import { IContrato } from './IContrato';
 
 export interface IPagamento extends Document {
@@ -7,6 +8,6 @@ export interface IPagamento extends Document {
     valorPago: number;
     dataVencimento: Date;
     dataPagamento: Date;
-    status: string;
+    status: StatusPagamentoEnum;
     contrato: IContrato;
 }
