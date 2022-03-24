@@ -12,11 +12,11 @@ export class PlanoService extends ServiceBase<IPlano, PlanoDTO, PlanoRepository>
 
     entityToDTO(entity: IPlano): PlanoDTO {
         return {
-            id: entity._id,
-            nome: entity.nome,
-            descricao: entity.descricao,
-            status: entity.status,
-            valor: entity.valor,
+            id: entity?._id,
+            nome: entity?.nome,
+            descricao: entity?.descricao,
+            status: entity?.status,
+            valor: entity?.valor,
         };
     }
 

@@ -6,6 +6,7 @@ import { VendaService } from './VendaService';
 
 export class ContratoService extends ServiceBase<IContrato, ContratoDTO, ContratoRepository> {
 
+
     private vendaService: VendaService;
     constructor() {
         super(ContratoRepository);
@@ -14,11 +15,11 @@ export class ContratoService extends ServiceBase<IContrato, ContratoDTO, Contrat
 
     entityToDTO(entity: IContrato): ContratoDTO {
         return {
-            id: entity._id,
-            codigo: entity.codigo,
-            status: entity.status,
-            venda: !entity.venda?._id ? this.vendaService.entityToDTO(entity.venda) : entity.venda,
-            pagamentos: entity.pagamentos,
+            id: entity?._id,
+            codigo: entity?.codigo,
+            status: entity?.status,
+            venda: this.vendaService.entityToDTO(entity.venda),
+            pagamentos: entity?.pagamentos,
         };
     }
 

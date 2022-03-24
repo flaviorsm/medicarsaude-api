@@ -24,7 +24,7 @@ export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, Paga
             referencia: entity.referencia,
             status: entity.status,
             valorPago: entity.valorPago,
-            contrato: this.contratoService.entityToDTO(entity.contrato)
+            contrato: entity.contrato,
         }
     }
 
@@ -37,8 +37,9 @@ export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, Paga
                     pagamentos.push(pg);
                 }
                 pagamentos.push(res._id);
-                this.contratoService.update(contrato._id, { pagamentos } as ContratoDTO);
-                return res;
+                return this.contratoService.patch(contrato._id, { pagamentos }).then(() =>{
+                    return res;
+                });
             })
             .catch(error => {
                 throw new APIException(error);

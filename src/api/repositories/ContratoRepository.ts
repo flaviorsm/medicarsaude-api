@@ -1,3 +1,4 @@
+import { EnderecoModel } from './../models/Endereco.model';
 import { VendaModel } from './../models/Venda.model';
 import { RepositoryBase } from '../../core/RepositoryBase';
 import { ContratoDTO } from '../dtos/ContratoDTO';
@@ -24,16 +25,19 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
                     path: 'plano', model: PlanoModel, select: '-_id',
                 },
                 {
-                    path: 'cliente', model: ClienteModel, select: '_id pessoaFisica',
+                    path: 'cliente', model: ClienteModel,
                     populate: {
                         path: 'pessoaFisica', select: 'cpf dataNascimento pessoa -_id',
                         populate: {
-                            path: 'pessoa', select: 'nome email telefone -_id'
+                            path: 'pessoa', select: 'nome email telefone -_id',
+                            populate: {
+                                path: 'endereco', model: EnderecoModel, select: '-_id',
+                            }
                         }
                     }
                 },
                 {
-                    path: 'vendedor', model: ColaboradorModel, select: '_id codigo pessoaFisica',
+                    path: 'vendedor', model: ColaboradorModel,
                     populate: {
                         path: 'pessoaFisica', select: 'pessoa -_id',
                         populate: {
