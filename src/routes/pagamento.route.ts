@@ -56,5 +56,30 @@ router.get('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
     controller.find(req, res, next);
 });
 
+router.patch('/pagamentos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+  /*
+   #swagger.tags = ['pagamentos']
+   #swagger.security = [{ "apiKeyAuth": [] }]
+   #swagger.description = 'Alterar status do pagameto.'
+   #swagger.parameters['id'] = { description: 'Identificador do pagamento' }
+   #swagger.parameters['pagamento'] = {
+          in: 'body',
+          description: 'Alterar status de pagamento.',
+          schema: {
+            $status: 'PENDENTE, EFETIVADO ou CANCELADO'
+          }
+      }
+   #swagger.responses[200] = {
+     description: 'Status modificado.'
+   }
+   #swagger.responses[404] = {
+     description: 'Colaborador não encontrado!'
+   }
+   #swagger.responses[500] = {
+     description: 'Erro interno'
+   }
+ */
+  controller.patch(req, res, next);
+});
 
 export default router;

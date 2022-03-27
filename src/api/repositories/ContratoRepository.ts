@@ -18,7 +18,7 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
     async find(query: any): Promise<IContrato[]> {
         return await ContratoModel
             .find(query)
-            .populate({ path: 'pagamentos', model: PagamentoModel })
+            .populate({ path: 'pagamentos', model: PagamentoModel }).sort('-dataVencimento')
             .populate({
                 path: 'venda', model: VendaModel, select: '-_id',
                 populate: [{
@@ -46,5 +46,9 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
                     }
                 }]
             });
+    }
+
+    async findByIdAndUpdate(contratoId: string, pagamentoId: string): Promise<void> {
+        await ContratoModel.findByIdAndUpdate(contratoId, { $push: { pagamentos: pagamentoId } }, { new: true, useFindAndModify: false });
     }
 }

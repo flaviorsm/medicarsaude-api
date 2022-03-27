@@ -17,32 +17,29 @@ export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, Paga
 
     entityToDTO(entity: IPagamento): PagamentoDTO {
         return {
-            id: entity._id,
-            codigo: entity.codigo,
-            dataPagamento: entity.dataPagamento,
-            dataVencimento: entity.dataVencimento,
-            referencia: entity.referencia,
-            status: entity.status,
-            valorPago: entity.valorPago,
-            contrato: entity.contrato,
+            id: entity?._id,
+            codigo: entity?.codigo,
+            dataPagamento: entity?.dataPagamento,
+            dataVencimento: entity?.dataVencimento,
+            referencia: entity?.referencia,
+            status: entity?.status,
+            valorPago: entity?.valorPago,
+            contrato: entity?.contrato,
         }
     }
 
-    async create(dto: PagamentoDTO): Promise<IPagamento> {
-        return await this.repository.create(dto)
-            .then(async res => {
-                const contrato = await this.contratoService.findById(dto.contrato);
-                const pagamentos = [];
-                for (const pg of contrato.pagamentos) {
-                    pagamentos.push(pg);
-                }
-                pagamentos.push(res._id);
-                return this.contratoService.patch(contrato._id, { pagamentos }).then(() =>{
-                    return res;
+    async createList(pagamentos: PagamentoDTO[]): Promise<IPagamento[]> {
+        const pagamentosEntity: IPagamento[] = [];
+        for (const dto of pagamentos) {
+            await this.repository.create(dto)
+                .then(async pag => {
+                    await this.contratoService.findByIdAndUpdate(dto.contrato, pag._id);
+                    pagamentosEntity.push(pag);
+                })
+                .catch(error => {
+                    throw new APIException(error);
                 });
-            })
-            .catch(error => {
-                throw new APIException(error);
-            });
+        }
+        return pagamentosEntity;
     }
 }
