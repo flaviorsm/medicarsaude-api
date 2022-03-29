@@ -8,6 +8,7 @@ import PagamentoRouter from './routes/pagamento.route';
 import VendaRouter from './routes/venda.route';
 import UsuarioRouter from './routes/usuario.route';
 import AutenticacaoRouter from './routes/autenticacao.route';
+import DashboardRouter from './routes/dashboard.route';
 
 class Routes {
 
@@ -33,6 +34,7 @@ class Routes {
             PlanoRouter,
             VendaRouter,
             AutenticacaoRouter,
+            DashboardRouter,
         );
     }
 }

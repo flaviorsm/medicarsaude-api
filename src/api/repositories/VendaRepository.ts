@@ -84,4 +84,53 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
                 }
             });
     }
+
+    async recordsByMonth() {
+        const monthsArray = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        return VendaModel.aggregate([
+            {
+                $match: {
+                    dataVenda: {
+                        $gte: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+                        $lt: new Date(new Date().setHours(24))
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: { 'year_month': { $substrCP: ["$dataVenda", 0, 7] } },
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { "_id.year_month": 1 }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    count: 1,
+                    month_year: {
+                        $concat: [
+                            { $arrayElemAt: [monthsArray, { $subtract: [{ $toInt: { $substrCP: ["$_id.year_month", 5, 2] } }, 1] }] },
+                            "-",
+                            { $substrCP: ["$_id.year_month", 0, 4] }
+                        ]
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    data: { $push: { k: "$month_year", v: "$count" } }
+                }
+            },
+            {
+                $project: {
+                    data: { $arrayToObject: "$data" },
+                    _id: 0
+                }
+            }
+        ]);
+    }
 }
