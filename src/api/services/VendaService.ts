@@ -52,4 +52,8 @@ export class VendaService extends ServiceBase<IVenda, VendaDTO, VendaRepository>
     async recordsByMonth() {
         return await this.repository.recordsByMonth();
     }
+
+    async recordsByStatus() {
+        return await this.repository.recordsByStatus();
+    }
 }

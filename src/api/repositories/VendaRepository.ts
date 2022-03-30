@@ -133,4 +133,15 @@ export class VendaRepository extends RepositoryBase<IVenda, VendaDTO> {
             }
         ]);
     }
+
+    async recordsByStatus() {
+        return await VendaModel.aggregate([
+            {
+                $group: {
+                    _id: { status: '$statusPagamento' },
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+    }
 }

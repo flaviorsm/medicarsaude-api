@@ -51,4 +51,22 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
     async findByIdAndUpdate(contratoId: string, pagamentoId: string): Promise<void> {
         await ContratoModel.findByIdAndUpdate(contratoId, { $push: { pagamentos: pagamentoId } }, { new: true, useFindAndModify: false });
     }
+
+    async recordsActive() {
+        const result = {ativos: 0, total: 0 };
+        result.ativos = await ContratoModel.aggregate([
+            {
+                $match: {
+                    status: 0
+                }
+            },
+            {
+                $count: 'ativos'
+            }
+        ]).then(res => res[0].ativos);
+
+        result.total = await ContratoModel.count();
+
+        return result;
+    }
 }

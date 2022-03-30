@@ -117,4 +117,12 @@ export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRep
         return await this.findById(id);
     }
 
+    async recordsByMonth() {
+        return await this.repository.recordsByMonth();
+    }
+
+    async recordsByStatus() {
+        return await this.repository.recordsByStatus();
+    }
+
 }

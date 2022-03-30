@@ -38,4 +38,15 @@ export class PagamentoRepository extends RepositoryBase<IPagamento, PagamentoDTO
             }
         });
     }
+
+    async recordsByStatus() {
+        return await PagamentoModel.aggregate([
+            {
+                $group: {
+                    _id: { status: '$status' },
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+    }
 }

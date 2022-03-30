@@ -42,4 +42,8 @@ export class PagamentoService extends ServiceBase<IPagamento, PagamentoDTO, Paga
         }
         return pagamentosEntity;
     }
+
+    async recordsByStatus() {
+        return await this.repository.recordsByStatus();
+    }
 }

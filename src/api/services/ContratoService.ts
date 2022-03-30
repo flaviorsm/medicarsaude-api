@@ -28,4 +28,7 @@ export class ContratoService extends ServiceBase<IContrato, ContratoDTO, Contrat
         await this.repository.findByIdAndUpdate(contratoId, pagamentoId);
     }
 
+    async recordsActive() {
+        return await this.repository.recordsActive();
+    }
 }
