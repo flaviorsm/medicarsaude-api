@@ -6,7 +6,7 @@ import { IUsuario } from '../interfaces/IUsuario';
 const UsuarioSchema = new Schema<IUsuario>({
     usuario: { type: String, required: true, unique: true },
     senha: { type: String, required: true, select: false },
-    regra: { type: Number, enum: RegraEnum,  required: true, default: RegraEnum.COLABORADOR },
+    regra: { type: Number, enum: RegraEnum,  required: true, default: RegraEnum.CLIENTE },
     status: { type: Number, enum: StatusEnum, required: true, default: StatusEnum.ATIVO },
     pessoaFisica: { type: Schema.Types.ObjectId, ref: 'PessoaFisica' }
 }, { timestamps: true });
