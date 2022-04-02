@@ -7,7 +7,7 @@ import { PlanoController } from './../api/controllers/PlanoController';
 const router = Router();
 const controller = new PlanoController();
 
-router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.post('/planos', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -31,7 +31,7 @@ router.post('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (r
     controller.create(req, res, next);
 });
 
-router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.get('/planos', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -51,7 +51,7 @@ router.get('/planos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (re
     controller.find(req, res, next);
 });
 
-router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.put('/planos/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
     #swagger.tags = ['Plano']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -79,7 +79,7 @@ router.put('/planos/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
     controller.update(req, res, next);
 });
 
-router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Plano']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -98,7 +98,7 @@ router.delete('/planos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
     controller.delete(req, res, next);
 });
 
-router.patch('/planos/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/planos/:id/:status', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
      #swagger.tags = ['Plano']
      #swagger.security = [{ "apiKeyAuth": [] }]

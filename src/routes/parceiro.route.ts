@@ -7,7 +7,7 @@ import { ParceiroController } from './../api/controllers/ParceiroController';
 const router = Router();
 const controller = new ParceiroController();
 
-router.post('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.post('/parceiros', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Parceiro']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -45,7 +45,7 @@ router.post('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
   controller.create(req, res, next);
 });
 
-router.get('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.get('/parceiros', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Parceiro']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -69,7 +69,7 @@ router.get('/parceiros', [validarToken, validarRegra([RegraEnum.COLABORADOR])], 
   controller.find(req, res, next);
 });
 
-router.put('/parceiros/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.put('/parceiros/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Parceiro']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -111,7 +111,7 @@ router.put('/parceiros/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR]
   controller.update(req, res, next);
 });
 
-router.delete('/parceiros/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.delete('/parceiros/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Parceiro']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -130,7 +130,7 @@ router.delete('/parceiros/:id', [validarToken, validarRegra([RegraEnum.ADMIN])],
   controller.delete(req, res, next);
 });
 
-router.patch('/parceiros/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/parceiros/:id/:status', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Parceiro']
    #swagger.security = [{ "apiKeyAuth": [] }]

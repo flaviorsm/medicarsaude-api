@@ -7,7 +7,7 @@ import { ContratoController } from './../api/controllers/ContratoController';
 const router = Router();
 const controller = new ContratoController();
 
-router.post('/contratos', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.post('/contratos', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Contrato']
     #swagger.security = [{ "apiKeyAuth": [] }]

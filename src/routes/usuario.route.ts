@@ -33,7 +33,7 @@ router.post('/usuarios', (req, res, next) => {
   controller.create(req, res, next);
 });
 
-router.get('/usuarios', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.get('/usuarios', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Usuario']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -72,7 +72,7 @@ router.get('/usuarios/:id', [validarToken], (req: Request, res: Response, next: 
   controller.find(req, res, next);
 });
 
-router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.put('/usuarios/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Usuario']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -102,5 +102,25 @@ router.put('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (re
 */
   controller.update(req, res, next);
 });
+
+router.delete('/usuarios/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
+  /*
+    #swagger.tags = ['Usuarios']
+    #swagger.security = [{ "apiKeyAuth": [] }]
+    #swagger.description = 'Exclui dados do Usuário.'
+    #swagger.parameters['id'] = { description: 'Identificador do Usuário' }
+    #swagger.responses[200] = {
+      description: 'Usuário deletado.'
+    }
+    #swagger.responses[404] = {
+      description: 'Usuário não encontrado!'
+    }
+    #swagger.responses[500] = {
+      description: 'Erro interno'
+    }
+  */
+  controller.delete(req, res, next);
+});
+
 
 export default router;

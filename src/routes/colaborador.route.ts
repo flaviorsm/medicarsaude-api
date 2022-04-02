@@ -7,7 +7,7 @@ import { ColaboradorController } from './../api/controllers/ColaboradorControlle
 const router = Router();
 const controller = new ColaboradorController();
 
-router.post('/colaboradores', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.post('/colaboradores', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -44,7 +44,7 @@ router.post('/colaboradores', [validarToken, validarRegra([RegraEnum.ADMIN])], (
     controller.create(req, res, next);
 });
 
-router.get('/colaboradores', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.get('/colaboradores', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -67,7 +67,7 @@ router.get('/colaboradores', [validarToken, validarRegra([RegraEnum.COLABORADOR]
     controller.find(req, res, next);
 });
 
-router.put('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.put('/colaboradores/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
     #swagger.tags = ['Colaborador']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -108,7 +108,7 @@ router.put('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.COLABORA
     controller.update(req, res, next);
 });
 
-router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
       #swagger.security = [{ "apiKeyAuth": [] }]
@@ -127,7 +127,7 @@ router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMIN
     controller.delete(req, res, next);
 });
 
-router.patch('/colaboradores/:id/:status', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/colaboradores/:id/:status', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
      #swagger.tags = ['Colaborador']
      #swagger.security = [{ "apiKeyAuth": [] }]

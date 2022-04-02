@@ -13,13 +13,13 @@ export const validarRegra = (regras: RegraEnum[]) => {
             const usuario = await usuarioRepository.obterSenhaRegraPorId(id);
             logger.info('jwtPayload==>', res.locals.jwtPayload);
 
-            if (usuario.regra === RegraEnum.ADMIN) {
+            if (usuario.regra === RegraEnum.ADMINISTRADOR) {
                 next();
             }
             else if (regras.indexOf(usuario.regra) > -1) {
                 next();
             } else {
-                res.status(401).send({ messagem: 'Acesso não autorizado!' });
+                res.status(401).send({ message: 'Acesso não autorizado!' });
             }
 
         } catch (error) {

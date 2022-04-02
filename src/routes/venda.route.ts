@@ -7,7 +7,7 @@ import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 const router = Router();
 const controller = new VendaController();
 
-router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.post('/vendas', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -32,7 +32,7 @@ router.post('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (r
   controller.create(req, res, next);
 });
 
-router.get('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.get('/vendas', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -52,7 +52,7 @@ router.get('/vendas', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (re
   controller.find(req, res, next);
 });
 
-router.put('/vendas/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.put('/vendas/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
   #swagger.tags = ['Venda']
   #swagger.security = [{ "apiKeyAuth": [] }]
@@ -80,7 +80,7 @@ router.put('/vendas/:id', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
   controller.update(req, res, next);
 });
 
-router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Venda']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -99,7 +99,7 @@ router.delete('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (r
   controller.delete(req, res, next);
 });
 
-router.patch('/vendas/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/vendas/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Venda']
    #swagger.security = [{ "apiKeyAuth": [] }]

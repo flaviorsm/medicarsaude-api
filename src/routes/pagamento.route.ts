@@ -56,7 +56,7 @@ router.get('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])],
     controller.find(req, res, next);
 });
 
-router.patch('/pagamentos/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/pagamentos/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['pagamentos']
    #swagger.security = [{ "apiKeyAuth": [] }]

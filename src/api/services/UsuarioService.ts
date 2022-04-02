@@ -20,6 +20,7 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
 
     entityToDTO(entity: IUsuario): UsuarioDTO {
         return {
+            id: entity._id,
             usuario: entity.usuario,
             cpf: entity.pessoaFisica.cpf,
             dataNascimento: entity.pessoaFisica.dataNascimento,
@@ -64,6 +65,39 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
         }
 
         return usuario;
+    }
+
+    async update(id: string, dto: UsuarioDTO): Promise<IUsuario> {
+
+        const session = await this.database.conn.startSession();
+
+        try {
+            session.startTransaction();
+
+            dto.senha = await bcrypt.hash(dto.senha, 10);
+
+            const usuario = await this.repository.update(id, dto, session).then(usu => {
+                if (usu) {
+                    return usu;
+                }
+                throw new HttpException(404, `Colaborador ${dto.nome} não encontrado`);
+            })
+
+            const pessoaFisica = await this.pessoaFisicaRepository.update(usuario.pessoaFisica.toString(), dto, session)
+                .then(pf => pf);
+
+            await this.pessoaRepository.update(pessoaFisica.pessoa.toString(), dto, session).then(pes => pes);
+
+            await session.commitTransaction();
+
+
+        } catch (error) {
+            await session.abortTransaction();
+            throw new APIException(error);
+        }
+
+        session.endSession();
+        return await this.findById(id);
     }
 
     async login(nomeUsuario: string, senha: string) {

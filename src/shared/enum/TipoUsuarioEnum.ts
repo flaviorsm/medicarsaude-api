@@ -1,5 +1,5 @@
 export enum RegraEnum {
-    ADMIN,
-    CLIENTE,
+    ADMINISTRADOR,
+    GERENTE,
     COLABORADOR
 }

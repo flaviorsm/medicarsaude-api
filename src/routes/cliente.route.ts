@@ -102,7 +102,7 @@ router.put('/clientes/:id', [validarToken], (req: Request, res: Response, next: 
   clienteController.update(req, res, next);
 });
 
-router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], (req: Request, res: Response, next: NextFunction) => {
+router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
   /*
     #swagger.tags = ['Cliente']
     #swagger.security = [{ "apiKeyAuth": [] }]
@@ -121,7 +121,7 @@ router.delete('/clientes/:id', [validarToken, validarRegra([RegraEnum.ADMIN])], 
   clienteController.delete(req, res, next);
 });
 
-router.patch('/clientes/:id/:status', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
+router.patch('/clientes/:id/:status', [validarToken], (req: Request, res: Response, next: NextFunction) => {
   /*
    #swagger.tags = ['Cliente']
    #swagger.security = [{ "apiKeyAuth": [] }]
