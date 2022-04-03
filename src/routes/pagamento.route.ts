@@ -1,12 +1,16 @@
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { PagamentoController } from './../api/controllers/PagamentoController';
 
 const router = Router();
 const controller = new PagamentoController();
 
-router.post('/pagamentos', (req, res) => {
+router.post('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Pagamento']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.parameters['pagamento'] = {
           in: 'body',
           description: 'Adicionando novo pagamento.',
@@ -27,16 +31,18 @@ router.post('/pagamentos', (req, res) => {
           description: 'Erro interno'
       }
     */
-    controller.create(req, res);
+    controller.create(req, res, next);
 });
 
-router.get('/pagamentos', (req, res) => {
+router.get('/pagamentos', [validarToken, validarRegra([RegraEnum.COLABORADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Pagamento']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
       #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
       #swagger.parameters['nome'] = { description: 'Nome do Cliente' }
       #swagger.parameters['codigo'] = { description: 'Código do Pagamento' }
+      #swagger.parameters['contrato'] = { description: 'Identificador do contrato' }
       #swagger.responses[200] = {
         description: 'Pagamento encontrado.'
       }
@@ -47,74 +53,33 @@ router.get('/pagamentos', (req, res) => {
         description: 'Erro interno'
       }
     */
-    controller.find(req, res);
+    controller.find(req, res, next);
 });
 
-router.put('/pagamentos/:id', (req, res) => {
-    /*
-    #swagger.tags = ['Pagamento']
-    #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
-    #swagger.parameters['pagamento'] = {
-        in: 'body',
-        description: 'Alterar pagamento.',
-        schema: {
-            $codigo: 'string',
-            $referencia: 'Date',
-            $valorPago: 'number',
-            $dataVencimento: 'Date',
-            $dataPagamento: 'Date',
-            $status: 'string',
-            $contrato: 'string'
-        }
-    }
-    #swagger.responses[200] = {
-        description: 'Alterado com sucesso.'
-    }
-    #swagger.responses[404] = {
-      description: 'Pagamento não encontrado!'
-    }
-    #swagger.responses[500] = {
-        description: 'Erro interno'
-    }
-  */
-    controller.update(req, res);
-});
-
-router.delete('/pagamentos/:id', (req, res) => {
-    /*
-      #swagger.tags = ['Pagamento']
-      #swagger.description = 'Exclui dados do pagamento.'
-      #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
-      #swagger.responses[200] = {
-        description: 'Pagamento deletado.'
+router.patch('/pagamentos/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
+  /*
+   #swagger.tags = ['pagamentos']
+   #swagger.security = [{ "apiKeyAuth": [] }]
+   #swagger.description = 'Alterar status do pagameto.'
+   #swagger.parameters['id'] = { description: 'Identificador do pagamento' }
+   #swagger.parameters['pagamento'] = {
+          in: 'body',
+          description: 'Alterar status de pagamento.',
+          schema: {
+            $status: 'PENDENTE, EFETIVADO ou CANCELADO'
+          }
       }
-      #swagger.responses[404] = {
-        description: 'Pagamento não encontrado!'
-      }
-      #swagger.responses[500] = {
-        description: 'Erro interno'
-      }
-    */
-    controller.delete(req, res);
-});
-
-router.patch('/pagamentos/:id/:status', (req, res) => {
-    /*
-     #swagger.tags = ['Pagamento']
-     #swagger.description = 'Alterar status do pagamento.'
-     #swagger.parameters['id'] = { description: 'Identificador do Pagamento' }
-     #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }
-     #swagger.responses[200] = {
-       description: 'Status modificado.'
-     }
-     #swagger.responses[404] = {
-       description: 'Pagamento não encontrado!'
-     }
-     #swagger.responses[500] = {
-       description: 'Erro interno'
-     }
-   */
-    controller.alterStatus(req, res);
+   #swagger.responses[200] = {
+     description: 'Status modificado.'
+   }
+   #swagger.responses[404] = {
+     description: 'Colaborador não encontrado!'
+   }
+   #swagger.responses[500] = {
+     description: 'Erro interno'
+   }
+ */
+  controller.patch(req, res, next);
 });
 
 export default router;

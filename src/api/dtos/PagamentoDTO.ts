@@ -1,11 +1,12 @@
-import { ContratoDTO } from './ContratoDTO';
+import { StatusPagamentoEnum } from "../../shared/enum/StatusPagamento.enum";
 
 export interface PagamentoDTO {
+    id?: string;
     codigo: string;
     referencia: Date;
     valorPago: number;
     dataVencimento: Date;
     dataPagamento: Date;
-    status: string;
-    contrato: ContratoDTO;
+    status: StatusPagamentoEnum;
+    contrato?: any;
 }

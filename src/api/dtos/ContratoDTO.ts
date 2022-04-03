@@ -1,15 +1,11 @@
-import { ColaboradorDTO } from './ColaboradorDTO';
-import { ClienteDTO } from './ClienteDTO';
-import { PlanoDTO } from './PlanoDTO';
 import { StatusEnum } from '../../shared/enum/Status.enum';
 import { PagamentoDTO } from './PagamentoDTO';
+import { VendaDTO } from './VendaDTO';
 
 export interface ContratoDTO {
+    id?: string;
     codigo: string;
     status: StatusEnum;
-    plano: PlanoDTO;
-    cliente: ClienteDTO;
-    vendedor: ColaboradorDTO;
+    venda?: any;
     pagamentos: PagamentoDTO[];
-
 }

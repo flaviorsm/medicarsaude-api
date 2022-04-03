@@ -1,7 +1,7 @@
 import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
 import { IPessoaFisica } from './../interfaces/IPessoaFisica';
 import { PessoaFisicaModel } from '../models/PessoaFisica.model';
-import { RepositoryBase } from '../core/RepositoryBase';
+import { RepositoryBase } from '../../core/RepositoryBase';
 
 export class PessoaFisicaRepository extends RepositoryBase<IPessoaFisica, PessoaFisicaDTO> {
 
@@ -9,7 +9,7 @@ export class PessoaFisicaRepository extends RepositoryBase<IPessoaFisica, Pessoa
         super(PessoaFisicaModel);
     }
 
-    async find(query: any): Promise<IPessoaFisica | IPessoaFisica[]> {
+    async find(query: any): Promise<IPessoaFisica[]> {
         return await PessoaFisicaModel
             .find(query)
             .populate({

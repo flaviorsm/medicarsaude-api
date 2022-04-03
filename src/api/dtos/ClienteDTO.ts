@@ -1,11 +1,21 @@
 import { StatusEnum } from '../../shared/enum/Status.enum';
-import { PessoaFisicaDTO } from './PessoaFisicaDTO';
 
-export interface ClienteDTO extends PessoaFisicaDTO {
-    codigo: string;
-    status: StatusEnum;
-
+export interface ClienteDTO {
+    id?: string,
+    codigo: string,
+    nome: string,
+    email: string,
+    telefone: string,
+    cpf: string,
+    rg: string,
+    dataNascimento: Date,
+    status: StatusEnum,
+    cep: string,
+    rua: string,
+    bairro: string,
+    cidade: string,
+    estado: string,
+    endereco?: any,
     pessoaFisica?: any;
     pessoa?: any;
-    endereco?: any;
 }

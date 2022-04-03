@@ -16,13 +16,8 @@ export class Database {
 
         const url = process.env.MONGODB_URI;
 
-        this.logger.info(`Iniciando coneção em ${url}`);
-
         if (!this.conn) {
-
-            mongoose.connect(url)
-                .then(() => console.log('Mongodb conectado com sucesso!'))
-                .catch((err) => console.error(err));
+            mongoose.connect(url);
 
             this.conn = mongoose.connection;
 

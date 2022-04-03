@@ -1,7 +1,7 @@
+import { RepositoryBase } from '../../core/RepositoryBase';
 import { PessoaJuridicaDTO } from '../dtos/PessoaJuridicaDTO';
 import { IPessoaJuridica } from '../interfaces/IPessoaJuridica';
 import { PessoaJuridicaModel } from '../models/PessoaJuridica.model';
-import { RepositoryBase } from '../core/RepositoryBase';
 
 export class PessoaJuridicaRepository extends RepositoryBase<IPessoaJuridica, PessoaJuridicaDTO> {
 
@@ -9,7 +9,7 @@ export class PessoaJuridicaRepository extends RepositoryBase<IPessoaJuridica, Pe
         super(PessoaJuridicaModel);
     }
 
-    async find(query: any): Promise<IPessoaJuridica | IPessoaJuridica[]> {
+    async find(query: any): Promise<IPessoaJuridica[]> {
         return await PessoaJuridicaModel
             .find(query)
             .populate({

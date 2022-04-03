@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Logger } from '../../shared/logger/logger';
+import { Logger } from '../shared/logger/logger';
 import { IRepository } from './IRepository';
 
 export abstract class RepositoryBase<T, D> implements IRepository<T, D> {
@@ -10,7 +10,7 @@ export abstract class RepositoryBase<T, D> implements IRepository<T, D> {
         this.logger = new Logger();
     }
 
-    async find(query: any): Promise<T | T[]> {
+    async find(query: any): Promise<T[]> {
         return await this.model.find(query);
     }
 
@@ -28,5 +28,10 @@ export abstract class RepositoryBase<T, D> implements IRepository<T, D> {
 
     async update(id: string, dto: D, session?: any): Promise<T> {
         return await this.model.findByIdAndUpdate(id, dto, { session });
+    }
+
+    async delete(id: string): Promise<boolean> {
+        const result = await this.model.findByIdAndDelete(id);
+        return result ? true : false
     }
 }

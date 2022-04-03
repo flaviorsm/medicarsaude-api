@@ -1,6 +1,6 @@
 export interface IRepository<T, D> {
 
-    find(query: any): Promise<T[] | T>;
+    find(query: any): Promise<T[]>;
 
     findOne(query: any): Promise<T>;
 
@@ -9,4 +9,6 @@ export interface IRepository<T, D> {
     create(dto: D, session?: any): Promise<T>;
 
     update(id: string, dto: any, session?: any): Promise<T>;
+
+    delete(id: string): Promise<boolean>;
 }

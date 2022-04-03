@@ -1,12 +1,16 @@
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
+import { validarRegra } from '../helpers/ValidarRegra';
+import { validarToken } from '../helpers/ValidarToken';
+import { RegraEnum } from '../shared/enum/TipoUsuarioEnum';
 import { ColaboradorController } from './../api/controllers/ColaboradorController';
 
 const router = Router();
 const controller = new ColaboradorController();
 
-router.post('/colaboradores', (req, res) => {
+router.post('/colaboradores', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.parameters['colaborador'] = {
           in: 'body',
           description: 'Adicionando novo colaborador.',
@@ -37,12 +41,13 @@ router.post('/colaboradores', (req, res) => {
           description: 'Erro interno'
       }
     */
-    controller.create(req, res);
+    controller.create(req, res, next);
 });
 
-router.get('/colaboradores', (req, res) => {
+router.get('/colaboradores', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Escolha apenas um parâmetro, para listar todos os registros não informe nenhuma parâmentro.'
       #swagger.parameters['id'] = { description: 'Identificador do Colaborador' }
       #swagger.parameters['nome'] = { description: 'Nome do Colaborador' }
@@ -59,12 +64,13 @@ router.get('/colaboradores', (req, res) => {
         description: 'Erro interno'
       }
     */
-    controller.find(req, res);
+    controller.find(req, res, next);
 });
 
-router.put('/colaboradores/:id', (req, res) => {
+router.put('/colaboradores/:id', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
     #swagger.tags = ['Colaborador']
+    #swagger.security = [{ "apiKeyAuth": [] }]
     #swagger.parameters['id'] = { description: 'Identificador do Colaborador' }
     #swagger.parameters['colaborador'] = {
         in: 'body',
@@ -99,12 +105,13 @@ router.put('/colaboradores/:id', (req, res) => {
         description: 'Erro interno'
     }
   */
-    controller.update(req, res);
+    controller.update(req, res, next);
 });
 
-router.delete('/colaboradores/:id', (req, res) => {
+router.delete('/colaboradores/:id', [validarToken, validarRegra([RegraEnum.ADMINISTRADOR])], (req: Request, res: Response, next: NextFunction) => {
     /*
       #swagger.tags = ['Colaborador']
+      #swagger.security = [{ "apiKeyAuth": [] }]
       #swagger.description = 'Exclui dados do colaborador.'
       #swagger.parameters['id'] = { description: 'Identificador do Colaborador' }
       #swagger.responses[200] = {
@@ -117,12 +124,13 @@ router.delete('/colaboradores/:id', (req, res) => {
         description: 'Erro interno'
       }
     */
-    controller.delete(req, res);
+    controller.delete(req, res, next);
 });
 
-router.patch('/colaboradores/:id/:status', (req, res) => {
+router.patch('/colaboradores/:id/:status', [validarToken], (req: Request, res: Response, next: NextFunction) => {
     /*
      #swagger.tags = ['Colaborador']
+     #swagger.security = [{ "apiKeyAuth": [] }]
      #swagger.description = 'Alterar status do colaborador.'
      #swagger.parameters['id'] = { description: 'Identificador do Colaborador' }
      #swagger.parameters['status'] = { description: 'ATIVO ou SUSPENSO ou INATIVO' }
@@ -136,7 +144,7 @@ router.patch('/colaboradores/:id/:status', (req, res) => {
        description: 'Erro interno'
      }
    */
-    controller.alterStatus(req, res);
+    controller.alterStatus(req, res, next);
 });
 
 export default router;

@@ -1,7 +1,8 @@
 import { PessoaDTO } from './PessoaDTO';
 
-export interface PessoaFisicaDTO extends PessoaDTO {
+export interface PessoaFisicaDTO {
     cpf: string;
-    rg: string;
+    rg?: string;
     dataNascimento: Date;
+    pessoa?: any;
 }
