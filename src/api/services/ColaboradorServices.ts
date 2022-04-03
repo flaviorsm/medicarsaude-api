@@ -8,6 +8,7 @@ import { IColaborador } from '../interfaces/IColaborador';
 import { UsuarioRepository } from '../repositories/UsuarioRepository';
 import { ColaboradorDTO } from './../dtos/ColaboradorDTO';
 import { ColaboradorRepository } from './../repositories/ColaboradorRepository';
+import bcrypt = require('bcryptjs');
 
 export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO, ColaboradorRepository> {
 
@@ -78,8 +79,8 @@ export class ColaboradorService extends ServiceBase<IColaborador, ColaboradorDTO
             if (dto.usuario) {
                 colaboradorCompleto.usuario = false;
                 const usuario = {
-                    usuario: colaboradorCompleto.pessoaFisica.pessoa.nome.split(' ')[0].toLocaleLowerCase(),
-                    senha: '123456',
+                    usuario: colaboradorCompleto.pessoaFisica.pessoa.email,
+                    senha: await bcrypt.hash('medicar', 10),
                     regra: RegraEnum.COLABORADOR,
                     status: StatusEnum.ATIVO,
                     pessoaFisica: colaboradorCompleto.pessoaFisica._id

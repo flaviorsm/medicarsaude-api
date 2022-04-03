@@ -1,6 +1,5 @@
-import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
-import { PessoaDTO } from './../dtos/PessoaDTO';
-import { IPessoaFisica } from './../interfaces/IPessoaFisica';
+import { StatusEnum } from './../../shared/enum/Status.enum';
+import { ClienteDTO } from './../dtos/ClienteDTO';
 import * as jwt from 'jsonwebtoken';
 import { ServiceBase } from "../../core/ServiceBase";
 import APIException from "../../shared/utils/exceptions/APIException";
@@ -8,14 +7,22 @@ import HttpException from "../../shared/utils/exceptions/HttpException";
 import { UsuarioDTO } from "../dtos/UsuarioDTO";
 import { IUsuario } from "../interfaces/IUsuario";
 import { UsuarioRepository } from "../repositories/UsuarioRepository";
+import { PessoaDTO } from './../dtos/PessoaDTO';
+import { PessoaFisicaDTO } from './../dtos/PessoaFisicaDTO';
 import bcrypt = require('bcryptjs');
+import { RegraEnum } from '../../shared/enum/TipoUsuarioEnum';
+import { ClienteRepository } from './../repositories/ClienteRepository';
+import { Util } from '../../shared/utils/util';
 
 require('dotenv').config()
 
 export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRepository> {
 
+    private clienteRepository: ClienteRepository;
+
     constructor() {
         super(UsuarioRepository);
+        this.clienteRepository = new ClienteRepository();
     }
 
     entityToDTO(entity: IUsuario): UsuarioDTO {
@@ -50,6 +57,16 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
             }
             dto.senha = await bcrypt.hash(dto.senha, 10);
             usuario = await super.create(dto, session);
+            this.logger.info('dto ===>', dto);
+            if(dto.regra === RegraEnum.CLIENTE) {
+                const cliente: any = {
+                    codigo: Util.codigoAleatorio(),
+                    status: StatusEnum.ATIVO,
+                    pessoaFisica: dto.pessoaFisica,
+                };
+                await this.clienteRepository.create(cliente, session).then(cli => cli);
+            }
+
             await session.commitTransaction();
 
         } catch (error) {
