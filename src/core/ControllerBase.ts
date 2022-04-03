@@ -21,9 +21,12 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                         data: this.service.entityToDTO(result)
                     });
                 } else {
-                    next(new PostNotFoundException(id));
+                    res.status(204).send({
+                        response: 'not found',
+                        data: result
+                    });
                 }
-            });
+            }).catch(err => next(new PostNotFoundException(err)));
         }
 
         else if (req.query) {
@@ -35,9 +38,12 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                         count: result.length
                     });
                 } else {
-                    next(new PostNotFoundException(null, req.query));
+                    res.status(204).send({
+                        response: 'not found',
+                        data: result
+                    });
                 }
-            });
+            }).catch(err => next(new PostNotFoundException(err)));
         }
 
         else {
@@ -49,9 +55,12 @@ export abstract class ControllerBase<TEntity, TDto, TService extends IService<TE
                         count: result.length
                     });
                 } else {
-                    next(new PostNotFoundException(null, req.query));
+                    res.status(204).send({
+                        response: 'not found',
+                        data: result
+                    });
                 }
-            });
+            }).catch(err => next(new PostNotFoundException(err)));
         }
     }
 

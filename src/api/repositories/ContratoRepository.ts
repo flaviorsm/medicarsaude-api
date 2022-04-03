@@ -63,7 +63,7 @@ export class ContratoRepository extends RepositoryBase<IContrato, ContratoDTO> {
             {
                 $count: 'ativos'
             }
-        ]).then(res => res[0].ativos);
+        ]).then(res => res[0]?.ativos);
 
         result.total = await ContratoModel.count();
 

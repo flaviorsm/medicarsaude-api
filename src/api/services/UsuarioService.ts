@@ -57,7 +57,7 @@ export class UsuarioService extends ServiceBase<IUsuario, UsuarioDTO, UsuarioRep
             }
             dto.senha = await bcrypt.hash(dto.senha, 10);
             usuario = await super.create(dto, session);
-            this.logger.info('dto ===>', dto);
+            this.logger.info('dto ===>', dto.regra === RegraEnum.CLIENTE);
             if(dto.regra === RegraEnum.CLIENTE) {
                 const cliente: any = {
                     codigo: Util.codigoAleatorio(),

@@ -25,11 +25,11 @@ export class ClienteService extends ServiceBase<ICliente, ClienteDTO, ClienteRep
             email: entity.pessoaFisica.pessoa.email,
             telefone: entity.pessoaFisica.pessoa.telefone,
 
-            cep: entity.pessoaFisica.pessoa.endereco.cep,
-            rua: entity.pessoaFisica.pessoa.endereco.rua,
-            bairro: entity.pessoaFisica.pessoa.endereco.bairro,
-            cidade: entity.pessoaFisica.pessoa.endereco.cidade,
-            estado: entity.pessoaFisica.pessoa.endereco.estado,
+            cep: entity.pessoaFisica.pessoa.endereco?.cep,
+            rua: entity.pessoaFisica.pessoa.endereco?.rua,
+            bairro: entity.pessoaFisica.pessoa.endereco?.bairro,
+            cidade: entity.pessoaFisica.pessoa.endereco?.cidade,
+            estado: entity.pessoaFisica.pessoa.endereco?.estado,
         }
     }
 
