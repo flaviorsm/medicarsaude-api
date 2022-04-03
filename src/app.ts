@@ -5,6 +5,7 @@ import Routes from './routes';
 import { Logger } from './shared/logger/logger';
 import swaggerUi = require('swagger-ui-express');
 import fs = require('fs');
+import cors = require('cors');
 
 class App {
 
@@ -24,6 +25,7 @@ class App {
     }
 
     private middleware(): void {
+        this.express.use(cors())
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
     }
